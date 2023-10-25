@@ -1,0 +1,17 @@
+{
+    "firstName": "Skyler",
+    "lastName": "White",
+    "email": "skyler@somedomain.com",
+    "birthDay": "1970-11-08",
+    "login": "skyler",
+    "password": "h3ll0",
+    "phone": "+1 804-406-4234",
+    "cars": [
+        {
+            "year": 1991,
+            "licensePlate": "QHU 6881",
+            "model": "Jeep Grand Wagoneer",
+            "color": "White"
+        }
+    ]
+}
