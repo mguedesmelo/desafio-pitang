@@ -29,32 +29,32 @@ public class CarRestController extends BaseRestController<User> {
 	@Autowired
 	private CarService carService;
 
+	@GetMapping
+	public List<CarDto> findAll() {
+		return this.carService.findAll();
+	}
+	
 	@PostMapping
 	public ResponseEntity<CarDto> save(@RequestBody @Valid CarRequestDto car) {
 		CarDto savedCar = this.carService.save(car);
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedCar);
 	}
 
+	@GetMapping(value = "/{id}")
+	public CarDto findById(@PathVariable("id") @Positive @NotNull Long id) {
+		return this.carService.findById(id);
+	}
+	
+	@DeleteMapping("/{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable @Positive @NotNull Long id) {
+		this.carService.delete(id);
+	}
+	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<CarDto> update(@PathVariable @Positive @NotNull Long id,
 			@RequestBody @Valid CarRequestDto car) {
 		CarDto savedCar = this.carService.update(id, car);
 		return ResponseEntity.status(HttpStatus.OK).body(savedCar);
-	}
-
-	@GetMapping
-	public List<CarDto> findAll() {
-		return this.carService.findAll();
-	}
-
-	@GetMapping(value = "/{id}")
-	public CarDto findById(@PathVariable("id") @Positive @NotNull Long id) {
-		return this.carService.findById(id);
-	}
-
-	@DeleteMapping("/{id}")
-	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable @Positive @NotNull Long id) {
-		this.carService.delete(id);
 	}
 }

@@ -29,22 +29,15 @@ public class UserRestController extends BaseRestController<User> {
 	@Autowired
 	private UserService userService;
 
+	@GetMapping
+	public List<UserDto> findAll() {
+		return this.userService.findAll();
+	}
+	
 	@PostMapping
 	public ResponseEntity<UserDto> save(@RequestBody @Valid UserRequestDto user) {
 		UserDto savedUser = this.userService.save(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
-	}
-
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<UserDto> update(@PathVariable @Positive @NotNull Long id,
-			@RequestBody @Valid UserRequestDto user) {
-		UserDto savedUser = this.userService.update(id, user);
-		return ResponseEntity.status(HttpStatus.OK).body(savedUser);
-	}
-
-	@GetMapping
-	public List<UserDto> findAll() {
-		return this.userService.findAll();
 	}
 
 	@GetMapping(value = "/{id}")
@@ -56,6 +49,13 @@ public class UserRestController extends BaseRestController<User> {
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable @Positive @NotNull Long id) {
 		this.userService.delete(id);
+	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<UserDto> update(@PathVariable @Positive @NotNull Long id,
+			@RequestBody @Valid UserRequestDto user) {
+		UserDto savedUser = this.userService.update(id, user);
+		return ResponseEntity.status(HttpStatus.OK).body(savedUser);
 	}
 
 //	@GetMapping("image")
