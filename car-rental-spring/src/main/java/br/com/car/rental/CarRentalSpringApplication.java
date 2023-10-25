@@ -10,8 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.car.rental.api.data.CarRequestDto;
-import br.com.car.rental.api.data.UserDto;
 import br.com.car.rental.api.data.UserRequestDto;
+import br.com.car.rental.model.User;
 import br.com.car.rental.service.UserService;
 
 @SpringBootApplication
@@ -39,16 +39,16 @@ public class CarRentalSpringApplication implements CommandLineRunner {
 
 		UserRequestDto userHeisenberg = new UserRequestDto("Walter", "White", 
 				"heisenberg@somedomain.com", LocalDate.of(1958, 9, 7), "heisenberg", 
-				"+1 515-516-0624", "h3ll0", carsHeisenberg);
+				"+1 515-516-0624", "$2a$10$SDelfowfCRWei0rkUI5IIO1dLNKYrcHP4cjbjoJLViYj4h/0a7VdO", carsHeisenberg);
 
 		UserRequestDto userJessePinkman = new UserRequestDto("Jesse", "Pinkman", 
 				"pinkman@somedomain.com", LocalDate.of(1984, 10, 22), "pinkman", 
-				"+1 707-719-0993", "h3ll0", carsJessePinkman);
+				"+1 707-719-0993", "$2a$10$SDelfowfCRWei0rkUI5IIO1dLNKYrcHP4cjbjoJLViYj4h/0a7VdO", carsJessePinkman);
 
 		this.userService.save(userHeisenberg);
 		this.userService.save(userJessePinkman);
 
-		List<UserDto> users = this.userService.findAll();
+		List<User> users = this.userService.findAllUsers();
 		users.stream().forEach(System.out::println);
 	}
 }

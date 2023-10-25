@@ -1,5 +1,7 @@
 package br.com.car.rental.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,15 +15,16 @@ import jakarta.transaction.Transactional;
 @Service
 public class AuthenticationService implements UserDetailsService {
     @Autowired
-    private UserRepository usuarioRepository;
+    private UserRepository userRepository;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = this.usuarioRepository.findByLogin(username);
-        if (user == null) {
-        	throw new UsernameNotFoundException("User not found!");
+        Optional<User> optional = this.userRepository.findByLogin(username);
+        if (optional.isPresent()) {
+        	return optional.get();
         }
-        return user;
+
+        throw new UsernameNotFoundException("Invalid login or password");
     }
 }

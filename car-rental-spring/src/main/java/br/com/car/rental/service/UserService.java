@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.car.rental.api.data.UserDto;
 import br.com.car.rental.api.data.UserRequestDto;
 import br.com.car.rental.api.data.mapper.UserMapper;
+import br.com.car.rental.exception.BusinessException;
 import br.com.car.rental.exception.RecordNotFoundException;
 import br.com.car.rental.model.User;
 import br.com.car.rental.repository.UserRepository;
@@ -26,8 +27,20 @@ public class UserService extends BaseService {
 	public List<UserDto> findAll() {
 		return this.userRepository.findAll().stream().map(userMapper::map).toList();
 	}
+	
+	public List<User> findAllUsers() {
+		return this.userRepository.findAll();
+	}
 
 	public UserDto save(UserRequestDto userRequestDto) {
+		userRepository.findAllByEmail(userRequestDto.email()).stream().findAny().ifPresent(c -> {
+			throw new BusinessException("Email already exists.");
+		});
+
+		userRepository.findAllByLogin(userRequestDto.login()).stream().findAny().ifPresent(c -> {
+			throw new BusinessException("Login already exists.");
+		});
+
 		User user = this.userMapper.toModel(userRequestDto);
 		return this.userMapper.map(this.userRepository.save(user));
 	}

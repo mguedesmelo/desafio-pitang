@@ -7,8 +7,9 @@ import java.util.List;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -109,9 +110,9 @@ public class User extends BaseEntity implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		return authentication.getAuthorities();
-		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return authentication.getAuthorities();
+//		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
 	}
 
 	@Override
