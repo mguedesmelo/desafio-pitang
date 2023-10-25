@@ -1,7 +1,6 @@
 package br.com.car.rental.api.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.car.rental.api.data.UserDto;
-import br.com.car.rental.api.data.UserMapper;
 import br.com.car.rental.api.data.UserRequestDto;
 import br.com.car.rental.model.User;
 import br.com.car.rental.service.UserService;
@@ -30,8 +28,6 @@ import jakarta.validation.constraints.Positive;
 public class UserRestController extends BaseRestController<User> {
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private UserMapper userMapper;
 
 	@PostMapping
 	public ResponseEntity<UserDto> save(@RequestBody @Valid UserRequestDto user) {
@@ -48,8 +44,7 @@ public class UserRestController extends BaseRestController<User> {
 
 	@GetMapping
 	public List<UserDto> findAll() {
-		return this.userService.findAll().stream().map(
-				this::convertToDto).collect(Collectors.toList());
+		return this.userService.findAll();
 	}
 
 	@GetMapping(value = "/{id}")
@@ -61,10 +56,6 @@ public class UserRestController extends BaseRestController<User> {
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable @Positive @NotNull Long id) {
 		this.userService.delete(id);
-	}
-
-	private UserDto convertToDto(User user) {
-		return this.userMapper.map(user);
 	}
 
 //	@GetMapping("image")

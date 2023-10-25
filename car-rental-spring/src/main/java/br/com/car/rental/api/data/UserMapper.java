@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import br.com.car.rental.model.Car;
-import br.com.car.rental.model.CarColor;
 import br.com.car.rental.model.User;
 
 /**
@@ -14,7 +13,7 @@ import br.com.car.rental.model.User;
  * ModelMapper currently does not support record types.
  */
 @Component
-public class UserMapper {
+public class UserMapper extends BaseMapper {
 	public UserDto map(User user) {
 		if (user == null) {
 			return null;
@@ -24,14 +23,14 @@ public class UserMapper {
 	}
 
 	public User toModel(UserRequestDto userRequestDto) {
-		User user = new User();
-		user.setFirstName(userRequestDto.firstName());
-		user.setLastName(userRequestDto.lastName());
-		user.setEmail(userRequestDto.email());
-		user.setBirthDay(userRequestDto.birthDay());
-		user.setLogin(userRequestDto.login());
-		user.setPhone(userRequestDto.phone());
-		user.setPassword(userRequestDto.password());
+		User userToReturn = new User();
+		userToReturn.setFirstName(userRequestDto.firstName());
+		userToReturn.setLastName(userRequestDto.lastName());
+		userToReturn.setEmail(userRequestDto.email());
+		userToReturn.setBirthDay(userRequestDto.birthDay());
+		userToReturn.setLogin(userRequestDto.login());
+		userToReturn.setPhone(userRequestDto.phone());
+		userToReturn.setPassword(userRequestDto.password());
 
 		List<Car> cars = userRequestDto.cars().stream().map(carRequestDto -> {
 			Car car = new Car();
@@ -44,24 +43,12 @@ public class UserMapper {
 			car.setModel(carRequestDto.model());
 			car.setColor(convertColorValue(carRequestDto.color()));
 			car.setProductionYear(carRequestDto.productionYear());
-			car.setUser(user);
+			car.setUser(userToReturn);
 
 			return car;
 		}).collect(Collectors.toList());
-		user.setCars(cars);
+		userToReturn.setCars(cars);
 
-		return user;
-	}
-
-	private CarColor convertColorValue(String value) {
-		CarColor toReturn = null;
-		if (value == null) {
-			return null;
-		}
-		toReturn = CarColor.valueOf(value);
-		if (toReturn == null) {
-			throw new IllegalArgumentException("Invalid Color.");
-		}
-		return toReturn;
+		return userToReturn;
 	}
 }

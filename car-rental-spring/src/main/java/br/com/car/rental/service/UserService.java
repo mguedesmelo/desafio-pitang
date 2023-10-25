@@ -23,8 +23,8 @@ public class UserService extends BaseService {
 	@Autowired
 	private UserMapper userMapper;
 
-	public List<User> findAll() {
-		return this.userRepository.findAll();
+	public List<UserDto> findAll() {
+		return this.userRepository.findAll().stream().map(userMapper::map).toList();
 	}
 
 	public UserDto save(UserRequestDto userRequestDto) {
@@ -54,10 +54,11 @@ public class UserService extends BaseService {
 	}
 
 	public void delete(@Positive @NotNull Long id) {
-		this.userRepository.delete(this.userRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id)));
+		this.userRepository.delete(this.userRepository.findById(id).orElseThrow(
+				() -> new RecordNotFoundException(id)));
 	}
 
-	public User findImageById(@Positive @NotNull Long id) {
-		return this.userRepository.findImageById(id).orElse(null);
-	}
+//	public User findImageById(@Positive @NotNull Long id) {
+//		return this.userRepository.findImageById(id).orElse(null);
+//	}
 }

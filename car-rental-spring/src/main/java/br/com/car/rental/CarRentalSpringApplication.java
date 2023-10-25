@@ -10,8 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.car.rental.api.data.CarRequestDto;
+import br.com.car.rental.api.data.UserDto;
 import br.com.car.rental.api.data.UserRequestDto;
-import br.com.car.rental.model.User;
 import br.com.car.rental.service.UserService;
 
 @SpringBootApplication
@@ -48,7 +48,7 @@ public class CarRentalSpringApplication implements CommandLineRunner {
 		this.userService.save(userHeisenberg);
 		this.userService.save(userJessePinkman);
 
-		List<User> users = this.userService.findAll();
+		List<UserDto> users = this.userService.findAll();
 		users.stream().forEach(System.out::println);
 	}
 }
