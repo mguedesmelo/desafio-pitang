@@ -10,6 +10,8 @@ import br.com.car.rental.model.User;
 public interface UserRepository extends BaseRepository<User> {
 	List<User> findByFirstNameAndLastName(String firstName, String lastName);
 
+	User findByLogin(String login);
+	
 //    @Query("SELECT u FROM User u WHERE u.email = :email")
 //    Optional<User> findByEmail(@Param("email") String email);
 

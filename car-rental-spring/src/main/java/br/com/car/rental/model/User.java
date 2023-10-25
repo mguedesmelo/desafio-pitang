@@ -2,10 +2,14 @@ package br.com.car.rental.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,7 +32,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_user")
-public class User extends BaseEntity {
+public class User extends BaseEntity implements UserDetails {
 	/**
 	 * 
 	 */
@@ -101,5 +105,37 @@ public class User extends BaseEntity {
 				", phone=" + phone + 
 				", cars=" + cars + 
 				"]";
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		return authentication.getAuthorities();
+		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	}
+
+	@Override
+	public String getUsername() {
+		return this.login;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 }

@@ -7,4 +7,7 @@ public class Constants {
 
 	public static final String FORMAT_PATTERN_DATETIME = "dd/MM/yyyy HH:mm:ss";
 	public static final String FORMAT_PATTERN_DATE = "dd/MM/yyyy";
+
+	public static final String JWT_ISSUER = "pitang";
+	public static final String JWT_SECRET_KEY = "desafio";
 }
