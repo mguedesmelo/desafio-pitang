@@ -38,8 +38,8 @@ public class User extends BaseEntity {
 //		super(imageContentType, image);
 //	}
 
-	public User(String firstName, String lastName, String email, LocalDate birthdate, 
-			String login, String password, String phone) {
+	public User(String firstName, String lastName, String email, LocalDate birthdate, String login, String password,
+			String phone) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -60,7 +60,7 @@ public class User extends BaseEntity {
 	private String email;
 
 	@Column(name = "birthday")
-    private LocalDate birthDay = LocalDate.now();
+	private LocalDate birthDay = LocalDate.now();
 
 	@Column(name = "login", length = 20, nullable = false)
 	private String login;
@@ -73,11 +73,11 @@ public class User extends BaseEntity {
 
 	// FIXME Colocar lazy
 	@Fetch(FetchMode.SELECT)
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    @Getter
-    @JsonIgnore
-    private List<Car> cars = new ArrayList<Car>(0);
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	@Getter
+	@JsonIgnore
+	private List<Car> cars = new ArrayList<Car>(0);
 
 	public void addCar(Car car) {
 		this.cars.add(car);
@@ -85,13 +85,14 @@ public class User extends BaseEntity {
 	}
 
 	public void removeCar(Car car) {
-	    this.cars.remove(car);
-	    car.setUser(null);
+		this.cars.remove(car);
+		car.setUser(null);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "User [firstName=" + firstName + 
+		return "User ["
+				+ "firstName=" + firstName + 
 				", lastName=" + lastName + 
 				", email=" + email + 
 				", birthDay=" + birthDay + 

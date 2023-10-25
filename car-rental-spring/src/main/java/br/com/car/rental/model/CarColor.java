@@ -3,21 +3,17 @@ package br.com.car.rental.model;
 import lombok.Getter;
 
 public enum CarColor {
-    Red("Red", "bg-primary"), 
-    Yellow("Yellow", "bg-secondary"), 
-    Blue("Blue", "bg-warning"), 
-    White("White", "bg-success"), 
-    WineRed("WineRed", "bg-success"), 
-    Black("Black", "bg-danger");
-    
-	@Getter
-    private String color;
+	Red("Red"), 
+	Yellow("Yellow"), 
+	Blue("Blue"),
+	White("White"), 
+	WineRed("WineRed"), 
+	Black("Black");
 
 	@Getter
-    private String cssClass;
+	private String color;
 
-	CarColor(String color, String cssClass) {
-        this.color = color;
-        this.cssClass = cssClass;
-    }
+	CarColor(String color) {
+		this.color = color;
+	}
 }

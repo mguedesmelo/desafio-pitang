@@ -11,8 +11,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record CarRequestDto(
-		@NotNull @IsBeforeOrEqualThanCurrentYear @JsonProperty("year") Integer productionYear, 
-		@NotBlank @NotNull @Length(max = 10) String licensePlate, 
+		@NotNull @IsBeforeOrEqualThanCurrentYear @JsonProperty("year") Integer productionYear,
+		@NotBlank @NotNull @Length(max = 10) String licensePlate,
 		@NotBlank @NotNull @Length(min = 5, max = 60) String model,
 		@ValueOfEnum(enumClass = CarColor.class) String color) {
 

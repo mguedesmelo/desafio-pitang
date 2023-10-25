@@ -19,8 +19,8 @@ public class UserMapper {
 		if (user == null) {
 			return null;
 		}
-		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(),
-				user.getBirthDay(), user.getLastName(), user.getPhone());
+		return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getBirthDay(),
+				user.getLastName(), user.getPhone());
 	}
 
 	public User toModel(UserRequestDto userRequestDto) {

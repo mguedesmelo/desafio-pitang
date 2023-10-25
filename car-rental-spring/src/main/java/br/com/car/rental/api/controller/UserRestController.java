@@ -31,7 +31,7 @@ public class UserRestController extends BaseRestController<User> {
 	@Autowired
 	private UserService userService;
 	@Autowired
-    private UserMapper userMapper;
+	private UserMapper userMapper;
 
 	@PostMapping
 	public ResponseEntity<UserDto> save(@RequestBody @Valid UserRequestDto user) {
@@ -48,25 +48,25 @@ public class UserRestController extends BaseRestController<User> {
 
 	@GetMapping
 	public List<UserDto> findAll() {
-	    return this.userService.findAll().stream().map(this::convertToDto).collect(
-	    		Collectors.toList());
+		return this.userService.findAll().stream().map(
+				this::convertToDto).collect(Collectors.toList());
 	}
 
 	@GetMapping(value = "/{id}")
 	public UserDto findById(@PathVariable("id") @Positive @NotNull Long id) {
 		return this.userService.findById(id);
 	}
-	
+
 	@DeleteMapping("/{id}")
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable @Positive @NotNull Long id) {
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable @Positive @NotNull Long id) {
 		this.userService.delete(id);
-    }
+	}
 
 	private UserDto convertToDto(User user) {
-	    return this.userMapper.map(user);
+		return this.userMapper.map(user);
 	}
-	
+
 //	@GetMapping("image")
 //	public void image(@RequestParam Long id, HttpServletResponse response) {
 //		Optional<User> optional = this.userService.findOptionalById(id);

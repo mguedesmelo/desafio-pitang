@@ -16,7 +16,7 @@ import jakarta.validation.Payload;
 @Documented
 public @interface IsBeforeOrEqualThanCurrentYear {
 	String message() default "The production year should be equal to or less than the current year.";
-	
+
 	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default {};

@@ -18,7 +18,7 @@ import br.com.car.rental.service.UserService;
 public class CarRentalSpringApplication implements CommandLineRunner {
 	@Autowired
 	private UserService userService;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(CarRentalSpringApplication.class, args);
 	}
@@ -37,11 +37,13 @@ public class CarRentalSpringApplication implements CommandLineRunner {
 				new CarRequestDto(1986, "PQT 3570", "Toyota Tercel", "White"),
 				new CarRequestDto(1978, "LPM 1201", "Chevrolet El Camino", "Red"));
 
-		UserRequestDto userHeisenberg = new UserRequestDto("Walter", "White", "heisenberg@somedomain.com", 
-				LocalDate.of(1958, 9, 7), "heisenberg",	"+1 515-516-0624","h3ll0", carsHeisenberg);
+		UserRequestDto userHeisenberg = new UserRequestDto("Walter", "White", 
+				"heisenberg@somedomain.com", LocalDate.of(1958, 9, 7), "heisenberg", 
+				"+1 515-516-0624", "h3ll0", carsHeisenberg);
 
-		UserRequestDto userJessePinkman = new UserRequestDto("Jesse", "Pinkman", "pinkman@somedomain.com", 
-				LocalDate.of(1984, 10, 22), "pinkman", "+1 707-719-0993", "h3ll0", carsJessePinkman);
+		UserRequestDto userJessePinkman = new UserRequestDto("Jesse", "Pinkman", 
+				"pinkman@somedomain.com", LocalDate.of(1984, 10, 22), "pinkman", 
+				"+1 707-719-0993", "h3ll0", carsJessePinkman);
 
 		this.userService.save(userHeisenberg);
 		this.userService.save(userJessePinkman);
@@ -49,18 +51,4 @@ public class CarRentalSpringApplication implements CommandLineRunner {
 		List<User> users = this.userService.findAll();
 		users.stream().forEach(System.out::println);
 	}
-	/**
-	- Mapeando uma classe para um dto
-	@GetMapping("/dto")
-	public List<EmployeeDto> getEmployeesDto() {
-	    log.info("In controller");
-	    return this.employeeService.getEmployees().stream().map(this::convertToDto).collect(Collectors.toList());
-	}
-	private EmployeeDto convertToDto(Employee employee) {
-	    return this.modelMapper.map(employee, EmployeeDto.class);
-	}
-	
-	
-	*/
-
 }

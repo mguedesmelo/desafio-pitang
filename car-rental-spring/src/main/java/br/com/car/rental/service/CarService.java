@@ -37,5 +37,4 @@ public class CarService extends BaseService {
 	public Car findImageById(Long id) {
 		return this.carRepository.findImageById(id).orElse(null);
 	}
-
 }

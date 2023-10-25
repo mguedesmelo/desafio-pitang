@@ -21,7 +21,7 @@ public class UserService extends BaseService {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-    private UserMapper userMapper;
+	private UserMapper userMapper;
 
 	public List<User> findAll() {
 		return this.userRepository.findAll();
@@ -31,19 +31,19 @@ public class UserService extends BaseService {
 		User user = this.userMapper.toModel(userRequestDto);
 		return this.userMapper.map(this.userRepository.save(user));
 	}
-	
+
 	public UserDto update(@Positive @NotNull Long id, @Valid UserRequestDto userRequestDto) {
-		 return this.userRepository.findById(id).map(actual -> {
-	            actual.setFirstName(userRequestDto.firstName());
-	            actual.setLastName(userRequestDto.lastName());
-	            actual.setEmail(userRequestDto.email());
-	            actual.setBirthDay(userRequestDto.birthDay());
-	            actual.setLogin(userRequestDto.login());
-	            actual.setPassword(userRequestDto.password());
-	            actual.setPhone(userRequestDto.phone());
-	            return this.userMapper.map(this.userRepository.save(actual));
-	        }).orElseThrow(() -> new RecordNotFoundException(id));
-    }
+		return this.userRepository.findById(id).map(actual -> {
+			actual.setFirstName(userRequestDto.firstName());
+			actual.setLastName(userRequestDto.lastName());
+			actual.setEmail(userRequestDto.email());
+			actual.setBirthDay(userRequestDto.birthDay());
+			actual.setLogin(userRequestDto.login());
+			actual.setPassword(userRequestDto.password());
+			actual.setPhone(userRequestDto.phone());
+			return this.userMapper.map(this.userRepository.save(actual));
+		}).orElseThrow(() -> new RecordNotFoundException(id));
+	}
 
 	public UserDto findById(@Positive @NotNull Long id) {
 		return this.userMapper.map(this.findOptionalById(id).orElse(null));
@@ -54,8 +54,7 @@ public class UserService extends BaseService {
 	}
 
 	public void delete(@Positive @NotNull Long id) {
-		this.userRepository.delete(this.userRepository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException(id)));
+		this.userRepository.delete(this.userRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id)));
 	}
 
 	public User findImageById(@Positive @NotNull Long id) {
