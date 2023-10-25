@@ -1,7 +1,10 @@
-package br.com.car.rental.api.data;
+package br.com.car.rental.api.data.mapper;
 
 import org.springframework.stereotype.Component;
 
+import br.com.car.rental.api.data.BaseMapper;
+import br.com.car.rental.api.data.CarDto;
+import br.com.car.rental.api.data.CarRequestDto;
 import br.com.car.rental.model.Car;
 
 /**

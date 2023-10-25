@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.car.rental.api.data.UserDto;
-import br.com.car.rental.api.data.UserMapper;
 import br.com.car.rental.api.data.UserRequestDto;
+import br.com.car.rental.api.data.mapper.UserMapper;
 import br.com.car.rental.exception.RecordNotFoundException;
 import br.com.car.rental.model.User;
 import br.com.car.rental.repository.UserRepository;

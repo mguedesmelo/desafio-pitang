@@ -1,10 +1,13 @@
-package br.com.car.rental.api.data;
+package br.com.car.rental.api.data.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import br.com.car.rental.api.data.BaseMapper;
+import br.com.car.rental.api.data.UserDto;
+import br.com.car.rental.api.data.UserRequestDto;
 import br.com.car.rental.model.Car;
 import br.com.car.rental.model.User;
 
