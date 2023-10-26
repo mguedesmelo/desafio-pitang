@@ -33,16 +33,29 @@ public class UserService extends BaseService {
 		return this.userRepository.findAll();
 	}
 
-	
-//	firstName,
-//	lastName, 
-//	email,
-//	LocalDate birthDay, 
-//	login,
-//	phone, 
-//	password
-	
 	public UserDto save(@Valid UserRequestDto userRequestDto) {
+		validateUser(userRequestDto);
+
+		User user = this.userMapper.toModel(userRequestDto);
+		return this.userMapper.map(this.userRepository.save(user));
+	}
+
+	public UserDto update(@Positive @NotNull Long id, @Valid UserRequestDto userRequestDto) {
+		validateUser(userRequestDto);
+
+		return this.userRepository.findById(id).map(actual -> {
+			actual.setFirstName(userRequestDto.firstName());
+			actual.setLastName(userRequestDto.lastName());
+			actual.setEmail(userRequestDto.email());
+			actual.setBirthDay(userRequestDto.birthDay());
+			actual.setLogin(userRequestDto.login());
+			actual.setPassword(userRequestDto.password());
+			actual.setPhone(userRequestDto.phone());
+			return this.userMapper.map(this.userRepository.save(actual));
+		}).orElseThrow(() -> new RecordNotFoundException(id));
+	}
+
+	private void validateUser(UserRequestDto userRequestDto) {
 		if (StringUtil.isNullOrEmpty(userRequestDto.firstName(), userRequestDto.lastName(),
 				userRequestDto.email(), userRequestDto.login(), userRequestDto.phone(),
 				userRequestDto.password()) || userRequestDto.birthDay() == null) {
@@ -55,22 +68,6 @@ public class UserService extends BaseService {
 		userRepository.findAllByLogin(userRequestDto.login()).stream().findAny().ifPresent(c -> {
 			throw new BusinessException("Login already exists");
 		});
-
-		User user = this.userMapper.toModel(userRequestDto);
-		return this.userMapper.map(this.userRepository.save(user));
-	}
-
-	public UserDto update(@Positive @NotNull Long id, @Valid UserRequestDto userRequestDto) {
-		return this.userRepository.findById(id).map(actual -> {
-			actual.setFirstName(userRequestDto.firstName());
-			actual.setLastName(userRequestDto.lastName());
-			actual.setEmail(userRequestDto.email());
-			actual.setBirthDay(userRequestDto.birthDay());
-			actual.setLogin(userRequestDto.login());
-			actual.setPassword(userRequestDto.password());
-			actual.setPhone(userRequestDto.phone());
-			return this.userMapper.map(this.userRepository.save(actual));
-		}).orElseThrow(() -> new RecordNotFoundException(id));
 	}
 
 	public UserDto findById(@Positive @NotNull Long id) {

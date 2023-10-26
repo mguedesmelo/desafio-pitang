@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 import br.com.car.rental.api.data.CarDto;
 import br.com.car.rental.api.data.CarRequestDto;
 import br.com.car.rental.api.data.mapper.CarMapper;
+import br.com.car.rental.exception.BusinessException;
 import br.com.car.rental.exception.RecordNotFoundException;
 import br.com.car.rental.model.Car;
 import br.com.car.rental.model.CarColor;
 import br.com.car.rental.model.User;
 import br.com.car.rental.repository.CarRepository;
+import br.com.car.rental.shared.StringUtil;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -31,9 +33,29 @@ public class CarService extends BaseService {
 	}
 
 	public CarDto save(User user, CarRequestDto carRequestDto) {
+		validateCar(carRequestDto);
+
 		Car car = this.carMapper.toModel(carRequestDto);
 		user.addCar(car);
 		return this.carMapper.map(this.carRepository.save(car));
+	}
+
+	private void validateCar(@Valid CarRequestDto carRequestDto) {
+		if (carRequestDto.productionYear() == null ||
+				StringUtil.isNullOrEmpty(
+						carRequestDto.licensePlate(), 
+						carRequestDto.model(),
+						carRequestDto.color())) {
+			throw new BusinessException("Missing fields");
+		}
+		
+		if (!CarColor.contains(carRequestDto.color())) {
+			throw new BusinessException("Invalid fields");
+		}
+
+		carRepository.findAllByLicensePlate(carRequestDto.licensePlate()).stream().findAny().ifPresent(c -> {
+			throw new BusinessException("License plate already exists");
+		});
 	}
 
 	public CarDto update(User user, @Positive @NotNull Long id, @Valid CarRequestDto carRequestDto) {

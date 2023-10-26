@@ -1,5 +1,6 @@
 package br.com.car.rental.repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,4 +26,7 @@ public interface CarRepository extends BaseRepository<Car> {
 	@Modifying
 	@Query("DELETE FROM br.com.car.rental.model.Car c WHERE c.id = :id")
 	void delete(@Param("id") Long id);
+
+	@Query("SELECT c FROM br.com.car.rental.model.Car c WHERE c.licensePlate = :licensePlate")
+	Collection<Car> findAllByLicensePlate(@Param("licensePlate") String licensePlate);
 }

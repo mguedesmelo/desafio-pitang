@@ -16,4 +16,13 @@ public enum CarColor {
 	CarColor(String color) {
 		this.color = color;
 	}
+	
+	public static boolean contains(String test) {
+	    for (CarColor c : CarColor.values()) {
+	        if (c.name().equals(test)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 }

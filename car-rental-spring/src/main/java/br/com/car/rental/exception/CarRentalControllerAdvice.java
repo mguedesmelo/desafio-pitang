@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.ValidationException;
 
 /**
  * Controller advice that handles exceptions thrown by the controllers.
@@ -18,6 +19,12 @@ public class CarRentalControllerAdvice {
     @ExceptionHandler(RecordNotFoundException.class)
     public String handleRecordNotFoundException(RecordNotFoundException e) {
     	return new ResponseMessage(HttpStatus.NOT_FOUND.value(), e.getMessage()).toString();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidationException.class)
+    public String handleValidationException(ValidationException e) {
+        return new ResponseMessage(HttpStatus.BAD_REQUEST.value(), "Invalid fields").toString();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

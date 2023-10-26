@@ -34,7 +34,6 @@ public class FilterToken extends OncePerRequestFilter {
     		HttpServletResponse response, 
     		FilterChain filterChain) throws ServletException, IOException {
         var authorizationHeader = request.getHeader("Authorization");
-        System.out.println("-- " + request.getServletPath());
         if (httpUtil.isFreeToNavigate(request.getServletPath())) {
         	filterChain.doFilter(request, response);
         } else if (authorizationHeader == null) {
