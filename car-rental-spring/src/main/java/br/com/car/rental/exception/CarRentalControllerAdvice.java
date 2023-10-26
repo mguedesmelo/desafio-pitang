@@ -1,9 +1,11 @@
 package br.com.car.rental.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -30,7 +32,15 @@ public class CarRentalControllerAdvice {
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(TokenExpiredException.class)
+    @ResponseBody
     public String handleTokenExpiredException(TokenExpiredException e) {
+        return "Unauthorized - invalid session";
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseBody
+    public String handleAccessDeniedException(AccessDeniedException e) {
         return "Unauthorized - invalid session";
     }
 
