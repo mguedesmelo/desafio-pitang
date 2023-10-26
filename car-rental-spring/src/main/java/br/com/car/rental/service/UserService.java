@@ -27,7 +27,7 @@ public class UserService extends BaseService {
 	public List<UserDto> findAll() {
 		return this.userRepository.findAll().stream().map(userMapper::map).toList();
 	}
-	
+
 	public List<User> findAllUsers() {
 		return this.userRepository.findAll();
 	}
@@ -60,6 +60,10 @@ public class UserService extends BaseService {
 
 	public UserDto findById(@Positive @NotNull Long id) {
 		return this.userMapper.map(this.findOptionalById(id).orElse(null));
+	}
+
+	public Optional<User> findByLogin(String login) {
+		return this.userRepository.findByLogin(login);
 	}
 
 	public Optional<User> findOptionalById(@Positive @NotNull Long id) {

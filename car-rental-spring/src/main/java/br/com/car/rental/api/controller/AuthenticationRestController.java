@@ -5,7 +5,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import br.com.car.rental.api.data.LoginDto;
 import br.com.car.rental.exception.BusinessException;
 import br.com.car.rental.model.User;
 import br.com.car.rental.service.TokenService;
+import br.com.car.rental.service.UserService;
 
 @RestController
 @RequestMapping("/api")
@@ -23,7 +26,9 @@ public class AuthenticationRestController {
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private TokenService tokenService;
-	
+	@Autowired
+	private UserService userService;
+
 	@PostMapping(value = "/signin")
 	public String login(@RequestBody LoginDto loginDto) {
 		try {
@@ -42,5 +47,14 @@ public class AuthenticationRestController {
 			t.printStackTrace();
 		}
 		return null;
+	}
+
+	@GetMapping(value = "/me")
+	public User me() {
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (login != null) {
+            return this.userService.findByLogin(login).orElse(null);
+        }
+        return null;
 	}
 }

@@ -12,7 +12,9 @@ import br.com.car.rental.api.data.mapper.CarMapper;
 import br.com.car.rental.exception.RecordNotFoundException;
 import br.com.car.rental.model.Car;
 import br.com.car.rental.model.CarColor;
+import br.com.car.rental.model.User;
 import br.com.car.rental.repository.CarRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -28,13 +30,14 @@ public class CarService extends BaseService {
 		return this.carRepository.findAll().stream().map(carMapper::map).toList();
 	}
 
-	public CarDto save(CarRequestDto carRequestDto) {
+	public CarDto save(User user, CarRequestDto carRequestDto) {
 		Car car = this.carMapper.toModel(carRequestDto);
+		user.addCar(car);
 		return this.carMapper.map(this.carRepository.save(car));
 	}
 
-	public CarDto update(@Positive @NotNull Long id, @Valid CarRequestDto carRequestDto) {
-		return this.carRepository.findById(id).map(actual -> {
+	public CarDto update(User user, @Positive @NotNull Long id, @Valid CarRequestDto carRequestDto) {
+		return this.carRepository.findByUserAndId(user.getLogin(), id).map(actual -> {
 			actual.setProductionYear(carRequestDto.productionYear());
 			actual.setLicensePlate(carRequestDto.licensePlate());
 			actual.setModel(carRequestDto.model());
@@ -43,16 +46,24 @@ public class CarService extends BaseService {
 		}).orElseThrow(() -> new RecordNotFoundException(id));
 	}
 
-	public CarDto findById(@Positive @NotNull Long id) {
-		return this.carMapper.map(this.findOptionalById(id).orElse(null));
+	public CarDto findByUserAndId(User user, @Positive @NotNull Long id) {
+		return this.carMapper.map(this.carRepository.findByUserAndId(user.getLogin(), id).orElse(null));
 	}
 
 	public Optional<Car> findOptionalById(@Positive @NotNull Long id) {
 		return this.carRepository.findById(id);
 	}
 
-	public void delete(@Positive @NotNull Long id) {
-		this.carRepository.delete(this.carRepository.findById(id).orElseThrow(
-				() -> new RecordNotFoundException(id)));
+    @Transactional
+	public void delete(User user, @Positive @NotNull Long id) {
+		Car car = this.carRepository.findByUserAndId(user.getLogin(), id).orElse(null);
+		if (car == null) {
+			new RecordNotFoundException(id);
+		}
+		this.carRepository.delete(car.getId());
+	}
+
+	public List<CarDto> findAllByUser(User user) {
+		return this.carRepository.findAllByUser(user.getLogin()).stream().map(carMapper::map).toList();
 	}
 }

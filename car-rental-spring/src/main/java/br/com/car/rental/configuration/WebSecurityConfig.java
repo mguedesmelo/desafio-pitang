@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
@@ -26,8 +27,8 @@ public class WebSecurityConfig {
 	private AuthenticationService authenticationService;
 //	@Autowired
 //	private UserService userService;
-//	@Autowired
-//	private FilterToken filter;
+	@Autowired
+	private FilterToken filter;
 
 	@Bean
     MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
@@ -74,6 +75,7 @@ public class WebSecurityConfig {
 	            		.contentTypeOptions(withDefaults())
 	            		.frameOptions(withDefaults())
 	            		.disable())
+				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
 				.build();
 
 

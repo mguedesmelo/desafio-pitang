@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
+
 import jakarta.validation.ConstraintViolationException;
 
 /**
@@ -24,6 +26,12 @@ public class CarRentalControllerAdvice {
     @ExceptionHandler(BusinessException.class)
     public String handleBusinessException(BusinessException e) {
         return e.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(TokenExpiredException.class)
+    public String handleTokenExpiredException(TokenExpiredException e) {
+        return "Unauthorized - invalid session";
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

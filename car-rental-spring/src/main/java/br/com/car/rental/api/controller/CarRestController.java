@@ -31,30 +31,30 @@ public class CarRestController extends BaseRestController<User> {
 
 	@GetMapping
 	public List<CarDto> findAll() {
-		return this.carService.findAll();
+		return this.carService.findAllByUser(getLoggedUser());
 	}
 	
 	@PostMapping
-	public ResponseEntity<CarDto> save(@RequestBody @Valid CarRequestDto car) {
-		CarDto savedCar = this.carService.save(car);
+	public ResponseEntity<CarDto> save(@RequestBody @Valid CarRequestDto carRequestDto) {
+		CarDto savedCar = this.carService.save(this.getLoggedUser(), carRequestDto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedCar);
 	}
 
 	@GetMapping(value = "/{id}")
 	public CarDto findById(@PathVariable("id") @Positive @NotNull Long id) {
-		return this.carService.findById(id);
+		return this.carService.findByUserAndId(getLoggedUser(), id);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable @Positive @NotNull Long id) {
-		this.carService.delete(id);
+		this.carService.delete(getLoggedUser(), id);
 	}
 	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<CarDto> update(@PathVariable @Positive @NotNull Long id,
 			@RequestBody @Valid CarRequestDto car) {
-		CarDto savedCar = this.carService.update(id, car);
+		CarDto savedCar = this.carService.update(getLoggedUser(), id, car);
 		return ResponseEntity.status(HttpStatus.OK).body(savedCar);
 	}
 }

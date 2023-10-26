@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import br.com.car.rental.shared.Constants;
 import br.com.car.rental.shared.DateUtil;
 import jakarta.persistence.Column;
@@ -28,6 +31,7 @@ public abstract class BaseEntity implements Serializable {
 	private Long id;
 
 	@Column(name = "creation_date", nullable = false)
+	@JsonProperty("createdAt")
 	private LocalDateTime creationDate = LocalDateTime.now();
 
 //	@Column(name = "image_content_type")
@@ -59,6 +63,7 @@ public abstract class BaseEntity implements Serializable {
 //		this.image = image;
 	}
 
+	@JsonIgnore
 	public String getAgeString() {
 		if (this.creationDate == null) {
 			return "";
@@ -66,6 +71,7 @@ public abstract class BaseEntity implements Serializable {
 		return DateUtil.getDuration(creationDate);
 	}
 
+	@JsonIgnore
 	public String getCreationDateString() {
 		if (this.creationDate == null) {
 			return "";

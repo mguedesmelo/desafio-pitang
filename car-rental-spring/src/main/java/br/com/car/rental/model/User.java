@@ -1,15 +1,15 @@
 package br.com.car.rental.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,7 +24,6 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -67,6 +66,9 @@ public class User extends BaseEntity implements UserDetails {
 	@Column(name = "birthday")
 	private LocalDate birthDay = LocalDate.now();
 
+	@Column(name = "last_login")
+	private LocalDateTime lastLogin;
+
 	@Column(name = "login", length = 20, nullable = false)
 	private String login;
 
@@ -80,8 +82,6 @@ public class User extends BaseEntity implements UserDetails {
 	@Fetch(FetchMode.SELECT)
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
-	@Getter
-	@JsonIgnore
 	private List<Car> cars = new ArrayList<Car>(0);
 
 	public void addCar(Car car) {
@@ -109,33 +109,39 @@ public class User extends BaseEntity implements UserDetails {
 	}
 
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		return authentication.getAuthorities();
-//		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		return authentication.getAuthorities();
+		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
 	}
 
 	@Override
+	@JsonIgnore
 	public String getUsername() {
 		return this.login;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
 	@Override
+	@JsonIgnore
 	public boolean isEnabled() {
 		return true;
 	}
