@@ -25,8 +25,6 @@ import br.com.car.rental.service.AuthenticationService;
 public class WebSecurityConfig {
 	@Autowired
 	private AuthenticationService authenticationService;
-//	@Autowired
-//	private UserService userService;
 	@Autowired
 	private FilterToken filter;
 
@@ -43,11 +41,11 @@ public class WebSecurityConfig {
         		this.passwordEncoder());
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 
-		return http
+        return http
 				.cors(withDefaults())
 				.authorizeHttpRequests((auth) -> auth
 						.requestMatchers(
-                                antMatcher("/h2-console/**/**"),
+								antMatcher("/h2-console/**/**"),
 								antMatcher("/api/signin"), 
 								antMatcher("/api/logout"), 
 								antMatcher("/api/users/**"), 
@@ -56,7 +54,8 @@ public class WebSecurityConfig {
 								antMatcher("/images/**"), 
 								antMatcher("/js/**"), 
 								antMatcher("/plugins/**"), 
-								antMatcher("/*/imagem/**"))
+								antMatcher("/*/imagem/**")
+								)
 						.permitAll()
 						.anyRequest()
 						.authenticated())
@@ -77,8 +76,6 @@ public class WebSecurityConfig {
 	            		.disable())
 				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
 				.build();
-
-
 
 //    	return http
 //    			.csrf((csrf) -> csrf.disable())

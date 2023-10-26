@@ -13,6 +13,7 @@ import br.com.car.rental.exception.BusinessException;
 import br.com.car.rental.exception.RecordNotFoundException;
 import br.com.car.rental.model.User;
 import br.com.car.rental.repository.UserRepository;
+import br.com.car.rental.shared.StringUtil;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -32,13 +33,27 @@ public class UserService extends BaseService {
 		return this.userRepository.findAll();
 	}
 
-	public UserDto save(UserRequestDto userRequestDto) {
+	
+//	firstName,
+//	lastName, 
+//	email,
+//	LocalDate birthDay, 
+//	login,
+//	phone, 
+//	password
+	
+	public UserDto save(@Valid UserRequestDto userRequestDto) {
+		if (StringUtil.isNullOrEmpty(userRequestDto.firstName(), userRequestDto.lastName(),
+				userRequestDto.email(), userRequestDto.login(), userRequestDto.phone(),
+				userRequestDto.password()) || userRequestDto.birthDay() == null) {
+			throw new BusinessException("Missing fields");
+		}
 		userRepository.findAllByEmail(userRequestDto.email()).stream().findAny().ifPresent(c -> {
-			throw new BusinessException("Email already exists.");
+			throw new BusinessException("Email already exists");
 		});
 
 		userRepository.findAllByLogin(userRequestDto.login()).stream().findAny().ifPresent(c -> {
-			throw new BusinessException("Login already exists.");
+			throw new BusinessException("Login already exists");
 		});
 
 		User user = this.userMapper.toModel(userRequestDto);

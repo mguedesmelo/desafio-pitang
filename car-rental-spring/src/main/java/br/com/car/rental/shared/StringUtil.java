@@ -4,6 +4,7 @@ import java.text.Normalizer;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,6 +43,22 @@ public final class StringUtil {
 	 */
 	public static boolean isNullOrEmpty(String text) {
 		return (text == null || text.trim().length() == 0 || text.trim().isEmpty());
+	}
+
+	/**
+	 * Verify if some of the texts is null or empty.
+	 *
+	 * @param text Text to be verified.
+	 * @return boolean Returns <code>true</code> if some of the texts is null or empty,
+	 *         <code>false</code> otherwise.
+	 */
+	public static boolean isNullOrEmpty(String... texts) {
+		for (String text : texts) {
+			if (StringUtil.isNullOrEmpty(text)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

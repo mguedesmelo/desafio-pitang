@@ -35,7 +35,7 @@ public class UserRestController extends BaseRestController<User> {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserDto> save(@RequestBody @Valid UserRequestDto user) {
+	public ResponseEntity<UserDto> save(@RequestBody UserRequestDto user) {
 		UserDto savedUser = this.userService.save(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
 	}

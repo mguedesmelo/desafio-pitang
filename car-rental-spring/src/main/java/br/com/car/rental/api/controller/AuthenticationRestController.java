@@ -8,7 +8,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,8 +28,8 @@ public class AuthenticationRestController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping(value = "/signin")
-	public String login(@RequestBody LoginDto loginDto) {
+	@GetMapping(value = "/signin")
+	public String signin(@RequestBody LoginDto loginDto) {
 		try {
 			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 					loginDto.login(), loginDto.password());
@@ -44,9 +43,8 @@ public class AuthenticationRestController {
 		} catch (BadCredentialsException e) {
 			throw new BusinessException("Invalid login or password");
 		} catch (Throwable t) {
-			t.printStackTrace();
+			throw new BusinessException(t.getMessage());
 		}
-		return null;
 	}
 
 	@GetMapping(value = "/me")

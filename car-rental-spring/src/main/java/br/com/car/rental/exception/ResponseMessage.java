@@ -8,4 +8,9 @@ import lombok.Getter;
 public class ResponseMessage {
 	private int errorCode;
     private String message;
+
+	@Override
+	public String toString() {
+		return String.format("{\"errorCode\":%s,\"message\":\"%s\"}", errorCode, message);
+	}
 }
