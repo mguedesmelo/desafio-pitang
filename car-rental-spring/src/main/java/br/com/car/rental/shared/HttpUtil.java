@@ -24,6 +24,7 @@ public class HttpUtil {
 			"/api/logout", 
 			"/api/users",
 			"/h2-console",
+			"/swagger-ui",
 			"/css", 
 			"/icons", 
 			"/images",

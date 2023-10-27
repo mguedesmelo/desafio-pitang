@@ -48,6 +48,7 @@ public class WebSecurityConfig {
 								antMatcher("/h2-console/**/**"),
 								antMatcher("/api/signin"), 
 								antMatcher("/api/logout"), 
+								antMatcher("/swagger-ui"), 
 								antMatcher("/api/users/**"), 
 								antMatcher("/css/**"), 
 								antMatcher("/icons/**"), 
@@ -112,7 +113,7 @@ public class WebSecurityConfig {
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		System.out.println("h3ll0 = " + bCryptPasswordEncoder.encode("h3ll0"));
+//		System.out.println("h3ll0 = " + bCryptPasswordEncoder.encode("h3ll0"));
 		return bCryptPasswordEncoder;
 	}
 }
