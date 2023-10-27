@@ -84,6 +84,9 @@ public class User extends BaseEntity implements UserDetails {
 	@JoinColumn(name = "user_id")
 	private List<Car> cars = new ArrayList<Car>(0);
 
+	@Column(name = "is_active", nullable = false)
+	private Boolean active = Boolean.TRUE;
+
 	public void addCar(Car car) {
 		this.cars.add(car);
 		car.setUser(this);

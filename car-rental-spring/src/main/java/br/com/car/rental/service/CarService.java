@@ -33,14 +33,14 @@ public class CarService extends BaseService {
 	}
 
 	public CarDto save(User user, CarRequestDto carRequestDto) {
-		validateCar(carRequestDto);
+		validateCar(-1l, carRequestDto);
 
 		Car car = this.carMapper.toModel(carRequestDto);
 		user.addCar(car);
 		return this.carMapper.map(this.carRepository.save(car));
 	}
 
-	private void validateCar(@Valid CarRequestDto carRequestDto) {
+	private void validateCar(Long id, CarRequestDto carRequestDto) {
 		if (carRequestDto.productionYear() == null ||
 				StringUtil.isNullOrEmpty(
 						carRequestDto.licensePlate(), 
@@ -59,6 +59,8 @@ public class CarService extends BaseService {
 	}
 
 	public CarDto update(User user, @Positive @NotNull Long id, @Valid CarRequestDto carRequestDto) {
+		validateCar(id, carRequestDto);
+
 		return this.carRepository.findByUserAndId(user.getLogin(), id).map(actual -> {
 			actual.setProductionYear(carRequestDto.productionYear());
 			actual.setLicensePlate(carRequestDto.licensePlate());

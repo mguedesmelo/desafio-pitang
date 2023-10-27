@@ -27,6 +27,6 @@ public interface CarRepository extends BaseRepository<Car> {
 	@Query("DELETE FROM br.com.car.rental.model.Car c WHERE c.id = :id")
 	void delete(@Param("id") Long id);
 
-	@Query("SELECT c FROM br.com.car.rental.model.Car c WHERE c.licensePlate = :licensePlate")
-	Collection<Car> findAllByLicensePlate(@Param("licensePlate") String licensePlate);
+	@Query("SELECT c FROM br.com.car.rental.model.Car c WHERE c.id <> :id AND c.licensePlate = :licensePlate")
+	Collection<Car> findAllByLicensePlate(@Param("id") Long id, @Param("licensePlate") String licensePlate);
 }

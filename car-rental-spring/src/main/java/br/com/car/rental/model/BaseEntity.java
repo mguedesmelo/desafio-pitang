@@ -34,9 +34,6 @@ public abstract class BaseEntity implements Serializable {
 	@JsonProperty("createdAt")
 	private LocalDateTime creationDate = LocalDateTime.now();
 
-	@Column(name = "is_active", nullable = false)
-	private Boolean active = Boolean.TRUE;
-
 //	@Column(name = "image_content_type")
 //	@JsonIgnore
 //	private String imageContentType;

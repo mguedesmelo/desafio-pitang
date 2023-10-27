@@ -34,14 +34,14 @@ public class UserService extends BaseService {
 	}
 
 	public UserDto save(@Valid UserRequestDto userRequestDto) {
-		validateUser(userRequestDto);
+		validateUser(-1l, userRequestDto);
 
 		User user = this.userMapper.toModel(userRequestDto);
 		return this.userMapper.map(this.userRepository.save(user));
 	}
 
 	public UserDto update(@Positive @NotNull Long id, @Valid UserRequestDto userRequestDto) {
-		validateUser(userRequestDto);
+		validateUser(id, userRequestDto);
 
 		return this.userRepository.findById(id).map(actual -> {
 			actual.setFirstName(userRequestDto.firstName());
@@ -55,17 +55,17 @@ public class UserService extends BaseService {
 		}).orElseThrow(() -> new RecordNotFoundException(id));
 	}
 
-	private void validateUser(UserRequestDto userRequestDto) {
+	private void validateUser(Long id, UserRequestDto userRequestDto) {
 		if (StringUtil.isNullOrEmpty(userRequestDto.firstName(), userRequestDto.lastName(),
 				userRequestDto.email(), userRequestDto.login(), userRequestDto.phone(),
 				userRequestDto.password()) || userRequestDto.birthDay() == null) {
 			throw new BusinessException("Missing fields");
 		}
-		userRepository.findAllByEmail(userRequestDto.email()).stream().findAny().ifPresent(c -> {
+		userRepository.findAllByEmail(id, userRequestDto.email()).stream().findAny().ifPresent(c -> {
 			throw new BusinessException("Email already exists");
 		});
 
-		userRepository.findAllByLogin(userRequestDto.login()).stream().findAny().ifPresent(c -> {
+		userRepository.findAllByLogin(id, userRequestDto.login()).stream().findAny().ifPresent(c -> {
 			throw new BusinessException("Login already exists");
 		});
 	}
