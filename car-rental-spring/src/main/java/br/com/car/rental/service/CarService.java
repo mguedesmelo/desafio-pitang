@@ -53,7 +53,7 @@ public class CarService extends BaseService {
 			throw new BusinessException("Invalid fields");
 		}
 
-		carRepository.findAllByLicensePlate(carRequestDto.licensePlate()).stream().findAny().ifPresent(c -> {
+		carRepository.findAllByLicensePlate(id, carRequestDto.licensePlate()).stream().findAny().ifPresent(c -> {
 			throw new BusinessException("License plate already exists");
 		});
 	}
