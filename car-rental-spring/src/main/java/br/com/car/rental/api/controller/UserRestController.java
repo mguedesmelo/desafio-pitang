@@ -1,6 +1,7 @@
 package br.com.car.rental.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import br.com.car.rental.api.data.UserDto;
 import br.com.car.rental.api.data.UserRequestDto;
 import br.com.car.rental.model.User;
 import br.com.car.rental.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -57,14 +59,14 @@ public class UserRestController extends BaseRestController<User> {
 		UserDto savedUser = this.userService.update(id, user);
 		return ResponseEntity.status(HttpStatus.OK).body(savedUser);
 	}
-
-//	@GetMapping("image")
-//	public void image(@RequestParam Long id, HttpServletResponse response) {
-//		Optional<User> optional = this.userService.findOptionalById(id);
-//		optional.ifPresentOrElse((entity) -> {
-//			loadImage(response, entity.getImageContentType(), entity.getImage());
-//		}, () -> {
-//			loadNoPhoto(response);
-//		});
-//	}
+	
+	@GetMapping("/image/{id}")
+    public void image(@PathVariable Long id, HttpServletResponse response) {
+    	Optional<User> optional = this.userService.findImagemById(id);
+		optional.ifPresentOrElse((u) -> {
+			loadImage(response, u.getImageType(), u.getImage());
+		}, () -> {
+			loadNoPhoto(response);
+		});
+    }
 }

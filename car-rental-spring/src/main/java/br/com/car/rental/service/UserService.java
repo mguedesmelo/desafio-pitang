@@ -91,7 +91,7 @@ public class UserService extends BaseService {
 //				() -> new RecordNotFoundException(id)));
 	}
 
-//	public User findImageById(@Positive @NotNull Long id) {
-//		return this.userRepository.findImageById(id).orElse(null);
-//	}
+	public Optional<User> findImagemById(Long id) {
+		return this.userRepository.findImageById(id);
+	}
 }

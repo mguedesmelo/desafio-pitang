@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
@@ -16,6 +17,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -65,6 +67,23 @@ public class UserHistory {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private List<CarHistory> cars = new ArrayList<CarHistory>(0);
+
+	@Column(name = "image_name", length = 255)
+	@JsonIgnore
+	private String imageName;
+
+	@Column(name = "image_size")
+	@JsonIgnore
+	private Long imageSize;
+
+	@Column(name = "image_type", length = 50)
+	@JsonIgnore
+	private String imageType;
+
+	@Lob
+	@Column(name = "image")
+	@JsonIgnore
+	private byte[] image;
 
 	public UserHistory(String firstName, String lastName, String email, LocalDate birthdate, 
 			String login, String password, String phone) {

@@ -14,6 +14,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -49,6 +50,23 @@ public class CarHistory {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private UserHistory user;
+
+	@Column(name = "image_name", length = 255)
+	@JsonIgnore
+	private String imageName;
+
+	@Column(name = "image_size")
+	@JsonIgnore
+	private Long imageSize;
+
+	@Column(name = "image_type", length = 50)
+	@JsonIgnore
+	private String imageType;
+
+	@Lob
+	@Column(name = "image")
+	@JsonIgnore
+	private byte[] image;
 
 	public CarHistory(Integer productionYear, String licensePlate, String model, 
 			CarColor color, UserHistory user) {

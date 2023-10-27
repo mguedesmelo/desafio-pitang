@@ -1,6 +1,7 @@
 package br.com.car.rental.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.car.rental.api.data.CarDto;
 import br.com.car.rental.api.data.CarRequestDto;
+import br.com.car.rental.model.Car;
 import br.com.car.rental.model.User;
 import br.com.car.rental.service.CarService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -57,4 +60,14 @@ public class CarRestController extends BaseRestController<User> {
 		CarDto savedCar = this.carService.update(getLoggedUser(), id, car);
 		return ResponseEntity.status(HttpStatus.OK).body(savedCar);
 	}
+	
+	@GetMapping("/image/{id}")
+    public void image(@PathVariable Long id, HttpServletResponse response) {
+    	Optional<Car> optional = this.carService.findImagemById(id);
+		optional.ifPresentOrElse((c) -> {
+			loadImage(response, c.getImageType(), c.getImage());
+		}, () -> {
+			loadNoPhoto(response);
+		});
+    }
 }

@@ -38,22 +38,6 @@ public class User extends BaseEntity implements UserDetails {
 	 */
 	private static final long serialVersionUID = -4951439767748796428L;
 
-//	public User(String imageContentType, byte[] image) {
-//		super(imageContentType, image);
-//	}
-
-	public User(String firstName, String lastName, String email, LocalDate birthdate, 
-			String login, String password, String phone) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.birthDay = birthdate;
-		this.login = login;
-		this.password = password;
-		this.phone = phone;
-	}
-
 	@Column(name = "first_name", length = 60, nullable = false)
 	private String firstName;
 
@@ -86,6 +70,22 @@ public class User extends BaseEntity implements UserDetails {
 
 	@Column(name = "is_active", nullable = false)
 	private Boolean active = Boolean.TRUE;
+
+	public User(String imageName, Long imageSize, String imageType, byte[] image) {
+		super(imageName, imageSize, imageType, image);
+	}
+
+	public User(String firstName, String lastName, String email, LocalDate birthdate, 
+			String login, String password, String phone) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.birthDay = birthdate;
+		this.login = login;
+		this.password = password;
+		this.phone = phone;
+	}
 
 	public void addCar(Car car) {
 		this.cars.add(car);

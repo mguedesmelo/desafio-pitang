@@ -19,16 +19,13 @@ public interface UserRepository extends BaseRepository<User> {
 	@Query("SELECT u FROM User u WHERE u.id <> :id AND u.login = :login")
 	List<User> findAllByLogin(@Param("id") Long id, @Param("login") String login);
 	
-	@Query("SELECT u FROM br.com.car.rental.model.User u WHERE u.login = :login")
+	@Query("SELECT u FROM User u WHERE u.login = :login")
 	Optional<User> findByLogin(@Param("login") String login);
 	
 	@Query("SELECT u FROM User u WHERE u.active = FALSE")
 	List<User> findAllDeleted();
 
-//    @Query("SELECT u FROM User u WHERE u.email = :email")
-//    Optional<User> findByEmail(@Param("email") String email);
-
-//	@Override
-//    @Query("SELECT NEW User(u.imageContentType, u.image) FROM User u WHERE u.id = :id")
-//    Optional<User> findImageById(@Param("id") Long id);
+    @Query("SELECT NEW User(u.imageName, u.imageSize, u.imageType, u.image) "
+    		+ "FROM User u WHERE u.id = :id")
+    Optional<User> findImageById(@Param("id") Long id);
 }

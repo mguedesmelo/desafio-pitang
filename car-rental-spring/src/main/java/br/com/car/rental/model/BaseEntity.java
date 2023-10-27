@@ -14,6 +14,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 
@@ -34,18 +35,34 @@ public abstract class BaseEntity implements Serializable {
 	@JsonProperty("createdAt")
 	private LocalDateTime creationDate = LocalDateTime.now();
 
-//	@Column(name = "image_content_type")
-//	@JsonIgnore
-//	private String imageContentType;
-//
-//	@Lob
-//	@Column(name = "image")
-//	@JsonIgnore
-//	private byte[] image;
+	@Column(name = "image_name", length = 255)
+	@JsonIgnore
+	private String imageName;
+
+	@Column(name = "image_size")
+	@JsonIgnore
+	private Long imageSize;
+
+	@Column(name = "image_type", length = 50)
+	@JsonIgnore
+	private String imageType;
+
+	@Lob
+	@Column(name = "image")
+	@JsonIgnore
+	private byte[] image;
 
 	public BaseEntity() {
 		super();
 		this.creationDate = LocalDateTime.now();
+	}
+
+	public BaseEntity(String imageName, Long imageSize, String imageType, byte[] image) {
+		super();
+		this.imageName = imageName;
+		this.imageSize = imageSize;
+		this.imageType = imageType;
+		this.image = image;
 	}
 
 	public BaseEntity(Long id, LocalDateTime creationDate) {
@@ -55,12 +72,6 @@ public abstract class BaseEntity implements Serializable {
 		if (creationDate == null) {
 			this.creationDate = LocalDateTime.now();
 		}
-	}
-
-	public BaseEntity(String imageContentType, byte[] image) {
-		super();
-//		this.imageContentType = imageContentType;
-//		this.image = image;
 	}
 
 	@JsonIgnore
