@@ -37,10 +37,6 @@ public class UserMapper extends BaseMapper {
 
 		List<Car> cars = userRequestDto.cars().stream().map(carRequestDto -> {
 			Car car = new Car();
-			// FIXME Analisar se isto eh necessario
-//			if (car.getId() > 0) {
-//				car.setId(carDto.id());
-//			}
 			car.setProductionYear(carRequestDto.productionYear());
 			car.setLicensePlate(carRequestDto.licensePlate());
 			car.setModel(carRequestDto.model());

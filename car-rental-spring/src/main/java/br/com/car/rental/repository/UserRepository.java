@@ -22,6 +22,9 @@ public interface UserRepository extends BaseRepository<User> {
 	@Query("SELECT u FROM User u WHERE u.login = :login")
 	List<User> findAllByLogin(@Param("login") String login);
 	
+	@Query("SELECT u FROM User u WHERE u.active = FALSE")
+	List<User> findAllDeleted();
+
 //    @Query("SELECT u FROM User u WHERE u.email = :email")
 //    Optional<User> findByEmail(@Param("email") String email);
 

@@ -83,8 +83,12 @@ public class UserService extends BaseService {
 	}
 
 	public void delete(@Positive @NotNull Long id) {
-		this.userRepository.delete(this.userRepository.findById(id).orElseThrow(
-				() -> new RecordNotFoundException(id)));
+		User user = this.userRepository.findById(id).orElseThrow(
+				() -> new RecordNotFoundException(id));
+		user.setActive(Boolean.FALSE);
+		this.userRepository.save(user);
+//		this.userRepository.delete(this.userRepository.findById(id).orElseThrow(
+//				() -> new RecordNotFoundException(id)));
 	}
 
 //	public User findImageById(@Positive @NotNull Long id) {

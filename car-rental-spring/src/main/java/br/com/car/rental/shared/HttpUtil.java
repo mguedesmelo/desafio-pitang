@@ -22,7 +22,8 @@ public class HttpUtil {
 	private List<String> freePatterns = List.of(
 			"/api/signin", 
 			"/api/logout", 
-			"/api/users", 
+			"/api/users",
+			"/h2-console",
 			"/css", 
 			"/icons", 
 			"/images",

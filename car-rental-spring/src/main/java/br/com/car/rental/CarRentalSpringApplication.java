@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import br.com.car.rental.api.data.CarRequestDto;
 import br.com.car.rental.api.data.UserRequestDto;
 import br.com.car.rental.model.User;
 import br.com.car.rental.service.UserService;
 
+@EnableScheduling
 @SpringBootApplication
 public class CarRentalSpringApplication implements CommandLineRunner {
 	@Autowired
