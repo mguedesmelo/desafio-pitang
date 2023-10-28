@@ -32,7 +32,7 @@ Caso venha a utilizar outro banco será necessário adicionar o Driver do mesmo 
 
 2. Importe o projeto "car-rental-spring" no Eclipse STS como um projeto maven e execute como uma aplicação Spring Boot
 
-3. Abra a pasta do projeto Angular no Visual Studio Code
+3. Abra a pasta "car-rental-angular" do projeto Angular no Visual Studio Code
 
 É necessário ter o Node.js / NPM instalados localmente.
 
@@ -43,7 +43,7 @@ npm run start
 Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do Angular).
 
 
-## Atributos das Classes
+## ✅ Atributos das Classes
 
 **Usuário**
 | Nome | Tipo | Descrição |
@@ -67,7 +67,7 @@ Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do 
 
 
 
-## Rotas
+## 🚧 Rotas
 
 **Rotas que **NÃO** exigem autenticação**
 
