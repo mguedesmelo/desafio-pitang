@@ -5,27 +5,35 @@
     <form [formGroup]="form" class="min-width">
       <mat-form-field class="full-width">
         <mat-label>Login</mat-label>
-        <input matInput placeholder="Último nome do usuário" formControlName="login">
+        <input matInput placeholder="Login" formControlName="login">
       </mat-form-field>
+
       <mat-form-field class="full-width">
         <mat-label>Primeiro Nome</mat-label>
-        <input matInput placeholder="Primeiro nome do usuário" formControlName="firstName">
+        <input matInput placeholder="Primeiro nome" formControlName="firstName">
       </mat-form-field>
+
       <mat-form-field class="full-width">
         <mat-label>Último Nome</mat-label>
-        <input matInput placeholder="Último nome do usuário" formControlName="lastName">
+        <input matInput placeholder="Último nome" formControlName="lastName">
       </mat-form-field>
+
       <mat-form-field class="full-width">
         <mat-label>E-mail</mat-label>
-        <input matInput placeholder="Último nome do usuário" formControlName="email">
+        <input matInput placeholder="E-mail" formControlName="email">
       </mat-form-field>
-      <mat-form-field class="full-width">
+
+      <mat-form-field style="width: 100%;">
         <mat-label>Birthday</mat-label>
-        <input matInput placeholder="Último nome do usuário" formControlName="birthDay">
+        <input matInput [matDatepicker]="birthDay" placeholder="Data de nascimento">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="birthDay"></mat-datepicker-toggle>
+        <mat-datepicker #birthDay></mat-datepicker>
       </mat-form-field>
+
       <mat-form-field class="full-width">
         <mat-label>Phone</mat-label>
-        <input matInput placeholder="Último nome do usuário" formControlName="phone">
+        <input matInput placeholder="Telefone" formControlName="phone">
       </mat-form-field>
     </form>
   </mat-card-content>
