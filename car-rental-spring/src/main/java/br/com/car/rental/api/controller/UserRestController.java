@@ -68,7 +68,7 @@ public class UserRestController extends BaseRestController<User> {
     public ResponseEntity<UserDto> upload(@PathVariable @Positive @NotNull Long id, 
     		@RequestParam("imagem") MultipartFile file) {
         try {
-        	return ResponseEntity.status(HttpStatus.OK).body(
+        	return ResponseEntity.status(HttpStatus.CREATED).body(
         			this.userService.saveImage(id, file.getName(), file.getSize(), 
         			file.getContentType(), file.getBytes()));
         } catch (IOException e) {
