@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'car-rental-angular';
+
+  logout() {
+    console.log('efetuar logout')
+  }
 }

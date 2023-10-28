@@ -24,4 +24,9 @@ export class UsersService {
       tap(user => console.log(user))
     );
   }
+
+  save(user: User) {
+    console.log(user);
+    return this.httpClient.post<User>(this.API, user).pipe(first());
+  }
 }
