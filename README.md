@@ -21,7 +21,7 @@ Criar aplicação que exponha uma API RESTful de criação de usuários e carros
 * [H2 Database](http://www.h2database.com) - SGBD
 * [Spring Tools 4 for Eclipse](https://spring.io/tools) - IDE
 
-### ⌨️ Instalação
+## ⌨️ Instalação
 1. Clone o repositório para baixar as pastas contendo o código fonte dos projeto Java e Angular.
 
 ```
@@ -40,7 +40,7 @@ npm run start
 Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do Angular).
 
 
-## ✅ Atributos das Classes
+## ✅Atributos das Classes
 
 **Usuário**
 | Nome | Tipo | Descrição |
@@ -141,12 +141,9 @@ http://localhost:8080/swagger-ui.html
 # ESTÓRIAS DE USUÁRIO
 Mini Sprint: Semana de 24 a 27 de Outubro de 2023
 
-Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
+Objetivo da Sprint: Desenvolver funcionalidades básicas do backend e frontend.
 
-## Histórias de Usuário:
-
-
-1. História de Usuário 1: Sign In
+**1. História de Usuário 1: Sign In**
 - **Eu como** usuário do sistema
 - **Quero** fazer login na API com meu login e senha
 - **Para que** eu possa acessar os recursos protegidos da API
@@ -157,7 +154,7 @@ Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
 - Em caso de login bem-sucedido, a API deve retornar um token de autenticação.
 - Em caso de falha no login, a API deve retornar uma mensagem de erro.
 
-2. História de Usuário 2: Listar Usuários
+**2. História de Usuário 2: Listar Usuários**
 - **Eu como** usuário do sistema
 - **Quero** listar todos os usuários cadastrados na API
 - **Para que** eu possa visualizar informações sobre os usuários na API
@@ -167,7 +164,7 @@ Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
 - A lista de usuários deve ser retornada como uma resposta JSON.
 - Os usuários devem ser retornados como objetos JSON com informações como nome, sobrenome, e-mail, etc.
 
-3. História de Usuário 3: Cadastrar Novo Usuário
+**3. História de Usuário 3: Cadastrar Novo Usuário**
 - **Eu como** usuário do sistema
 - **Quero** cadastrar um novo usuário na API informando seus dados
 - **Para que** o novo usuário tenha acesso à API
@@ -178,7 +175,7 @@ Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
 - A API deve validar os dados inseridos e retornar uma resposta com status apropriado.
 - Em caso de falha no cadastro, a API deve retornar uma mensagem de erro.
 
-4. História de Usuário 4: Buscar Usuário pelo ID
+**4. História de Usuário 4: Buscar Usuário pelo ID**
 - **Eu como** usuário do sistema
 - **Quero** buscar um usuário pelo seu ID na API
 - **Para que** eu possa visualizar os detalhes de um usuário específico
@@ -189,7 +186,7 @@ Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
 - Se o usuário for encontrado, a API deve retornar os detalhes do usuário em formato JSON.
 - Se nenhum usuário for encontrado com o ID fornecido, a API deve retornar um status apropriado.
 
-5. História de Usuário 5: Remover Usuário pelo ID
+**5. História de Usuário 5: Remover Usuário pelo ID**
 - **Eu como** usuário do sistema
 - **Quero** remover um usuário pelo seu ID na API
 - **Para que** eu possa desativar ou excluir usuários da API
@@ -200,7 +197,7 @@ Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
 - Após a remoção, o usuário deve ser desativado ou removido do sistema.
 - A API deve retornar um status apropriado após a remoção.
 
-6. História de Usuário 6: Atualizar Usuário pelo ID
+**6. História de Usuário 6: Atualizar Usuário pelo ID**
 - **Eu como** usuário do sistema
 - **Quero** atualizar os detalhes de um usuário existente pelo seu ID na API
 - **Para que** eu possa corrigir informações ou fazer atualizações necessárias
