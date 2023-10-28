@@ -35,19 +35,20 @@ public class UserMapper extends BaseMapper {
 		userToReturn.setPhone(userRequestDto.phone());
 		userToReturn.setPassword(userRequestDto.password());
 
-		List<Car> cars = userRequestDto.cars().stream().map(carRequestDto -> {
-			Car car = new Car();
-			car.setProductionYear(carRequestDto.productionYear());
-			car.setLicensePlate(carRequestDto.licensePlate());
-			car.setModel(carRequestDto.model());
-			car.setColor(convertColorValue(carRequestDto.color()));
-			car.setProductionYear(carRequestDto.productionYear());
-			car.setUser(userToReturn);
-
-			return car;
-		}).collect(Collectors.toList());
-		userToReturn.setCars(cars);
-
+		if (userRequestDto.cars() != null) {
+			List<Car> cars = userRequestDto.cars().stream().map(carRequestDto -> {
+				Car car = new Car();
+				car.setProductionYear(carRequestDto.productionYear());
+				car.setLicensePlate(carRequestDto.licensePlate());
+				car.setModel(carRequestDto.model());
+				car.setColor(convertColorValue(carRequestDto.color()));
+				car.setProductionYear(carRequestDto.productionYear());
+				car.setUser(userToReturn);
+	
+				return car;
+			}).collect(Collectors.toList());
+			userToReturn.setCars(cars);
+		}
 		return userToReturn;
 	}
 }
