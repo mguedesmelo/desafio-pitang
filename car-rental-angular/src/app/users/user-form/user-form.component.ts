@@ -47,11 +47,11 @@ export class UserFormComponent {
   }
 
   private onSuccess() {
-    this.snackBar.open('Curso salvo com sucesso!', '', { duration: 5000 });
+    this.snackBar.open('Usuário salvo com sucesso!', '', { duration: 5000 });
     this.location.back();
   }
   private onError(error: HttpErrorResponse) {
     console.log(error);
-    this.snackBar.open('Erro ao salvar o curso - ' + error.error.message , '', { duration: 5000 });
+    this.snackBar.open(error.error.message , '', { duration: 5000 });
   }
 }

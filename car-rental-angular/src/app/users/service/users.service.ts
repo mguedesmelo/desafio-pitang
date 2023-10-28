@@ -25,7 +25,7 @@ export class UsersService {
     );
   }
 
-  save(user: User) {
+  save(user: Partial<User>) {
     console.log(user);
     return this.httpClient.post<User>(this.API, user).pipe(first());
   }
