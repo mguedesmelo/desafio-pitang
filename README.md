@@ -12,7 +12,8 @@ Criar aplicação que exponha uma API RESTful de criação de usuários e carros
 </div>
 
 ## 💻 Tecnologias
-* [Java](https://www.java.com/) - v1.8.191-b12 - Linguagem
+* [Java](https://www.java.com/) - Linguagem Backend
+* [Angular](https://angular.io/) - Linguagem Frontend
 * [Spring](https://spring.io/) - Framework Web Java
 * [Spring Boot](https://spring.io/projects/spring-boot) - Framework Initializer
 * [Hibernate](http://hibernate.org/orm/) - ORM
@@ -22,15 +23,24 @@ Criar aplicação que exponha uma API RESTful de criação de usuários e carros
 * [Spring Tools 4 for Eclipse](https://spring.io/tools) - IDE
 
 ### ⌨️ Instalação
-Clone o projeto e importe com a IDE suportada que lhe convir como um projeto Maven.
+1. Clone o projeto e importe com a IDE suportada que lhe convir como um projeto Maven.
 
 ```
 git clone https://github.com/mguedesmelo/desafio-pitang.git
 ```
-
 Caso venha a utilizar outro banco será necessário adicionar o Driver do mesmo no pom.xml. Após isso, vá ao application.properties e ajuste os dados de acordo com o seu SGBD.
 
-Agora aguarde sua IDE baixar as dependencias ou execute o mvn spring-boot:run caso tenha configurado o Maven separadamente.
+2. Importe o projeto "car-rental-spring" no Eclipse STS como um projeto maven e execute como uma aplicação Spring Boot
+
+3. Abra a pasta do projeto Angular no Visual Studio Code
+
+É necessário ter o Node.js / NPM instalados localmente.
+
+Execute o projeto:
+```
+npm run start
+```
+Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do Angular).
 
 
 ## Atributos das Classes
