@@ -1,5 +1,7 @@
 package br.com.car.rental.api.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -38,6 +40,9 @@ public class AuthenticationRestController {
 				throw new UsernameNotFoundException("Invalid login or password");
 			}
 			User user = (User) authenticate.getPrincipal();
+			
+			user.setLastLogin(LocalDateTime.now());
+			this.userService.updateLastLogin(user);
 			
 			return this.tokenService.generateToken(user);
 		} catch (BadCredentialsException e) {

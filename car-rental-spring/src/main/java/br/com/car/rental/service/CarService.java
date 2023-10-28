@@ -94,4 +94,15 @@ public class CarService extends BaseService {
 	public Optional<Car> findImagemById(Long id) {
 		return this.carRepository.findImageById(id);
 	}
+
+	public CarDto saveImage(Long id, String imageName, Long imageSize, String imageType, 
+			byte[] image) {
+		return this.carRepository.findById(id).map(c -> {
+			c.setImage(image);
+			c.setImageName(imageName);
+			c.setImageSize(imageSize);
+			c.setImageType(imageType);
+			return this.carMapper.map(this.carRepository.save(c));
+		}).orElseThrow(() -> new RecordNotFoundException(id));		
+	}
 }

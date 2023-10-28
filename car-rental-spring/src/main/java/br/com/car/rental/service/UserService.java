@@ -1,5 +1,6 @@
 package br.com.car.rental.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +56,11 @@ public class UserService extends BaseService {
 		}).orElseThrow(() -> new RecordNotFoundException(id));
 	}
 
+	public UserDto updateLastLogin(User user) {
+		user.setLastLogin(LocalDateTime.now());
+		return this.userMapper.map(this.userRepository.save(user));
+	}
+
 	private void validateUser(Long id, UserRequestDto userRequestDto) {
 		if (StringUtil.isNullOrEmpty(userRequestDto.firstName(), userRequestDto.lastName(),
 				userRequestDto.email(), userRequestDto.login(), userRequestDto.phone(),
@@ -89,6 +95,17 @@ public class UserService extends BaseService {
 		this.userRepository.save(user);
 //		this.userRepository.delete(this.userRepository.findById(id).orElseThrow(
 //				() -> new RecordNotFoundException(id)));
+	}
+
+	public UserDto saveImage(Long id, String imageName, Long imageSize, String imageType, 
+			byte[] image) {
+		return this.userRepository.findById(id).map(u -> {
+			u.setImage(image);
+			u.setImageName(imageName);
+			u.setImageSize(imageSize);
+			u.setImageType(imageType);
+			return this.userMapper.map(this.userRepository.save(u));
+		}).orElseThrow(() -> new RecordNotFoundException(id));
 	}
 
 	public Optional<User> findImagemById(Long id) {
