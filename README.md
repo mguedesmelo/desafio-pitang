@@ -245,6 +245,17 @@ Em resumo, a escolha de Java no backend e Angular no frontend oferece um ambient
 # BACKLOG
 
 **Backend**
-- [x] item 1
-- [x] item 2
-- [x] item 3
+- [x] /api/signin (GET) - Login de acesso
+- [x] /api/users (GET) - Listar todos os usuários
+- [x] /api/users (POST) - Cadastrar um novo usuário
+- [x] /api/users/{id} (GET) - Buscar um usuário pelo id
+- [x] /api/users/{id} (DELETE) - Remover um usuário pelo id
+- [x] /api/users/{id} (PUT) - Atualizar um usuário pelo id
+- [x] /api/users/upload/{id} (POST) - Enviar foto
+- [x] /api/users/image/{id} (GET) - Obter foto do usuário
+- [x] /api/me (GET) - Retornar as informações do usuário logado
+- [x] /api/cars (GET) - Listar todos os carros do usuário logado
+- [x] /api/cars (POST) - Cadastrar um novo carro para o usuário logado
+- [x] /api/cars/{id} (GET) - Buscar um carro do usuário logado pelo id
+- [x] /api/cars/{id} (DELETE) - Remover um carro do usuário logado pelo id
+- [x] /api/cars/{id} (PUT) - Atualizar um carro do usuário logado pelo id
