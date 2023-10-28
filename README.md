@@ -66,14 +66,14 @@ Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do 
 
 **Rotas que **NÃO EXIGEM** autenticação**
 
-| Finalizado | Rota | Descrição | Tipo | Erros possíveis |
+| Rota | Descrição | Tipo | Erros possíveis |
 | ------ | ------ | ------ | ------ |
-| [X] | /api/signin | Esta rota espera um objeto com os campos login e password, e deve retornar o token de acesso da API (JWT) com as informações do usuário logado. | GET | 1 |
-| [X] | /api/users | Listar todos os usuários | GET | |
-| [X] | /api/users | Cadastrar um novo usuário | POST | 2,3,4,5 |
-| [X] | /api/users/{id} | Buscar um usuário pelo id | GET | |
-| [X] | /api/users/{id} | Remover um usuário pelo id | DELETE | |
-| [X] | /api/users/{id} | Atualizar um usuário pelo id | PUT | 2,3,4,5 |
+| /api/signin | Esta rota espera um objeto com os campos login e password, e deve retornar o token de acesso da API (JWT) com as informações do usuário logado. | GET | 1 |
+| /api/users | Listar todos os usuários | GET | |
+| /api/users | Cadastrar um novo usuário | POST | 2,3,4,5 |
+| /api/users/{id} | Buscar um usuário pelo id | GET | |
+| /api/users/{id} | Remover um usuário pelo id | DELETE | |
+| /api/users/{id} | Atualizar um usuário pelo id | PUT | 2,3,4,5 |
 
 **Erros possíveis:**
 1. Login inexistente ou senha inválida: retornar um erro com a mensagem “Invalid login or password”;
@@ -105,14 +105,14 @@ Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do 
 
 **Rotas que **EXIGEM** autenticação**
 
-| Finalizado | Rota | Descrição | Tipo | Erros possíveis |
+| Rota | Descrição | Tipo | Erros possíveis |
 | ------ | ------ | ------ | ------ |
-| [X] | /api/me | Retornar as informações do usuário logado (firstName, lastName, email, birthday, login, phone, cars) + createdAt (data da criação do usuário) + lastLogin (data da última vez que o usuário realizou login) | GET | 1,2 |
-| [X] | /api/cars | Listar todos os carros do usuário logado | GET | 1,2 |
-| [X] | /api/cars | Cadastrar um novo carro para o usuário logado | POST | 1,2,3,4,5 |
-| [X] | /api/cars/{id} | Buscar um carro do usuário logado pelo id | GET | 1,2 |
-| [X] | /api/cars/{id} | Remover um carro do usuário logado pelo id | DELETE | 1,2 |
-| [X] | /api/cars/{id} | Atualizar um carro do usuário logado pelo id | PUT | 1,2,3,4,5 |
+| /api/me | Retornar as informações do usuário logado (firstName, lastName, email, birthday, login, phone, cars) + createdAt (data da criação do usuário) + lastLogin (data da última vez que o usuário realizou login) | GET | 1,2 |
+| /api/cars | Listar todos os carros do usuário logado | GET | 1,2 |
+| /api/cars | Cadastrar um novo carro para o usuário logado | POST | 1,2,3,4,5 |
+| /api/cars/{id} | Buscar um carro do usuário logado pelo id | GET | 1,2 |
+| /api/cars/{id} | Remover um carro do usuário logado pelo id | DELETE | 1,2 |
+| /api/cars/{id} | Atualizar um carro do usuário logado pelo id | PUT | 1,2,3,4,5 |
 
 **Erros possíveis:**
 1. Token não enviado: retornar um erro com a mensagem “Unauthorized”;
