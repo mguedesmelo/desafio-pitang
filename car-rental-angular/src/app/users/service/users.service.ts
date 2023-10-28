@@ -9,7 +9,8 @@ import { User } from '../model/user';
   providedIn: 'root'
 })
 export class UsersService {
-  private readonly API = '/assets/users.json';
+  //private readonly API = '/assets/users.json';
+  private readonly API = 'api/users';
 
   constructor(private httpClient: HttpClient) {
     // Empty
@@ -19,22 +20,8 @@ export class UsersService {
     return this.httpClient.get<User[]>(this.API)
     .pipe(
       first(),
-      //delay(3000),
+      //delay(2000),
       tap(user => console.log(user))
     );
-    /*
-    return [
-      {
-        id: '1',
-        firstName: 'Marcio',
-        lastName: 'Melo',
-        email: 'mguedesmelo@gmail.com',
-        birthDay: '06-06-1974',
-        lastLogin: '27-10-2023',
-        login: 'mguedesmelo',
-        phone: '+5581999491213'
-      }
-    ];
-    */
   }
 }

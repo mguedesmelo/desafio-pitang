@@ -1,12 +1,20 @@
 [
   {
-    "id": "1",
-    "firstName": "Marcio",
-    "lastName": "Guedes",
-    "email": "mguedesmelo@gmail.com",
-    "birthDay": "06-06-1974",
-    "lastLogin": "27-10-2023",
-    "login": "mguedesmelo",
-    "phone": "+5581999491213"
+      "id": 1,
+      "firstName": "Walter",
+      "lastName": "White",
+      "email": "heisenberg@somedomain.com",
+      "birthDay": "1958-09-07",
+      "login": "white",
+      "phone": "+1 515-516-0624"
+  },
+  {
+      "id": 2,
+      "firstName": "Jesse",
+      "lastName": "Pinkman",
+      "email": "pinkman@somedomain.com",
+      "birthDay": "1984-10-22",
+      "login": "pinkman",
+      "phone": "+1 707-719-0993"
   }
 ]
