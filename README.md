@@ -245,3 +245,6 @@ Em resumo, a escolha de Java no backend e Angular no frontend oferece um ambient
 # BACKLOG
 
 **Backend**
+- [x] item 1
+- [x] item 2
+- [x] item 3
