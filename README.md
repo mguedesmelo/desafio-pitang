@@ -105,8 +105,8 @@ Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do 
 
 **Rotas que **EXIGEM** autenticação**
 
-| Rota | Descrição | Erros possíveis |
-| ------ | ------ | ------ |
+| Rota | Descrição | Tipo | Erros possíveis |
+| ------ | ------ | ------ | ------ |
 | /api/me | Retornar as informações do usuário logado (firstName, lastName, email, birthday, login, phone, cars) + createdAt (data da criação do usuário) + lastLogin (data da última vez que o usuário realizou login) | GET | 1,2 |
 | /api/cars | Listar todos os carros do usuário logado | GET | 1,2 |
 | /api/cars | Cadastrar um novo carro para o usuário logado | POST | 1,2,3,4,5 |
