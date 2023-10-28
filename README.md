@@ -64,7 +64,7 @@ Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do 
 
 ## 🚧 Rotas
 
-**Rotas que **NÃO** exigem autenticação**
+**Rotas que **NÃO EXIGEM** autenticação**
 
 | Rota | Descrição | Tipo | Erros possíveis |
 | ------ | ------ | ------ | ------ |
@@ -103,7 +103,7 @@ Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do 
 }
 ```
 
-**Rotas que exigem autenticação**
+**Rotas que **EXIGEM** autenticação**
 
 | Rota | Descrição | Erros possíveis |
 | ------ | ------ | ------ |
@@ -151,7 +151,7 @@ Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
 - **Quero** fazer login na API com meu login e senha
 - **Para que** eu possa acessar os recursos protegidos da API
 
-**Critérios de Aceitação:**
+*Critérios de Aceitação:*
 - A API deve fornecer um endpoint de login para autenticar usuários.
 - Deve ser possível enviar uma solicitação para o endpoint de signin com um login e senha válidos.
 - Em caso de login bem-sucedido, a API deve retornar um token de autenticação.
@@ -162,7 +162,7 @@ Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
 - **Quero** listar todos os usuários cadastrados na API
 - **Para que** eu possa visualizar informações sobre os usuários na API
 
-**Critérios de Aceitação:**
+*Critérios de Aceitação:*
 - A API deve fornecer um endpoint para listar todos os usuários cadastrados.
 - A lista de usuários deve ser retornada como uma resposta JSON.
 - Os usuários devem ser retornados como objetos JSON com informações como nome, sobrenome, e-mail, etc.
@@ -172,7 +172,7 @@ Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
 - **Quero** cadastrar um novo usuário na API informando seus dados
 - **Para que** o novo usuário tenha acesso à API
 
-**Critérios de Aceitação:**
+*Critérios de Aceitação:*
 - A API deve fornecer um endpoint para cadastrar um novo usuário.
 - Deve ser possível enviar uma solicitação para o endpoint de cadastro com os dados do novo usuário em formato JSON.
 - A API deve validar os dados inseridos e retornar uma resposta com status apropriado.
@@ -183,7 +183,7 @@ Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
 - **Quero** buscar um usuário pelo seu ID na API
 - **Para que** eu possa visualizar os detalhes de um usuário específico
 
-**Critérios de Aceitação:**
+*Critérios de Aceitação:*
 - A API deve fornecer um endpoint para buscar um usuário pelo seu ID.
 - Deve ser possível enviar uma solicitação para o endpoint com o ID do usuário.
 - Se o usuário for encontrado, a API deve retornar os detalhes do usuário em formato JSON.
@@ -194,7 +194,7 @@ Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
 - **Quero** remover um usuário pelo seu ID na API
 - **Para que** eu possa desativar ou excluir usuários da API
 
-**Critérios de Aceitação:**
+*Critérios de Aceitação:*
 - A API deve fornecer um endpoint para remover um usuário pelo seu ID.
 - Deve ser possível enviar uma solicitação DELETE para o endpoint com o ID do usuário.
 - Após a remoção, o usuário deve ser desativado ou removido do sistema.
@@ -205,9 +205,41 @@ Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
 - **Quero** atualizar os detalhes de um usuário existente pelo seu ID na API
 - **Para que** eu possa corrigir informações ou fazer atualizações necessárias
 
-**Critérios de Aceitação:**
+*Critérios de Aceitação:*
 - A API deve fornecer um endpoint para atualizar os detalhes de um usuário pelo seu ID.
 - Deve ser possível enviar uma solicitação PUT para o endpoint com os dados atualizados em formato JSON.
 - A API deve validar os dados atualizados e retornar uma resposta com status apropriado.
 - Após a atualização bem-sucedida, o usuário deve poder usar as informações atualizadas para acessar a API.
 
+
+# SOLUÇÃO
+
+A escolha das tecnologias para o desenvolvimento de um sistema, como Java no backend e Angular no frontend, foi ser baseada em diversos fatores técnicos que podem influenciar no desempenho, manutenção, escalabilidade e sucesso do projeto. Vamos justificar essa decisão tecnicamente:
+
+**Java no Backend:**
+
+1. **Ampla Comunidade e Ecossistema:** Java é uma das linguagens de programação mais populares e amplamente adotadas no mundo. Isso resulta em uma grande comunidade de desenvolvedores, vasta documentação e uma ampla gama de bibliotecas e frameworks disponíveis. Essa riqueza de recursos facilita o desenvolvimento e a solução de problemas.
+
+2. **Robustez e Confiabilidade:** Java é conhecido por sua robustez e confiabilidade. Ele é altamente tolerante a falhas e oferece um ambiente de execução seguro. Essas características são essenciais para sistemas críticos que precisam estar sempre disponíveis e funcionando corretamente.
+
+3. **Desempenho:** Java possui um bom desempenho, principalmente quando combinado com otimizações de JVM (Java Virtual Machine). A capacidade de escalabilidade vertical e horizontal também é uma vantagem, permitindo que a aplicação cresça com o aumento da demanda.
+
+4. **Segurança:** Java oferece recursos de segurança avançados, como controle de acesso, autenticação e autorização. Isso é fundamental para proteger os dados e garantir a conformidade com regulamentações de segurança.
+
+5. **Integração:** Java suporta integração fácil com outros sistemas e serviços, tornando-o uma escolha sólida para aplicativos empresariais que precisam se comunicar com sistemas legados ou outros serviços web.
+
+**Angular no Frontend:**
+
+1. **Framework Robusto e Estruturado:** Angular é um framework JavaScript mantido pelo Google que oferece uma estrutura robusta e bem organizada para o desenvolvimento de aplicações web. Ele segue os princípios de arquitetura MVC (Model-View-Controller) e promove boas práticas de desenvolvimento.
+
+2. **Componentização:** Angular utiliza o conceito de componentes reutilizáveis, o que facilita a construção e a manutenção de interfaces de usuário complexas. Cada componente é independente e pode ser reutilizado em várias partes do aplicativo.
+
+3. **SPA (Single-Page Application):** Angular é ideal para o desenvolvimento de SPAs, onde a navegação ocorre sem a necessidade de recarregar a página. Isso melhora a experiência do usuário, tornando o aplicativo mais rápido e responsivo.
+
+4. **TypeScript:** Angular é escrito em TypeScript, uma linguagem superset do JavaScript que oferece recursos de tipagem estática e melhor autocompletamento, o que ajuda a evitar erros em tempo de execução e a facilitar o desenvolvimento.
+
+5. **Ferramentas e Ecossistema:** Angular possui um ecossistema de ferramentas e bibliotecas complementares, como o Angular CLI, que simplificam o desenvolvimento, a construção e o teste de aplicações. Além disso, ele se integra facilmente com outras tecnologias.
+
+6. **Suporte a Testes:** Angular inclui suporte integrado para testes, o que torna mais fácil e eficaz realizar testes unitários, de integração e de ponta a ponta para garantir a qualidade do código.
+
+Em resumo, a escolha de Java no backend e Angular no frontend oferece um ambiente técnico robusto e escalável para o desenvolvimento de aplicações web. Java é uma escolha madura e segura para o backend, enquanto Angular fornece uma estrutura de desenvolvimento estruturada e moderna para o frontend. Essas tecnologias trabalham bem juntas e podem resultar em uma experiência de desenvolvimento eficiente e um sistema web confiável.
