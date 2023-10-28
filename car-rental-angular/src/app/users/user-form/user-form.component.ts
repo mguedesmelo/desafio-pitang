@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-user-form',
@@ -11,8 +13,9 @@ export class UserFormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
+    private location: Location
     //private service: UsersService,
-    //private snackBar: MatSnackBar,
   ) {
     this.form = this.formBuilder.group({
       firstName: [null],
@@ -26,10 +29,30 @@ export class UserFormComponent {
   }
 
   onSave() {
-
+    console.log(this.form.value);
+    this.onError(this.form.value);
+    /*
+    this.service.save(this.form.value)
+      .subscribe(
+        result =>
+        {
+          this.onSuccess();
+        },
+        error => {
+          this.onError(error);
+        });
+        */
   }
 
   onCancel() {
+    this.location.back();
+  }
 
+  private onSuccess() {
+    this.snackBar.open('Curso salvo com sucesso!', '', { duration: 5000 });
+    this.location.back();
+  }
+  private onError(error: any) {
+    this.snackBar.open('Erro ao salvar o curso - ' + error.message, '', { duration: 5000 });
   }
 }

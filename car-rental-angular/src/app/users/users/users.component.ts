@@ -39,7 +39,6 @@ export class UsersComponent {
   }
 
   onAdd() {
-    console.log('add');
     this.router.navigate(['add'], {relativeTo: this.route});
   }
 }
