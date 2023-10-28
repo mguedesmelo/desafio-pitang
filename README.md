@@ -23,13 +23,11 @@ Criar aplicação que exponha uma API RESTful de criação de usuários e carros
 * [Spring Tools 4 for Eclipse](https://spring.io/tools) - IDE
 
 ### ⌨️ Instalação
-1. Clone o projeto e importe com a IDE suportada que lhe convir como um projeto Maven.
+1. Clone o repositório para baixar as pastas contendo o código fonte dos projeto Java e Angular.
 
 ```
 git clone https://github.com/mguedesmelo/desafio-pitang.git
 ```
-Caso venha a utilizar outro banco será necessário adicionar o Driver do mesmo no pom.xml. Após isso, vá ao application.properties e ajuste os dados de acordo com o seu SGBD.
-
 2. Importe o projeto "car-rental-spring" no Eclipse STS como um projeto maven e execute como uma aplicação Spring Boot
 
 3. Abra a pasta "car-rental-angular" do projeto Angular no Visual Studio Code
@@ -64,8 +62,6 @@ Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do 
 | licensePlate | String | Placa do carro |
 | model | String | Modelo do carro |
 | color | String | Cor predominante do carro |
-
-
 
 ## 🚧 Rotas
 
