@@ -1,4 +1,3 @@
-# desafio-pitang
 ## API RESTful para Sistema de Usuários de Carros
 Criar aplicação que exponha uma API RESTful de criação de usuários e carros com login. Este projeto é para resolver o desafio proposto pela Pitang para ingressar na empresa.
 
@@ -22,7 +21,7 @@ Criar aplicação que exponha uma API RESTful de criação de usuários e carros
 * [H2 Database](http://www.h2database.com) - SGBD
 * [Spring Tools 4 for Eclipse](https://spring.io/tools) - IDE
 
-### Instalação
+### ⌨️ Instalação
 Clone o projeto e importe com a IDE suportada que lhe convir como um projeto Maven.
 
 ```
@@ -134,4 +133,3 @@ que o usuário realizou login). | 1,2 |
 ```
 http://localhost:8080/swagger-ui.html
 ```
-
