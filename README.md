@@ -259,3 +259,22 @@ Em resumo, a escolha de Java no backend e Angular no frontend oferece um ambient
 - [x] /api/cars/{id} (GET) - Buscar um carro do usuário logado pelo id
 - [x] /api/cars/{id} (DELETE) - Remover um carro do usuário logado pelo id
 - [x] /api/cars/{id} (PUT) - Atualizar um carro do usuário logado pelo id
+
+**Frontend**
+- [x] Tela principal com menu
+- [ ] Login de acesso
+- [x] Listagem de usuários
+- [x] Tela de novo usuário
+- [x] Salvar novo usuário
+- [ ] Tela de alteração de usuário
+- [ ] Alterar usuário
+- [ ] Remover usuário
+- [ ] Enviar foto do usuário
+- [ ] Listagem de carros de um usuário
+- [ ] Tela de novo carro
+- [ ] Salvar novo carro
+- [ ] Tela de alteração de carro
+- [ ] Alterar carro
+- [ ] Remover carro
+- [ ] Detalhar carro
+- [ ] Enviar foto do carro
