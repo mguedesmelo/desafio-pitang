@@ -66,14 +66,14 @@ Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do 
 
 **Rotas que **NÃO EXIGEM** autenticação**
 
-| Rota | Descrição | Tipo | Erros possíveis |
+| Finalizado | Rota | Descrição | Tipo | Erros possíveis |
 | ------ | ------ | ------ | ------ |
-| /api/signin | Esta rota espera um objeto com os campos login e password, e deve retornar o token de acesso da API (JWT) com as informações do usuário logado. | GET | 1 |
-| /api/users | Listar todos os usuários | GET | |
-| /api/users | Cadastrar um novo usuário | POST | 2,3,4,5 |
-| /api/users/{id} | Buscar um usuário pelo id | GET | |
-| /api/users/{id} | Remover um usuário pelo id | DELETE | |
-| /api/users/{id} | Atualizar um usuário pelo id | PUT | 2,3,4,5 |
+| [X] | /api/signin | Esta rota espera um objeto com os campos login e password, e deve retornar o token de acesso da API (JWT) com as informações do usuário logado. | GET | 1 |
+| [X] | /api/users | Listar todos os usuários | GET | |
+| [X] | /api/users | Cadastrar um novo usuário | POST | 2,3,4,5 |
+| [X] | /api/users/{id} | Buscar um usuário pelo id | GET | |
+| [X] | /api/users/{id} | Remover um usuário pelo id | DELETE | |
+| [X] | /api/users/{id} | Atualizar um usuário pelo id | PUT | 2,3,4,5 |
 
 **Erros possíveis:**
 1. Login inexistente ou senha inválida: retornar um erro com a mensagem “Invalid login or password”;
@@ -105,14 +105,14 @@ Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do 
 
 **Rotas que **EXIGEM** autenticação**
 
-| Rota | Descrição | Tipo | Erros possíveis |
+| Finalizado | Rota | Descrição | Tipo | Erros possíveis |
 | ------ | ------ | ------ | ------ |
-| /api/me | Retornar as informações do usuário logado (firstName, lastName, email, birthday, login, phone, cars) + createdAt (data da criação do usuário) + lastLogin (data da última vez que o usuário realizou login) | GET | 1,2 |
-| /api/cars | Listar todos os carros do usuário logado | GET | 1,2 |
-| /api/cars | Cadastrar um novo carro para o usuário logado | POST | 1,2,3,4,5 |
-| /api/cars/{id} | Buscar um carro do usuário logado pelo id | GET | 1,2 |
-| /api/cars/{id} | Remover um carro do usuário logado pelo id | DELETE | 1,2 |
-| /api/cars/{id} | Atualizar um carro do usuário logado pelo id | PUT | 1,2,3,4,5 |
+| [X] | /api/me | Retornar as informações do usuário logado (firstName, lastName, email, birthday, login, phone, cars) + createdAt (data da criação do usuário) + lastLogin (data da última vez que o usuário realizou login) | GET | 1,2 |
+| [X] | /api/cars | Listar todos os carros do usuário logado | GET | 1,2 |
+| [X] | /api/cars | Cadastrar um novo carro para o usuário logado | POST | 1,2,3,4,5 |
+| [X] | /api/cars/{id} | Buscar um carro do usuário logado pelo id | GET | 1,2 |
+| [X] | /api/cars/{id} | Remover um carro do usuário logado pelo id | DELETE | 1,2 |
+| [X] | /api/cars/{id} | Atualizar um carro do usuário logado pelo id | PUT | 1,2,3,4,5 |
 
 **Erros possíveis:**
 1. Token não enviado: retornar um erro com a mensagem “Unauthorized”;
@@ -240,3 +240,8 @@ A escolha das tecnologias para o desenvolvimento de um sistema, como Java no bac
 6. **Suporte a Testes:** Angular inclui suporte integrado para testes, o que torna mais fácil e eficaz realizar testes unitários, de integração e de ponta a ponta para garantir a qualidade do código.
 
 Em resumo, a escolha de Java no backend e Angular no frontend oferece um ambiente técnico robusto e escalável para o desenvolvimento de aplicações web. Java é uma escolha madura e segura para o backend, enquanto Angular fornece uma estrutura de desenvolvimento estruturada e moderna para o frontend. Essas tecnologias trabalham bem juntas e podem resultar em uma experiência de desenvolvimento eficiente e um sistema web confiável.
+
+
+# BACKLOG
+
+**Backend**
