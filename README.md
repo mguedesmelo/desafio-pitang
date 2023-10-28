@@ -1,7 +1,6 @@
-## API RESTful para Sistema de Usuários de Carros
+# Desafio Pitang - Reserva de Veículos
 Criar aplicação que exponha uma API RESTful de criação de usuários e carros com login. Este projeto é para resolver o desafio proposto pela Pitang para ingressar na empresa.
 
-# Desafio Pitang - Reserva de Veículos
 <div style="display: inline_block"><br>
   <img align="center" alt="mguedesmelo-java" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg">
   <img align="center" alt="mguedesmelo-angular" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/angularjs/angularjs-plain.svg">
@@ -137,3 +136,78 @@ Abra o browser e acesse o endereço **http://localhost:4200** (porta padrão do 
 ```
 http://localhost:8080/swagger-ui.html
 ```
+
+
+# ESTÓRIAS DE USUÁRIO
+Mini Sprint: Semana de 24 a 27 de Outubro de 2023
+
+Objetivo da Sprint: Desenvolver funcionalidades básicas do backend.
+
+## Histórias de Usuário:
+
+
+1. História de Usuário 1: Sign In
+- **Eu como** usuário do sistema
+- **Quero** fazer login na API com meu login e senha
+- **Para que** eu possa acessar os recursos protegidos da API
+
+**Critérios de Aceitação:**
+- A API deve fornecer um endpoint de login para autenticar usuários.
+- Deve ser possível enviar uma solicitação para o endpoint de signin com um login e senha válidos.
+- Em caso de login bem-sucedido, a API deve retornar um token de autenticação.
+- Em caso de falha no login, a API deve retornar uma mensagem de erro.
+
+2. História de Usuário 2: Listar Usuários
+- **Eu como** usuário do sistema
+- **Quero** listar todos os usuários cadastrados na API
+- **Para que** eu possa visualizar informações sobre os usuários na API
+
+**Critérios de Aceitação:**
+- A API deve fornecer um endpoint para listar todos os usuários cadastrados.
+- A lista de usuários deve ser retornada como uma resposta JSON.
+- Os usuários devem ser retornados como objetos JSON com informações como nome, sobrenome, e-mail, etc.
+
+3. História de Usuário 3: Cadastrar Novo Usuário
+- **Eu como** usuário do sistema
+- **Quero** cadastrar um novo usuário na API informando seus dados
+- **Para que** o novo usuário tenha acesso à API
+
+**Critérios de Aceitação:**
+- A API deve fornecer um endpoint para cadastrar um novo usuário.
+- Deve ser possível enviar uma solicitação para o endpoint de cadastro com os dados do novo usuário em formato JSON.
+- A API deve validar os dados inseridos e retornar uma resposta com status apropriado.
+- Em caso de falha no cadastro, a API deve retornar uma mensagem de erro.
+
+4. História de Usuário 4: Buscar Usuário pelo ID
+- **Eu como** usuário do sistema
+- **Quero** buscar um usuário pelo seu ID na API
+- **Para que** eu possa visualizar os detalhes de um usuário específico
+
+**Critérios de Aceitação:**
+- A API deve fornecer um endpoint para buscar um usuário pelo seu ID.
+- Deve ser possível enviar uma solicitação para o endpoint com o ID do usuário.
+- Se o usuário for encontrado, a API deve retornar os detalhes do usuário em formato JSON.
+- Se nenhum usuário for encontrado com o ID fornecido, a API deve retornar um status apropriado.
+
+5. História de Usuário 5: Remover Usuário pelo ID
+- **Eu como** usuário do sistema
+- **Quero** remover um usuário pelo seu ID na API
+- **Para que** eu possa desativar ou excluir usuários da API
+
+**Critérios de Aceitação:**
+- A API deve fornecer um endpoint para remover um usuário pelo seu ID.
+- Deve ser possível enviar uma solicitação DELETE para o endpoint com o ID do usuário.
+- Após a remoção, o usuário deve ser desativado ou removido do sistema.
+- A API deve retornar um status apropriado após a remoção.
+
+6. História de Usuário 6: Atualizar Usuário pelo ID
+- **Eu como** usuário do sistema
+- **Quero** atualizar os detalhes de um usuário existente pelo seu ID na API
+- **Para que** eu possa corrigir informações ou fazer atualizações necessárias
+
+**Critérios de Aceitação:**
+- A API deve fornecer um endpoint para atualizar os detalhes de um usuário pelo seu ID.
+- Deve ser possível enviar uma solicitação PUT para o endpoint com os dados atualizados em formato JSON.
+- A API deve validar os dados atualizados e retornar uma resposta com status apropriado.
+- Após a atualização bem-sucedida, o usuário deve poder usar as informações atualizadas para acessar a API.
+
