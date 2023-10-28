@@ -35,7 +35,7 @@ Agora aguarde sua IDE baixar as dependencias ou execute o mvn spring-boot:run ca
 
 ## Atributos das Classes
 
-### Usuário
+**Usuário**
 | Nome | Tipo | Descrição |
 | ------ | ------ | ------ |
 | firstName | String | Nome do usuário |
@@ -47,7 +47,7 @@ Agora aguarde sua IDE baixar as dependencias ou execute o mvn spring-boot:run ca
 | phone | String | Telefone do usuário |
 | cars | List | Lista de carros do usuário |
 
-### Carro
+**Carro**
 | Nome | Tipo | Descrição |
 | ------ | ------ | ------ |
 | year | Int | Ano de fabricação do carro |
@@ -59,16 +59,16 @@ Agora aguarde sua IDE baixar as dependencias ou execute o mvn spring-boot:run ca
 
 ## Rotas
 
-## Rotas que **NÃO** exigem autenticação
+**Rotas que **NÃO** exigem autenticação**
 
-| Rota | Descrição | Erros possíveis |
-| ------ | ------ | ------ |
-| /api/signin | Esta rota espera um objeto com os campos login e password, e deve retornar o token de acesso da API (JWT) com as informações do usuário logado. | 1 |
-| /api/users | Listar todos os usuários | |
-| /api/users | Cadastrar um novo usuário | 2,3,4,5 |
-| /api/users/{id} | Buscar um usuário pelo id |  |
-| /api/users/{id} | Remover um usuário pelo id |  |
-| /api/users/{id} | Atualizar um usuário pelo id | 2,3,4,5 |
+| Rota | Descrição | Tipo | Erros possíveis |
+| ------ | ------ | ------ | ------ |
+| /api/signin | Esta rota espera um objeto com os campos login e password, e deve retornar o token de acesso da API (JWT) com as informações do usuário logado. | GET | 1 |
+| /api/users | Listar todos os usuários | GET | |
+| /api/users | Cadastrar um novo usuário | POST | 2,3,4,5 |
+| /api/users/{id} | Buscar um usuário pelo id | GET | |
+| /api/users/{id} | Remover um usuário pelo id | DELETE | |
+| /api/users/{id} | Atualizar um usuário pelo id | PUT | 2,3,4,5 |
 
 **Erros possíveis:**
 1. Login inexistente ou senha inválida: retornar um erro com a mensagem “Invalid login or password”;
@@ -98,18 +98,16 @@ Agora aguarde sua IDE baixar as dependencias ou execute o mvn spring-boot:run ca
 }
 ```
 
-## Rotas que exigem autenticação
+**Rotas que exigem autenticação**
 
 | Rota | Descrição | Erros possíveis |
 | ------ | ------ | ------ |
-| /api/me | Retornar as informações do usuário logado (firstName, lastName, email, birthday, login,
-phone, cars) + createdAt (data da criação do usuário) + lastLogin (data da última vez
-que o usuário realizou login). | 1,2 |
-| /api/cars | Listar todos os carros do usuário logado | 1,2 |
-| /api/cars | Cadastrar um novo carro para o usuário logado | 1,2,3,4,5 |
-| /api/cars/{id} | Buscar um carro do usuário logado pelo id | 1,2 |
-| /api/cars/{id} | Remover um carro do usuário logado pelo id | 1,2 |
-| /api/cars/{id} | Atualizar um carro do usuário logado pelo id | 1,2,3,4,5 |
+| /api/me | Retornar as informações do usuário logado (firstName, lastName, email, birthday, login, phone, cars) + createdAt (data da criação do usuário) + lastLogin (data da última vez que o usuário realizou login) | GET | 1,2 |
+| /api/cars | Listar todos os carros do usuário logado | GET | 1,2 |
+| /api/cars | Cadastrar um novo carro para o usuário logado | POST | 1,2,3,4,5 |
+| /api/cars/{id} | Buscar um carro do usuário logado pelo id | GET | 1,2 |
+| /api/cars/{id} | Remover um carro do usuário logado pelo id | DELETE | 1,2 |
+| /api/cars/{id} | Atualizar um carro do usuário logado pelo id | PUT | 1,2,3,4,5 |
 
 **Erros possíveis:**
 1. Token não enviado: retornar um erro com a mensagem “Unauthorized”;
