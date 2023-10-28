@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
 import { User } from '../model/user';
 import { UsersService } from './../service/users.service';
@@ -19,7 +20,9 @@ export class UsersComponent {
 
   constructor(
     private usersService: UsersService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.users$ = this.usersService.findAll().pipe(
       catchError((error: HttpErrorResponse) => {
@@ -37,6 +40,6 @@ export class UsersComponent {
 
   onAdd() {
     console.log('add');
-    //this.router.navigate(['new'], {relativeTo: this.route});
+    this.router.navigate(['add'], {relativeTo: this.route});
   }
 }
