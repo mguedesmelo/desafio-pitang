@@ -278,3 +278,4 @@ Em resumo, a escolha de Java no backend e Angular no frontend oferece um ambient
 - [ ] Remover carro
 - [ ] Detalhar carro
 - [ ] Enviar foto do carro
+- [ ] Requisito extra (bonus stage)
