@@ -9,10 +9,6 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-table {
-  width: 100%
-}
-
 .loading-spinner {
   padding: 25px;
   //background: rgba(0, 0, 0, 0.15);
@@ -35,7 +31,26 @@ table {
 }
 
 mat-card {
-  max-width: 80%;
+  max-width: 90%;
   margin: 2em auto;
   text-align: center;
+}
+
+.column-flex {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 600px;
+}
+
+.action-column {
+  flex: 0 0 180px;
+}
+
+.action-column-header {
+  margin: 0 auto;
 }

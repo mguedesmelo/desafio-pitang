@@ -16,7 +16,7 @@ import { UsersService } from './../service/users.service';
 })
 export class UsersComponent {
   users$: Observable<User[]>;
-  displayedColumns = ['login', 'firstName', 'lastName', 'email', 'phone', 'actions'];
+  //displayedColumns = ['login', 'firstName', 'lastName', 'email', 'phone', 'actions'];
 
   constructor(
     private usersService: UsersService,

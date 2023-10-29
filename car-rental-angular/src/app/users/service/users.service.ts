@@ -20,7 +20,7 @@ export class UsersService {
     return this.httpClient.get<User[]>(this.API)
     .pipe(
       first(),
-      //delay(2000),
+      //delay(3000),
       tap(user => console.log(user))
     );
   }
