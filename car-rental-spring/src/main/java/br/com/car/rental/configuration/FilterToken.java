@@ -53,7 +53,8 @@ public class FilterToken extends OncePerRequestFilter {
 	
 	            filterChain.doFilter(request, response);
         	} catch (TokenExpiredException e) {
-        		httpUtil.sendResponseMessage(response, HttpStatus.UNAUTHORIZED.value(), "Unauthorized - invalid session");
+        		httpUtil.sendResponseMessage(response, HttpStatus.UNAUTHORIZED.value(), 
+        				"Unauthorized - invalid session");
         	}
         }
     }

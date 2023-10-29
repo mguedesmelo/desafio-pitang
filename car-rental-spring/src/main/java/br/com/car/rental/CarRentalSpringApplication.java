@@ -14,9 +14,12 @@ import br.com.car.rental.api.data.CarRequestDto;
 import br.com.car.rental.api.data.UserRequestDto;
 import br.com.car.rental.model.User;
 import br.com.car.rental.service.UserService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 
 @EnableScheduling
 @SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "Car Rental Swagger", version = "1"))
 public class CarRentalSpringApplication implements CommandLineRunner {
 	@Autowired
 	private UserService userService;
@@ -55,4 +58,25 @@ public class CarRentalSpringApplication implements CommandLineRunner {
 		List<User> users = this.userService.findAllUsers();
 		users.stream().forEach(System.out::println);
 	}
+	
+//	private SecurityScheme createAPIKeyScheme() {
+//	    return new SecurityScheme().type(SecurityScheme.Type.HTTP)
+//	        .bearerFormat("JWT")
+//	        .scheme("bearer");
+//	}
+	
+//	@Bean
+//	public OpenAPI openAPI() {
+//	    return new OpenAPI().addSecurityItem(new SecurityRequirement().
+//	            addList("Bearer Authentication"))
+//	        .components(new Components().addSecuritySchemes
+//	            ("Bearer Authentication", createAPIKeyScheme()))
+//	        .info(new Info().title("My REST API")
+//	            .description("Some custom description of API.")
+//	            .version("1.0").contact(new Contact().name("Sallo Szrajbman")
+//	                .email( "www.baeldung.com").url("salloszraj@gmail.com"))
+//	            .license(new License().name("License of API")
+//	                .url("API license URL")));
+//	}
 }
+	

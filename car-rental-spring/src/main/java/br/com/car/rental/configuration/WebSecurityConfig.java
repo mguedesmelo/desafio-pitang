@@ -48,7 +48,10 @@ public class WebSecurityConfig {
 								antMatcher("/h2-console/**/**"),
 								antMatcher("/api/signin"), 
 								antMatcher("/api/logout"), 
-								antMatcher("/swagger-ui"), 
+								antMatcher("/swagger-ui/**/**"),
+								antMatcher("/swagger-ui.html"),
+								antMatcher("/v3/**/**"),
+								antMatcher("/swagger-resources/**/**"),
 								antMatcher("/api/users/**"), 
 								antMatcher("/css/**"), 
 								antMatcher("/icons/**"), 
@@ -64,10 +67,10 @@ public class WebSecurityConfig {
 //						.loginPage("/login")
 //						.defaultSuccessUrl("/index", true)
 //						.permitAll())
-				.logout(logout -> logout
-						.logoutUrl("/api/logout")
-						.logoutSuccessUrl("/login")
-						.invalidateHttpSession(true))
+//				.logout(logout -> logout
+//						.logoutUrl("/api/logout")
+//						.logoutSuccessUrl("/login")
+//						.invalidateHttpSession(true))
 				.csrf((csrf) -> csrf
 						.disable())
 				.authenticationManager(authenticationManager)
@@ -77,26 +80,6 @@ public class WebSecurityConfig {
 	            		.disable())
 				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
 				.build();
-
-//    	return http
-//    			.csrf((csrf) -> csrf.disable())
-//    			.sessionManagement((sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .and()
-//                .authorizeHttpRequests((authorizeHttpRequests) ->
-//		                authorizeHttpRequests
-//		                        .requestMatchers("/api/signin", "/api/users/**", "/css/**", 
-//		                        		"/icons/**", "/images/**", "/js/**", "/plugins/**", 
-//		                        		"/*/image/**")
-//		                        .permitAll()
-//		                        .anyRequest().authenticated()
-//		        )
-//                .antMatchers(HttpMethod.POST, "/login")
-//                .permitAll()
-//                .antMatchers(HttpMethod.GET, "/home")
-//                .permitAll()
-//                .anyRequest().authenticated()
-//                .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
-//                .build();
 	}
 
 //	@Bean

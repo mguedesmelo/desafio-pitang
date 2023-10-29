@@ -25,6 +25,8 @@ public class HttpUtil {
 			"/api/users",
 			"/h2-console",
 			"/swagger-ui",
+			"/swagger-ui.html",
+			"/swagger-resources",
 			"/css", 
 			"/icons", 
 			"/images",
@@ -46,8 +48,8 @@ public class HttpUtil {
 			String responseBody) throws IOException {
 	    response.addHeader("Content-Type", "application/json;charset=UTF-8");
 	    response.setStatus(responseCode);
-	    ResponseMessage unauthorized = new ResponseMessage(responseCode, responseBody);
-	    objectMapper.writeValue(response.getOutputStream(), unauthorized);
+	    ResponseMessage responseMessage = new ResponseMessage(responseCode, responseBody);
+	    objectMapper.writeValue(response.getOutputStream(), responseMessage);
 	    response.flushBuffer();			
 	}
 }
