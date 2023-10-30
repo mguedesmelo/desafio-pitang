@@ -8,7 +8,7 @@
     </p>
 
     <div class="column-flex mat-elevation-z8">
-      <app-users-list *ngIf="users$ | async as users; else loading" [users]="users">
+      <app-users-list *ngIf="users$ | async as users; else loading" [users]="users" (add)="onAdd()">
 
       </app-users-list>
 

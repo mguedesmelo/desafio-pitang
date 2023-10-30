@@ -20,6 +20,14 @@ export class UserFormComponent {
     private service: UsersService,
   ) {
     this.form = this.formBuilder.group({
+      firstName: [null],
+      lastName: [null],
+      email: [null],
+      birthDay: [null],
+      login: [null],
+      password: [null],
+      phone: [null],
+      /*
       firstName: 'Skyler',
       lastName: 'White',
       email: 'skyler@somedomain.com',
@@ -27,6 +35,7 @@ export class UserFormComponent {
       login: 'skyler',
       password: 'h3ll0',
       phone: '+1 804-406-4234',
+      */
     });
   }
 

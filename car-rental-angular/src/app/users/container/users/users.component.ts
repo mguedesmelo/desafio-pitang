@@ -5,9 +5,9 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
-import { User } from '../model/user';
-import { UsersService } from './../service/users.service';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
+import { User } from '../../model/user';
+import { UsersService } from '../../service/users.service';
 
 @Component({
   selector: 'app-users',
@@ -39,6 +39,6 @@ export class UsersComponent {
   }
 
   onAdd() {
-    this.router.navigate(['add'], {relativeTo: this.route});
+    this.router.navigate(['add'], { relativeTo: this.route });
   }
 }

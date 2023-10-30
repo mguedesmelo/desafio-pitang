@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../model/user';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { User } from '../../model/user';
 
 @Component({
   selector: 'app-users-list',
@@ -9,16 +8,15 @@ import { User } from '../model/user';
 })
 export class UsersListComponent {
   @Input() users: User[] = [];
+  @Output() add = new EventEmitter(false);
   readonly displayedColumns = ['login', 'firstName', 'lastName', 'email', 'phone', 'actions'];
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
+  constructor() {
     // Empty
   }
 
   onAdd() {
-    this.router.navigate(['add'], {relativeTo: this.route});
+    this.add.emit(true);
+    //this.router.navigate(['add'], {relativeTo: this.route});
   }
 }
