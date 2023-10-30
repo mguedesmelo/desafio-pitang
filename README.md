@@ -259,6 +259,9 @@ Em resumo, a escolha de Java no backend e Angular no frontend oferece um ambient
 - [x] /api/cars/{id} (GET) - Buscar um carro do usuário logado pelo id
 - [x] /api/cars/{id} (DELETE) - Remover um carro do usuário logado pelo id
 - [x] /api/cars/{id} (PUT) - Atualizar um carro do usuário logado pelo id
+- [x] Testes unitários de autenticação
+- [x] Testes unitários do controlador de usuários
+- [ ] Testes unitários do controlador de carros
 
 **Frontend**
 - [ ] Tela principal com menu dinâmico
