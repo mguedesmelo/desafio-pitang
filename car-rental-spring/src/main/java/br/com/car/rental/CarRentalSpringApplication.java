@@ -11,15 +11,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import br.com.car.rental.api.data.CarRequestDto;
+import br.com.car.rental.api.data.UserDto;
 import br.com.car.rental.api.data.UserRequestDto;
-import br.com.car.rental.model.User;
 import br.com.car.rental.service.UserService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 @EnableScheduling
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "Car Rental Swagger", version = "1"))
+@SecurityScheme(
+		name="bearerAuth", description = "JWT Auth Description",
+		scheme = "bearer", type = SecuritySchemeType.HTTP, bearerFormat = "JWT",
+		in = SecuritySchemeIn.HEADER)
 public class CarRentalSpringApplication implements CommandLineRunner {
 	@Autowired
 	private UserService userService;
@@ -55,7 +62,7 @@ public class CarRentalSpringApplication implements CommandLineRunner {
 		this.userService.save(userHeisenberg);
 		this.userService.save(userJessePinkman);
 
-		List<User> users = this.userService.findAllUsers();
+		List<UserDto> users = this.userService.findAll();
 		users.stream().forEach(System.out::println);
 	}
 	

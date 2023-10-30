@@ -36,7 +36,7 @@ import jakarta.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/api/users")
-@Tag(name = "users")
+@Tag(name = "UserRestController")
 public class UserRestController extends BaseRestController<User> {
 	@Autowired
 	private UserService userService;

@@ -2,11 +2,8 @@ package br.com.car.rental.shared;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,9 +21,17 @@ public class HttpUtil {
 			"/api/logout", 
 			"/api/users",
 			"/h2-console",
-			"/swagger-ui",
-			"/swagger-ui.html",
-			"/swagger-resources",
+
+			"/v1",
+			"/api/v1",
+			"/v2",
+			"/api/v2",
+			"/v3",
+			"/api/v3",
+			"/configuration",
+			"/swagger",
+			"/webjars",
+
 			"/css", 
 			"/icons", 
 			"/images",
@@ -34,16 +39,12 @@ public class HttpUtil {
 			"/plugins", 
 			"/image");
 
-    public RequestMatcher[] getFreeRequestMatchers() {
-    	return (RequestMatcher[]) this.freePatterns.stream().map(pattern -> {
-    		return AntPathRequestMatcher.antMatcher(pattern);
-        }).collect(Collectors.toList()).toArray();
-    }
-
     public boolean isFreeToNavigate(String pattern) {
+    	System.out.println(pattern);
+    	System.out.println("/swagger-ui/index.html".startsWith("/swagger"));
 		return this.freePatterns.stream().filter(p -> pattern.startsWith(p)).count() > 0;
     }
-    
+
 	public void sendResponseMessage(HttpServletResponse response, int responseCode, 
 			String responseBody) throws IOException {
 	    response.addHeader("Content-Type", "application/json;charset=UTF-8");

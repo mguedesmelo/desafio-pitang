@@ -36,7 +36,7 @@ import jakarta.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/api/cars")
-@Tag(name = "cars")
+@Tag(name = "CarRestController")
 public class CarRestController extends BaseRestController<User> {
 	@Autowired
 	private CarService carService;

@@ -30,10 +30,6 @@ public class UserService extends BaseService {
 		return this.userRepository.findAll().stream().map(userMapper::map).toList();
 	}
 
-	public List<User> findAllUsers() {
-		return this.userRepository.findAll();
-	}
-
 	public UserDto save(@Valid UserRequestDto userRequestDto) {
 		validateUser(-1l, userRequestDto);
 
