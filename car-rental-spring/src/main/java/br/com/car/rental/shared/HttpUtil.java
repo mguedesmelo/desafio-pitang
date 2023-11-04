@@ -40,8 +40,6 @@ public class HttpUtil {
 			"/image");
 
     public boolean isFreeToNavigate(String pattern) {
-    	System.out.println(pattern);
-    	System.out.println("/swagger-ui/index.html".startsWith("/swagger"));
 		return this.freePatterns.stream().filter(p -> pattern.startsWith(p)).count() > 0;
     }
 

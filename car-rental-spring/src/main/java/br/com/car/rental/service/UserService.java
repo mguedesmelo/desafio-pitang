@@ -37,7 +37,8 @@ public class UserService extends BaseService {
 		return this.userMapper.map(this.userRepository.save(user));
 	}
 
-	public UserDto update(@Positive @NotNull Long id, @Valid UserRequestDto userRequestDto) {
+	public UserDto update(@Positive @NotNull Long id, 
+			@Valid UserRequestDto userRequestDto) {
 		validateUser(id, userRequestDto);
 
 		return this.userRepository.findById(id).map(actual -> {
@@ -48,13 +49,18 @@ public class UserService extends BaseService {
 			actual.setLogin(userRequestDto.login());
 			actual.setPassword(userRequestDto.password());
 			actual.setPhone(userRequestDto.phone());
+			
 			return this.userMapper.map(this.userRepository.save(actual));
 		}).orElseThrow(() -> new RecordNotFoundException(id));
 	}
 
 	public UserDto updateLastLogin(User user) {
-		user.setLastLogin(LocalDateTime.now());
-		return this.userMapper.map(this.userRepository.save(user));
+		 return this.userRepository.findById(user.getId())
+		 .map(actual -> {
+			 actual.setLastLogin(LocalDateTime.now());
+			 return this.userMapper.map(this.userRepository.save(actual));
+			 })
+		 .orElseThrow(() -> new RecordNotFoundException(user.getId()));
 	}
 
 	private void validateUser(Long id, UserRequestDto userRequestDto) {

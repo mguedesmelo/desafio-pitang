@@ -13,15 +13,18 @@ import br.com.car.rental.model.User;
 public interface UserRepository extends BaseRepository<User> {
 	List<User> findByFirstNameAndLastName(String firstName, String lastName);
 
-	@Query("SELECT u FROM User u WHERE u.id <> :id AND u.email = :email")
+	@Query("SELECT u FROM User u WHERE u.active = TRUE AND u.id <> :id AND u.email = :email")
 	List<User> findAllByEmail(@Param("id") Long id, @Param("email") String email);
 
-	@Query("SELECT u FROM User u WHERE u.id <> :id AND u.login = :login")
+	@Query("SELECT u FROM User u WHERE u.active = TRUE AND u.id <> :id AND u.login = :login")
 	List<User> findAllByLogin(@Param("id") Long id, @Param("login") String login);
-	
-	@Query("SELECT u FROM User u WHERE u.login = :login")
+
+	@Query("SELECT u FROM User u WHERE u.active = TRUE AND u.login = :login")
 	Optional<User> findByLogin(@Param("login") String login);
-	
+
+	@Query("SELECT u FROM User u WHERE u.active = TRUE")
+	List<User> findAll();
+
 	@Query("SELECT u FROM User u WHERE u.active = FALSE")
 	List<User> findAllDeleted();
 

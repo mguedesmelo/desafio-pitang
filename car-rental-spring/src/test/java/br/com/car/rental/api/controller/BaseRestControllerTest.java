@@ -10,7 +10,7 @@ import br.com.car.rental.api.data.CarRequestDto;
 import br.com.car.rental.api.data.UserRequestDto;
 
 public class BaseRestControllerTest<T> {
-	protected UserRequestDto createUserSkyler() {
+	protected UserRequestDto createMockUserSkyler() {
 		List<CarRequestDto> carsSkyler = Arrays
 				.asList(new CarRequestDto(1991, "QHU 6881", "Jeep Grand Wagoneer", "White"));
 

@@ -67,7 +67,7 @@ class UserRestControllerTest extends BaseRestControllerTest<User> {
 	 */
 	@Test
 	void testSave() {
-		UserRequestDto userSkyler = createUserSkyler();
+		UserRequestDto userSkyler = createMockUserSkyler();
 		UserDto user = this.testRestTemplate.postForObject("/api/users", userSkyler, UserDto.class);
 		assertNotNull(user);
 	}
@@ -77,7 +77,7 @@ class UserRestControllerTest extends BaseRestControllerTest<User> {
 	 */
 	@Test
 	void testSaveEmailAlreadyExists() {
-		UserRequestDto userSkyler = createUserSkyler();
+		UserRequestDto userSkyler = createMockUserSkyler();
 		UserDto user = this.testRestTemplate.postForObject("/api/users", userSkyler, UserDto.class);
 		assertNotNull(user);
 	}

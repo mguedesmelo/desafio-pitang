@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -78,13 +77,13 @@ public class UserRestController extends BaseRestController<User> {
 	}
 
 	@DeleteMapping("/{id}")
-	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@Operation(summary = "Remover um usuário pelo id", method = "DELETE")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "204", description = "Usuário removido com sucesso"),
     })	
-	public void delete(@PathVariable @Positive @NotNull Long id) {
+	public ResponseEntity<Void> delete(@PathVariable @Positive @NotNull Long id) {
 		this.userService.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 
 	@PutMapping(value = "/{id}")

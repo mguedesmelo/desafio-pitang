@@ -76,7 +76,7 @@ public final class DateUtil {
 	}
 
 	public static Date string2Date(String date) throws ParseException {
-		return string2Date(date, Constants.FORMAT_PATTERN_DATE);
+		return string2Date(date, Constants.DATE_FORMAT);
 	}
 
 	public static String dateToString(Date date, String format) {
@@ -88,11 +88,11 @@ public final class DateUtil {
 	}
 
 	public static String dateToString(Date date) {
-		return dateToString(date, Constants.FORMAT_PATTERN_DATE);
+		return dateToString(date, Constants.DATE_FORMAT);
 	}
 
 	public static String dateTimeToString(Date date) {
-		return dateToString(date, Constants.FORMAT_PATTERN_DATETIME);
+		return dateToString(date, Constants.DATETIME_FORMAT);
 	}
 
 	public static Date trunc(Date date) {
@@ -237,7 +237,7 @@ public final class DateUtil {
 			return false;
 		}
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat(Constants.FORMAT_PATTERN_DATE);
+			SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATE_FORMAT);
 			sdf.setLenient(false);
 			sdf.parse(stringDate);
 		} catch (ParseException e) {

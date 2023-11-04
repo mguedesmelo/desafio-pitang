@@ -87,7 +87,7 @@ public abstract class BaseEntity implements Serializable {
 		if (this.creationDate == null) {
 			return "";
 		}
-		return this.creationDate.format(DateTimeFormatter.ofPattern(Constants.FORMAT_PATTERN_DATETIME));
+		return this.creationDate.format(DateTimeFormatter.ofPattern(Constants.DATETIME_FORMAT));
 	}
 
 	@Override
