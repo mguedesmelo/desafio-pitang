@@ -32,7 +32,7 @@ public record UserRequestDto(
 
 		@NotNull 
 		@Past
-		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT_ISO8601)
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_FORMAT_JSON)
 		LocalDate birthDay, 
 
 		@NotBlank 
