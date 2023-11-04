@@ -32,7 +32,7 @@ public class WebSecurityConfig {
     MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
         return new MvcRequestMatcher.Builder(introspector);
     }
-	
+
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(
@@ -46,8 +46,6 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests((auth) -> auth
 						.requestMatchers(
 								antMatcher("/h2-console/**/**"),
-								antMatcher("/api/signin"), 
-								antMatcher("/api/logout"), 
 
 								antMatcher("/v2/apidocs"),
 								antMatcher("/v2/apidocs/**"),
@@ -64,13 +62,16 @@ public class WebSecurityConfig {
 								antMatcher("/swagger-ui.html"),
 								antMatcher("/swagger-ui/**"),
 
+								antMatcher("/api/signin"), 
+								antMatcher("/api/logout"), 
+								antMatcher("/api/users"), 
 								antMatcher("/api/users/**"), 
 								antMatcher("/css/**"), 
 								antMatcher("/icons/**"), 
-								antMatcher("/images/**"), 
+								antMatcher("/image"),
+								antMatcher("/image/**"), 
 								antMatcher("/js/**"), 
-								antMatcher("/plugins/**"), 
-								antMatcher("/*/imagem/**")
+								antMatcher("/plugins/**") 
 								)
 						.permitAll()
 						.anyRequest()
@@ -83,6 +84,8 @@ public class WebSecurityConfig {
 //						.logoutUrl("/api/logout")
 //						.logoutSuccessUrl("/login")
 //						.invalidateHttpSession(true))
+//				.cors((cors) -> cors
+//						.disable())
 				.csrf((csrf) -> csrf
 						.disable())
 				.authenticationManager(authenticationManager)
@@ -98,6 +101,12 @@ public class WebSecurityConfig {
 //	UserDetailsManager users(DataSource dataSource) {
 //		return new JdbcUserDetailsManager(dataSource);
 //	}
+
+//	public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//            .allowedOrigins("*")
+//            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
+//    }
 
 	@Bean
 	AuthenticationManager authenticationManager(
