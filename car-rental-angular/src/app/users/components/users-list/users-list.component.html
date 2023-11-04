@@ -34,15 +34,15 @@
       </button>
     </mat-header-cell>
     <mat-cell *matCellDef="let user" class="action-column">
-      <button mat-icon-button color="primary" aria-label="Editar usuário">
+      <button mat-icon-button color="primary" aria-label="Editar usuário" (click)="onEdit(user)">
         <mat-icon>edit</mat-icon>
       </button>
 
-      <button mat-icon-button color="primary" aria-label="Carros desse usuário">
+      <button mat-icon-button color="primary" aria-label="Carros desse usuário" (click)="onShowCars(user)">
         <mat-icon>commute</mat-icon>
       </button>
 
-      <button mat-icon-button color="warn" aria-label="Remover usuário">
+      <button mat-icon-button color="warn" aria-label="Remover usuário" (click)="onDelete(user)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>

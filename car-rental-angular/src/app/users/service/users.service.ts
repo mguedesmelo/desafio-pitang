@@ -21,12 +21,34 @@ export class UsersService {
     .pipe(
       first(),
       //delay(3000),
-      tap(user => console.log(user))
+      //tap(user => console.log(user))
     );
   }
 
+  findById(id: string) {
+    return this.httpClient.get<User>(this.API + '/' + id).pipe(first());
+  }
+
   save(user: Partial<User>) {
-    console.log(user);
+    console.log('users.service.save');
+    if (user.id) {
+      console.log('user.service.update');
+      return this.update(user);
+    }
+    console.log('user.service.create');
+    return this.create(user);
+  }
+
+  private create(user: Partial<User>) {
     return this.httpClient.post<User>(this.API, user).pipe(first());
+  }
+
+  private update(user: Partial<User>) {
+    return this.httpClient.put<User>(`${this.API}/${user.id}`, user).pipe(first());
+  }
+
+  delete(user: Partial<User>) {
+    console.log('users.service.delete');
+    return this.httpClient.delete(`${this.API}/${user.id}`).pipe(first());
   }
 }

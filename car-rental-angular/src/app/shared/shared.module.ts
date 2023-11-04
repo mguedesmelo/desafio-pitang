@@ -3,17 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppMaterialModule } from './app-material/app-material.module';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     AppMaterialModule,
     CommonModule
   ],
   exports: [
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    ConfirmDialogComponent
   ]
 })
 export class SharedModule {

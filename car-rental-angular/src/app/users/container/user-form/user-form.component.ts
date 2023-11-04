@@ -1,9 +1,11 @@
 import { Location } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UsersService } from '../service/users.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { UsersService } from '../../service/users.service';
+import { ActivatedRoute } from '@angular/router';
+import { User } from '../../model/user';
 
 @Component({
   selector: 'app-user-form',
@@ -15,31 +17,30 @@ export class UserFormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
+    private service: UsersService,
     private snackBar: MatSnackBar,
     private location: Location,
-    private service: UsersService,
+    private route: ActivatedRoute
   ) {
+    const user: User = this.route.snapshot.data['user'];
+    console.log(user.birthDay);
     this.form = this.formBuilder.group({
-      firstName: [null],
-      lastName: [null],
-      email: [null],
-      birthDay: [null],
-      login: [null],
-      password: [null],
-      phone: [null],
-      /*
-      firstName: 'Skyler',
-      lastName: 'White',
-      email: 'skyler@somedomain.com',
-      birthDay: '1970-11-08',
-      login: 'skyler',
-      password: 'h3ll0',
-      phone: '+1 804-406-4234',
-      */
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      birthDay: user.birthDay,
+      login: user.login,
+      password: user.password,
+      phone: user.phone,
     });
+    if (user.id) {
+      this.form.controls['password'].disable();
+    }
   }
 
   onSave() {
+    console.log('user-form.component.save');
     this.service.save(this.form.value)
       .subscribe(
         result =>
@@ -56,11 +57,11 @@ export class UserFormComponent {
   }
 
   private onSuccess() {
-    this.snackBar.open('Usuário salvo com sucesso!', '', { duration: 5000 });
+    this.snackBar.open('Usuário salvo com sucesso!', 'X', { duration: 5000 });
     this.location.back();
   }
   private onError(error: HttpErrorResponse) {
     console.log(error);
-    this.snackBar.open(error.error.message , '', { duration: 5000 });
+    this.snackBar.open(error.message , '', { duration: 5000 });
   }
 }

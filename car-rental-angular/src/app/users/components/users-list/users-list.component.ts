@@ -9,6 +9,9 @@ import { User } from '../../model/user';
 export class UsersListComponent {
   @Input() users: User[] = [];
   @Output() add = new EventEmitter(false);
+  @Output() edit = new EventEmitter(false);
+  @Output() delete = new EventEmitter(false);
+  @Output() showCars = new EventEmitter(false);
   readonly displayedColumns = ['login', 'firstName', 'lastName', 'email', 'phone', 'actions'];
 
   constructor() {
@@ -16,7 +19,20 @@ export class UsersListComponent {
   }
 
   onAdd() {
+    console.log('user-list.component.onAdd');
     this.add.emit(true);
-    //this.router.navigate(['add'], {relativeTo: this.route});
+  }
+
+  onEdit(user: User) {
+    this.edit.emit(user);
+  }
+
+  onShowCars(user: User) {
+    this.showCars.emit(user);
+  }
+
+  onDelete(user: User) {
+    console.log('users.list.component.onDelete')
+    this.delete.emit(user);
   }
 }
