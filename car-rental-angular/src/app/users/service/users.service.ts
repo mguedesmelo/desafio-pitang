@@ -31,6 +31,7 @@ export class UsersService {
 
   save(user: Partial<User>) {
     console.log('users.service.save');
+    console.log(user);
     if (user.id) {
       console.log('user.service.update');
       return this.update(user);

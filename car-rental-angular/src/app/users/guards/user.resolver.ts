@@ -1,3 +1,4 @@
+import { DatePipe, formatDate } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -17,13 +18,14 @@ export class UserResolver implements Resolve<User> {
     if (route.params && route.params['id']) {
       return this.service.findById(route.params['id']);
     }
+    const systemDate = formatDate(new Date(), 'MM/dd/yyyy', 'en_US');
     return of(
       {
         id: '',
         firstName: 'qqq',
         lastName: 'aaa',
         email: 'qqq@gmail.com',
-        birthDay: new Date(),
+        birthDay: systemDate,
         login: 'qqq',
         password: 'qqq',
         phone: '81999491213',

@@ -30,7 +30,7 @@
 
       <mat-form-field class="full-width">
         <mat-label>Birthday</mat-label>
-        <input matInput [matDatepicker]="birthDay" placeholder="Data de nascimento">
+        <input matInput [matDatepicker]="birthDay" placeholder="Data de nascimento" name="birthDay" formControlName="birthDay">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="birthDay"></mat-datepicker-toggle>
         <mat-datepicker #birthDay></mat-datepicker>

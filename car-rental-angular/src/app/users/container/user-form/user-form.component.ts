@@ -1,16 +1,16 @@
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UsersService } from '../../service/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../model/user';
+import { UsersService } from '../../service/users.service';
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent {
   form: FormGroup;
@@ -23,13 +23,14 @@ export class UserFormComponent {
     private route: ActivatedRoute
   ) {
     const user: User = this.route.snapshot.data['user'];
-    console.log(user.birthDay);
+    console.log('user-form.component.constructor');
+    console.log(user);
     this.form = this.formBuilder.group({
       id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      birthDay: user.birthDay,
+      birthDay: new FormControl(new Date(user.birthDay)),
       login: user.login,
       password: user.password,
       phone: user.phone,
