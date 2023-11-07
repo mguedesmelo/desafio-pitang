@@ -82,8 +82,9 @@ export class UserFormComponent {
     this.snackBar.open('Usuário salvo com sucesso!', 'X', { duration: 5000 });
     this.location.back();
   }
+
   private onError(error: HttpErrorResponse) {
     console.log(error);
-    this.snackBar.open(error.message, '', { duration: 5000 });
+    this.snackBar.open(error.message, 'X', { duration: 5000 });
   }
 }

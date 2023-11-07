@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UsersService } from '../../service/users.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-login-form',
@@ -12,7 +15,10 @@ export class UserLoginFormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: UsersService
+    private router: Router,
+    private route: ActivatedRoute,
+    private service: UsersService,
+    private snackBar: MatSnackBar,
     ) {
     this.form = this.formBuilder.group({
       login: ['pinkman'],
@@ -21,7 +27,24 @@ export class UserLoginFormComponent {
   }
 
   onLogin() {
-    const tt = this.service.signIn(this.form.value);
-    console.log(this.service.getToken());
+    this.service.login(this.form.value).subscribe(
+      () =>
+      {
+        this.onSuccess();
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+        this.onError(error);
+      });;
+
+  }
+
+  private onSuccess() {
+    this.router.navigate(['/']);
+    this.snackBar.open('Bem-vindo ao sistema!', 'X', { duration: 5000 });
+  }
+
+  private onError(error: HttpErrorResponse) {
+    this.snackBar.open(error.message, 'X', { duration: 5000 });
   }
 }

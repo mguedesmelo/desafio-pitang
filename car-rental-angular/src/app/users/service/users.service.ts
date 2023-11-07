@@ -1,10 +1,9 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
-import { first, delay, tap } from 'rxjs';
+import { Observable, catchError, first, map, throwError } from 'rxjs';
 
 import { User } from '../model/user';
-import { Login } from '../model/login';
+import { UserToken } from '../model/user-token';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +11,11 @@ import { Login } from '../model/login';
 export class UsersService {
   //private readonly API = '/assets/users.json';
   private readonly API = 'api/users';
+  //private tokenSubject: BehaviorSubject<UserToken>;
+  //private token: Observable<UserToken>;
 
   constructor(private httpClient: HttpClient) {
-    // Empty
+    //this.tokenSubject = new BehaviorSubject<UserToken>(JSON.parse(localStorage.getItem('token')));
   }
 
   findAll(): Observable<User[]> {
@@ -26,16 +27,34 @@ export class UsersService {
     );
   }
 
+  login(user: Partial<User>) {
+    return this.httpClient.post<UserToken>('api/signin', user)
+    .pipe(
+      map((token: UserToken) => {
+        const userToken: UserToken = token;
+
+        localStorage.setItem('token', JSON.stringify(userToken.token));
+        //this.tokenSubject.next(userToken);
+
+        return userToken;
+      }),
+      catchError((error) => {
+        return throwError(error);
+      })
+    );
+  }
+
   signIn(user: Partial<User>) {
-    this.httpClient.post('api/signin', user)
+    return this.httpClient.post('api/signin', user)
     .pipe(
       catchError((error) => {
         return throwError(error); // Propaga o erro
-      }))
-      .subscribe((response: any) => {
-        const token = response.token; // Supondo que a resposta contenha um campo "token"
-        this.saveToken(token);
-      });
+      })
+    )
+    .subscribe((response: any) => {
+      const token = response.token; // Supondo que a resposta contenha um campo "token"
+      this.saveToken(token);
+    });
   }
 
   private saveToken(token: string) {
@@ -43,7 +62,10 @@ export class UsersService {
   }
 
   isSignedIn() {
-    return this.getToken();
+    if (this.getToken()) {
+      return true;
+    }
+    return false;
   }
 
   getToken() {
@@ -51,66 +73,15 @@ export class UsersService {
   }
 
   logout() {
+    localStorage.removeItem('token');
     localStorage.clear();
   }
-
-  //signIn(login: string, password: string) {
-  signInOld(user: Partial<User>) {
-    return this.httpClient.post('api/signin', user).pipe(
-      catchError((error) => {
-        return throwError(error); // Propaga o erro
-      })
-    )
-    .subscribe((response: any) => {
-      const token = response.token; // Supondo que o token está no corpo da resposta
-      return token;
-      // Faça algo com o token, como armazená-lo para uso futuro.
-    });
-    /*
-    return this.httpClient.post<string>('api/signin', user)
-      .pipe(
-        catchError((error) => {
-          console.error('Erro na chamada GET:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe((response: any) => {
-        console.log(response);
-      });
-      */
-  }
-
-  /*
-  signIn(user: Partial<User>) {
-    this.http.get('https://api.example.com/data')
-    .pipe(
-      catchError((error) => {
-        console.error('Erro na chamada GET:', error);
-        return throwError(error); // Propaga o erro
-      })
-    )
-    .subscribe((data) => {
-      console.log('Dados recebidos:', data);
-      // Faça algo com os dados, como atualizar o estado da aplicação ou exibir na interface do usuário.
-    });
-    return this.httpClient.get<string>(this.API, user).pipe(
-      catchError((error) => {
-        console.error('Erro na chamada GET:', error);
-        return throwError(error); // Propaga o erro
-      })
-    ).subscribe((data) => {
-      console.log('Dados recebidos:', data);
-      // Faça algo com os dados, como atualizar o estado da aplicação ou exibir na interface do usuário.
-    });
-  }
-  */
 
   findById(id: string) {
     return this.httpClient.get<User>(`${this.API}/${id}`).pipe(first());
   }
 
   save(user: Partial<User>) {
-    console.log(user);
     if (user.id) {
       return this.update(user);
     }
@@ -126,7 +97,6 @@ export class UsersService {
   }
 
   delete(user: Partial<User>) {
-    console.log('users.service.delete');
     return this.httpClient.delete(`${this.API}/${user.id}`).pipe(first());
   }
 }
