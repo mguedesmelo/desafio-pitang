@@ -3,6 +3,7 @@ package br.com.car.rental.api.controller;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +25,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @RestController
 @RequestMapping("/api")
@@ -35,15 +40,15 @@ public class AuthenticationRestController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping(value = "/signin")
+	@PostMapping(value = "/signin")
 	@Operation(summary = "Esta rota espera um objeto com os campos login e password e deve "
 			+ "retornar o token de acesso da API (JWT) com as informações do usuário logado", 
-			method = "GET")
+			method = "POST")
 	@ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Login realizado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Login inexistente ou senha inválida"),
     })
-	public String signin(@RequestBody LoginDto loginDto) {
+	public ResponseEntity<Token> signin(@RequestBody LoginDto loginDto) {
 		try {
 			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 					loginDto.login(), loginDto.password());
@@ -56,7 +61,8 @@ public class AuthenticationRestController {
 			user.setLastLogin(LocalDateTime.now());
 			this.userService.updateLastLogin(user);
 			
-			return this.tokenService.generateToken(user);
+			Token token = new Token(this.tokenService.generateToken(user));
+			return ResponseEntity.ok().body(token);
 		} catch (BadCredentialsException e) {
 			throw new BusinessException("Invalid login or password");
 		} catch (Throwable t) {
@@ -81,4 +87,12 @@ public class AuthenticationRestController {
         }
         return null;
 	}
+}
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+class Token {
+	private String token;
+	
 }
