@@ -91,7 +91,8 @@ public class UserService extends BaseService {
 	}
 
 	public void delete(@Positive @NotNull Long id) {
-		User user = this.userRepository.findById(id).orElseThrow(
+		User user = this.userRepository.findById(id)
+				.orElseThrow(
 				() -> new RecordNotFoundException(id));
 		user.setActive(Boolean.FALSE);
 		this.userRepository.save(user);
