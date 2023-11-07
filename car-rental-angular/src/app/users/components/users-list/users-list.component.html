@@ -29,20 +29,22 @@
 
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef class="action-column">
-      <button mat-mini-fab color="primary" class="action-column-header" aria-label="Adicionar usuário" (click)="onAdd()">
+      <button mat-mini-fab color="primary" class="action-column-header" aria-label="Adicionar Usuário" (click)="onAdd()" title="Adicionar Usuário">
         <mat-icon>add</mat-icon>
       </button>
     </mat-header-cell>
     <mat-cell *matCellDef="let user" class="action-column">
-      <button mat-icon-button color="primary" aria-label="Editar usuário" (click)="onEdit(user)">
+      <button mat-icon-button color="primary" aria-label="Editar Usuário" (click)="onEdit(user)" title="Editar Usuário">
         <mat-icon>edit</mat-icon>
       </button>
 
-      <button mat-icon-button color="primary" aria-label="Carros desse usuário" (click)="onShowCars(user)">
+      <!--
+      <button mat-icon-button color="primary" aria-label="Carros" (click)="onShowCars(user)" title="Carros">
         <mat-icon>commute</mat-icon>
       </button>
+      -->
 
-      <button mat-icon-button color="warn" aria-label="Remover usuário" (click)="onDelete(user)">
+      <button mat-icon-button color="warn" aria-label="Remover Usuário" (click)="onDelete(user)" title="Remover Usuário">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>

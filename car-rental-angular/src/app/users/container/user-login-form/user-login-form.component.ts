@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { UsersService } from '../../service/users.service';
 
 @Component({
   selector: 'app-user-login-form',
@@ -9,14 +10,18 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class UserLoginFormComponent {
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: UsersService
+    ) {
     this.form = this.formBuilder.group({
-      login: [''],
-      password: [''],
+      login: ['pinkman'],
+      password: ['h3ll0'],
     });
   }
 
   onLogin() {
-
+    const tt = this.service.signIn(this.form.value);
+    console.log(this.service.getToken());
   }
 }
