@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../model/user';
@@ -27,13 +27,13 @@ export class UserFormComponent {
     console.log(user);
     this.form = this.formBuilder.group({
       id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      birthDay: new FormControl(new Date(user.birthDay)),
-      login: user.login,
-      password: user.password,
-      phone: user.phone,
+      firstName: [user.firstName, [Validators.required, Validators.minLength(5), Validators.maxLength(60)]],
+      lastName: [user.lastName, [Validators.required, Validators.minLength(5), Validators.maxLength(60)]],
+      email: [user.email, [Validators.required, Validators.email, Validators.maxLength(255)]],
+      birthDay: [new Date(user.birthDay), [Validators.required]],
+      login: [user.login, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+      password: [user.password, [Validators.required, Validators.minLength(5), Validators.maxLength(30)]],
+      phone: [user.phone, [Validators.required, Validators.maxLength(20)]],
     });
     if (user.id) {
       this.form.controls['password'].disable();
@@ -57,12 +57,33 @@ export class UserFormComponent {
     this.location.back();
   }
 
+  getErrorMessage(fieldName: string) {
+    const field = this.form.get(fieldName);
+
+    if (field?.hasError('required')) {
+      return 'Campo obrigatório';
+    }
+    if (field?.hasError('minlength')) {
+      const requiredLength: number = field.errors ? field.errors['minlength']['requiredLength'] : 5;
+      return `Tamaanho mínimo precisa ser de ${requiredLength} caracteres`;
+    }
+    if (field?.hasError('maxlength')) {
+      const requiredLength: number = field.errors ? field.errors['maxlength']['requiredLength'] : 60;
+      return `Tamaanho máximo excedido de ${requiredLength} caracteres`;
+    }
+    if (field?.hasError('email')) {
+      return 'E-mail inválido';
+    }
+    return 'Campo inválido';
+    //return 'email';// this.form.get('email').hasError('email' ? 'Not a valid email' : '';
+  }
+
   private onSuccess() {
     this.snackBar.open('Usuário salvo com sucesso!', 'X', { duration: 5000 });
     this.location.back();
   }
   private onError(error: HttpErrorResponse) {
     console.log(error);
-    this.snackBar.open(error.message , '', { duration: 5000 });
+    this.snackBar.open(error.message, '', { duration: 5000 });
   }
 }

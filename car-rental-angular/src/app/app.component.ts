@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,11 @@ export class AppComponent {
     // Empty
   }
 
-  cars() {
-    this.openSnackBar('Navegar para tela de carros, recurso ainda não implementado');
+  onAdd() {
+    //this.router.navigate(['add'], { relativeTo: this.route });
   }
 
-  logout() {
+  notReady(msg: string) {
     this.openSnackBar('Logout, recurso ainda não implementado');
   }
 

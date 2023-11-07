@@ -1,36 +1,47 @@
 <mat-card>
   <mat-toolbar color="primary">Novo Usuário</mat-toolbar>
-
+  <br>
   <mat-card-content>
     <form [formGroup]="form" class="min-width">
       <mat-form-field class="full-width">
         <mat-label>Login</mat-label>
-        <input matInput placeholder="Login" formControlName="login">
+        <input matInput placeholder="Login" formControlName="login" #login>
+        <mat-hint align="end">{{ login.value.length }}/20</mat-hint>
+        <mat-error *ngIf="form.get('login')?.invalid">{{ getErrorMessage('login') }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Senha</mat-label>
-        <input type="password" matInput placeholder="Login" formControlName="password">
+        <input type="password" matInput placeholder="Senha" formControlName="password" #password>
+        <mat-hint align="end">{{ password.value.length }}/30</mat-hint>
+        <mat-error *ngIf="form.get('password')?.invalid">{{ getErrorMessage('password') }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Primeiro Nome</mat-label>
-        <input matInput placeholder="Primeiro nome" formControlName="firstName">
+        <input matInput placeholder="Primeiro nome" formControlName="firstName" #firstName>
+        <mat-hint align="end">{{ firstName.value.length }}/60</mat-hint>
+        <mat-error *ngIf="form.get('firstName')?.invalid">{{ getErrorMessage('firstName') }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Último Nome</mat-label>
-        <input matInput placeholder="Último nome" formControlName="lastName">
+        <input matInput placeholder="Último nome" formControlName="lastName" #lastName>
+        <mat-hint align="end">{{ lastName.value.length }}/60</mat-hint>
+        <mat-error *ngIf="form.get('lastName')?.invalid">{{ getErrorMessage('lastName') }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>E-mail</mat-label>
-        <input matInput placeholder="E-mail" formControlName="email">
+        <input matInput placeholder="E-mail" formControlName="email" #email>
+        <mat-hint align="end">{{ email.value.length }}/255</mat-hint>
+        <mat-error *ngIf="form.get('email')?.invalid">{{ getErrorMessage('email') }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Birthday</mat-label>
         <input matInput [matDatepicker]="birthDay" placeholder="Data de nascimento" name="birthDay" formControlName="birthDay">
+        <mat-error *ngIf="form.get('birthDay')?.invalid">{{ getErrorMessage('birthDay') }}</mat-error>
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="birthDay"></mat-datepicker-toggle>
         <mat-datepicker #birthDay></mat-datepicker>
@@ -38,13 +49,15 @@
 
       <mat-form-field class="full-width">
         <mat-label>Phone</mat-label>
-        <input matInput placeholder="Telefone" formControlName="phone">
+        <input matInput placeholder="Telefone" formControlName="phone" #phone>
+        <mat-hint align="end">{{ phone.value.length }}/20</mat-hint>
+        <mat-error *ngIf="form.get('phone')?.invalid">{{ getErrorMessage('phone') }}</mat-error>
       </mat-form-field>
     </form>
-  </mat-card-content>
 
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="onSave()">Salvar</button>
-    <button mat-raised-button (click)="onCancel()">Cancelar</button>
-  </mat-card-actions>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="onSave()">Salvar</button>
+        <button mat-raised-button (click)="onCancel()">Cancelar</button>
+    </mat-card-actions>
+  </mat-card-content>
 </mat-card>
