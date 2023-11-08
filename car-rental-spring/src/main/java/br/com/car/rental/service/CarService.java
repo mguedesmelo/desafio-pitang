@@ -88,7 +88,7 @@ public class CarService extends BaseService {
 	}
 
 	public List<CarDto> findAllByUser(User user) {
-		return this.carRepository.findAllByUser(user.getLogin()).stream().map(carMapper::map).toList();
+		return this.carRepository.findAllByUser(user.getId()).stream().map(carMapper::map).toList();
 	}
 
 	public Optional<Car> findImagemById(Long id) {

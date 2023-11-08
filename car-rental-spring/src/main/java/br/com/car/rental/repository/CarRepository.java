@@ -20,8 +20,8 @@ public interface CarRepository extends BaseRepository<Car> {
 	@Query("SELECT c FROM Car c WHERE c.user.login = :login AND c.id = :id")
 	Optional<Car> findByUserAndId(@Param("login") String login, @Param("id") Long id);
 
-	@Query("SELECT c FROM Car c WHERE c.user.login = :login")
-	List<Car> findAllByUser(@Param("login") String login);
+	@Query("SELECT c FROM Car c WHERE c.user.id = :userId")
+	List<Car> findAllByUser(@Param("userId") Long userId);
 
 	@Modifying
 	@Query("DELETE FROM Car c WHERE c.id = :id")
