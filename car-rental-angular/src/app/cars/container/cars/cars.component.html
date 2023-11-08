@@ -7,7 +7,11 @@
     </p>
 
     <div class="column-flex mat-elevation-z8">
-      <app-cars-list *ngIf="cars$ | async as cars; else loading" [cars]="cars">
+      <app-cars-list *ngIf="cars$ | async as cars; else loading" [cars]="cars"
+      (add)="onAdd()"
+      (edit)="onEdit($event)"
+      (delete)="onDelete($event)"
+      >
 
       </app-cars-list>
 

@@ -20,6 +20,10 @@ export class CarsService {
     return this.httpClient.get<Car[]>(this.API, { headers });
   }
 
+  findById(id: string) {
+    return this.httpClient.get<Car>(`${this.API}/${id}`).pipe(first());
+  }
+
   save(car: Partial<Car>) {
     if (car.id) {
       return this.update(car);
