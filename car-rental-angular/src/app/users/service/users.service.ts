@@ -33,8 +33,7 @@ export class UsersService {
       map((token: UserToken) => {
         const userToken: UserToken = token;
 
-        localStorage.setItem('token', JSON.stringify(userToken.token));
-        //this.tokenSubject.next(userToken);
+        localStorage.setItem('token', userToken.token);
 
         return userToken;
       }),
@@ -48,11 +47,11 @@ export class UsersService {
     return this.httpClient.post('api/signin', user)
     .pipe(
       catchError((error) => {
-        return throwError(error); // Propaga o erro
+        return throwError(error);
       })
     )
     .subscribe((response: any) => {
-      const token = response.token; // Supondo que a resposta contenha um campo "token"
+      const token = response.token;//.replace('"', '');
       this.saveToken(token);
     });
   }

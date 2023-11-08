@@ -1,21 +1,15 @@
-
 <mat-card>
   <mat-card-content>
     <p>
       <mat-toolbar color="primary">
-        <span>Usuários</span>
+        <span>Carros</span>
       </mat-toolbar>
     </p>
 
     <div class="column-flex mat-elevation-z8">
-      <app-users-list *ngIf="users$ | async as users; else loading" [users]="users"
-        (add)="onAdd()"
-        (edit)="onEdit($event)"
-        (delete)="onDelete($event)"
-        (showCars)="onShowCars($event)"
-        >
+      <app-cars-list *ngIf="cars$ | async as cars; else loading" [cars]="cars">
 
-      </app-users-list>
+      </app-cars-list>
 
       <ng-template #loading>
         <div class="loading-spinner">

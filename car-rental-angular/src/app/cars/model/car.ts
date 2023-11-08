@@ -1,6 +1,6 @@
 export interface Car {
   id: string;
-  productionYear: string;
+  year: string;
   licensePlate: string;
   model: string;
   color: string;

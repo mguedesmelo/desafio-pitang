@@ -1,0 +1,41 @@
+<mat-table [dataSource]="cars">
+  <ng-container matColumnDef="year">
+    <mat-header-cell *matHeaderCellDef> Ano de Fabricação </mat-header-cell>
+    <mat-cell *matCellDef="let car"> {{ car.year }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="licensePlate">
+    <mat-header-cell *matHeaderCellDef> Placa </mat-header-cell>
+    <mat-cell *matCellDef="let car"> {{ car.licensePlate }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="model">
+    <mat-header-cell *matHeaderCellDef> Modelo </mat-header-cell>
+    <mat-cell *matCellDef="let car"> {{ car.model }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="color">
+    <mat-header-cell *matHeaderCellDef> Cor </mat-header-cell>
+    <mat-cell *matCellDef="let car"> {{ car.color }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="action-column">
+      <button mat-mini-fab color="primary" class="action-column-header" aria-label="Adicionar Carro" (click)="onAdd()" title="Adicionar Carro">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let user" class="action-column">
+      <button mat-icon-button color="primary" aria-label="Editar Carro" (click)="onEdit(user)" title="Editar Carro">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" aria-label="Remover Carro" (click)="onDelete(user)" title="Remover Carro">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
