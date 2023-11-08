@@ -1,16 +1,16 @@
 <mat-toolbar color="primary">
   <span>Desafio Pitang - Aluguel de Carros</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon" title="Usuários" onclick="window.location.href='/'">
+  <button mat-icon-button class="example-icon" title="Usuários" routerLink="/">
     <mat-icon>group</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" title="Acessar o Sistema" onclick="window.location.href='/users/login'">
+  <button mat-icon-button class="example-icon" title="Acessar o Sistema" routerLink="/users/login" *ngIf="isSignedIn() == false">
     <mat-icon>login</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" title="Carros" (click)="notReady('Navegar para tela de carros, recurso ainda não implementado')">
+  <button mat-icon-button class="example-icon" title="Carros" (click)="cars()" *ngIf="isSignedIn()">
     <mat-icon>commute</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" title="Sair do Sistema" (click)="notReady('Logout, recurso ainda não implementado')">
+  <button mat-icon-button class="example-icon" title="Sair do Sistema" (click)="logout()" routerLink="/" *ngIf="isSignedIn()">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
@@ -18,49 +18,13 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened="true" class="sidenav">
     <mat-nav-list>
-      <a mat-list-item href="/users/login">Acessar</a>
-      <a mat-list-item href="/">Usuários</a>
-      <a mat-list-item (click)="notReady('Navegar para tela de carros, recurso ainda não implementado')">Carros</a>
-      <a mat-list-item (click)="notReady('Logout, recurso ainda não implementado')">Sair</a>
+      <a mat-list-item routerLink="/users/login" *ngIf="isSignedIn() == false">Acessar</a>
+      <a mat-list-item routerLink="/users">Usuários</a>
+      <a mat-list-item (click)="cars()" *ngIf="isSignedIn()">Carros</a>
+      <a mat-list-item (click)="logout()" routerLink="/" *ngIf="isSignedIn()">Sair</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-
-<!--
-<mat-drawer-container autosize>
-  <mat-drawer #drawer opened="true" mode="side" position="start">
-  <mat-nav-list>
-    <mat-list-item>
-      <button routerLink="card" mat-button><mat-icon>dashboard</mat-icon> Dashboard</button>
-    </mat-list-item>
-    <mat-list-item>
-      <button routerLink="" mat-button><mat-icon>home</mat-icon> Home</button>
-    </mat-list-item>
-    <mat-list-item>
-      <button routerLink="slider" mat-button><mat-icon>explore</mat-icon> Slider</button>
-    </mat-list-item>
-    <mat-list-item>
-      <button routerLink="table" mat-button><mat-icon>table</mat-icon> Table</button>
-    </mat-list-item>
-    <mat-list-item>
-      <button mat-button><mat-icon>settings</mat-icon> Settings</button>
-    </mat-list-item>
-    <mat-list-item>
-      <button mat-button><mat-icon>help</mat-icon> Help</button>
-    </mat-list-item>
-    <mat-list-item>
-      <button mat-button><mat-icon>analytics</mat-icon> analytics</button>
-    </mat-list-item>
-  </mat-nav-list>
-  </mat-drawer>
-  <mat-drawer-content>
-    <div style="text-align: center;min-height: 600px;">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-drawer-content>
-</mat-drawer-container>
--->

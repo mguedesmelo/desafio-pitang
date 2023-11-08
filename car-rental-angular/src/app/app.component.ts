@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsersService } from './users/service/users.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ export class AppComponent {
   title = 'car-rental-angular';
 
   constructor(
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private service: UsersService
   ) {
     // Empty
   }
@@ -20,13 +22,21 @@ export class AppComponent {
     //this.router.navigate(['add'], { relativeTo: this.route });
   }
 
-  notReady(msg: string) {
-    this.openSnackBar('Logout, recurso ainda não implementado');
+  logout() {
+    this.service.logout();
+  }
+
+  cars() {
+    this.openSnackBar('Navegar para tela de carros, recurso ainda não implementado');
   }
 
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Ok', {
       duration: 5000
     });
+  }
+
+  isSignedIn() {
+    return this.service.isSignedIn();
   }
 }
