@@ -48,6 +48,7 @@ export class BaseService {
         }
       }
     }
+    console.log('teste');
     return toReturn;
   }
 }

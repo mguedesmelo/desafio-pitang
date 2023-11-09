@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/cars/model/car';
 import { CarsService } from 'src/app/cars/service/cars.service';
 
@@ -13,23 +13,37 @@ import { CarsService } from 'src/app/cars/service/cars.service';
   styleUrls: ['./car-form.component.scss']
 })
 export class CarFormComponent {
-  form: FormGroup;
+  form: FormGroup = this.formBuilder.group({
+    id: '',
+    year: '',
+    licensePlate: '',
+    model: '',
+    color: '',
+  });
 
   constructor(
     private formBuilder: FormBuilder,
     private service: CarsService,
     private snackBar: MatSnackBar,
     private location: Location,
+    private router: Router,
     private route: ActivatedRoute
   ) {
-    const car: Car = this.route.snapshot.data['car'];
-    this.form = this.formBuilder.group({
-      id: car.id,
-      year: [car.year, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-      licensePlate: [car.licensePlate, [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
-      model: [car.model, [Validators.required, Validators.maxLength(60)]],
-      color: [car.color, [Validators.required]],
-    });
+    if (this.service.isSignedIn()) {
+      const car: Car = this.route.snapshot.data['car'];
+      this.form = this.formBuilder.group({
+        id: car.id,
+        year: [car.year, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
+        licensePlate: [car.licensePlate, [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
+        model: [car.model, [Validators.required, Validators.maxLength(60)]],
+        color: [car.color, [Validators.required]],
+      });
+    } else {
+      this.router.navigate(['/users/login']);
+      this.snackBar.open('Para acessar esta área você deve estar logado', 'X', {
+        duration: 5000
+      });
+    }
   }
 
   onSave() {
@@ -66,7 +80,6 @@ export class CarFormComponent {
       return 'E-mail inválido';
     }
     return 'Campo inválido';
-    //return 'email';// this.form.get('email').hasError('email' ? 'Not a valid email' : '';
   }
 
   private onSuccess() {

@@ -27,6 +27,7 @@ export class CarsService extends BaseService {
 
   findById(id: string) {
     const headers = this.getHeaders();
+    console.log(headers);
     return this.httpClient.get<Car>(`${this.API}/${id}`, { headers }).pipe(
       first(),
       catchError(error => {

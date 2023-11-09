@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Inject } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CarsComponent } from './container/cars/cars.component';
 import { CarFormComponent } from './container/car-form/car-form/car-form.component';
+import { CarsComponent } from './container/cars/cars.component';
 import { CarResolver } from './guards/car.resolver';
+import { CarsService } from './service/cars.service';
 
 const routes: Routes = [
   { path: '', component: CarsComponent },
