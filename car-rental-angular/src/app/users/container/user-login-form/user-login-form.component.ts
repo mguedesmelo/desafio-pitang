@@ -27,13 +27,12 @@ export class UserLoginFormComponent {
   }
 
   onLogin() {
-    this.service.login(this.form.value).subscribe(
+    this.service.signIn(this.form.value).subscribe(
       () =>
       {
         this.onSuccess();
       },
       (error: HttpErrorResponse) => {
-        console.log(error);
         this.onError(error);
       });;
 

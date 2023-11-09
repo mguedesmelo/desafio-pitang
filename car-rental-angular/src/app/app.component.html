@@ -8,10 +8,10 @@
     <mat-icon>commute</mat-icon>
   </button>
   <button mat-icon-button class="example-icon" title="Acessar o Sistema" routerLink="/users/login" *ngIf="isSignedIn() == false">
-    <mat-icon>login</mat-icon>
+    <mat-icon>key</mat-icon>
   </button>
   <button mat-icon-button class="example-icon" title="Sair do Sistema" (click)="logout()" routerLink="/" *ngIf="isSignedIn()">
-    <mat-icon>logout</mat-icon>
+    <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
 

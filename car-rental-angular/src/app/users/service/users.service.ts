@@ -5,6 +5,7 @@ import { Observable, catchError, first, map, throwError } from 'rxjs';
 import { BaseService } from 'src/app/shared/service/base.service';
 import { User } from '../model/user';
 import { UserToken } from '../model/user-token';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class UsersService extends BaseService {
     );
   }
 
-  login(user: Partial<User>) {
+  signIn(user: Partial<User>) {
     return this.httpClient.post<UserToken>('api/signin', user)
     .pipe(
       map((token: UserToken) => {
@@ -45,21 +46,6 @@ export class UsersService extends BaseService {
       }),
     );
   }
-
-  /*
-  signIn(user: Partial<User>) {
-    return this.httpClient.post('api/signin', user)
-    .pipe(
-      catchError((error) => {
-        return throwError(() => new Error(error));
-      })
-    )
-    .subscribe((response: any) => {
-      const token = response.token;
-      this.saveToken(token);
-    });
-  }
-  */
 
   logout() {
     localStorage.removeItem('token');
@@ -77,6 +63,7 @@ export class UsersService extends BaseService {
   }
 
   save(user: Partial<User>) {
+    user.birthDay = new DatePipe('en').transform(user.birthDay, 'MM/dd/yyyy')?.toString();
     if (user.id) {
       return this.update(user);
     }

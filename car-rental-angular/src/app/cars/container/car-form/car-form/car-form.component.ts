@@ -88,7 +88,6 @@ export class CarFormComponent {
   }
 
   private onError(error: HttpErrorResponse) {
-    console.log(error);
     this.snackBar.open(error.message, 'X', { duration: 5000 });
   }
 }

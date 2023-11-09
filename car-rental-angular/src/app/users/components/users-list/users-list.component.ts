@@ -19,7 +19,6 @@ export class UsersListComponent {
   }
 
   onAdd() {
-    console.log('user-list.component.onAdd');
     this.add.emit(true);
   }
 
@@ -32,7 +31,6 @@ export class UsersListComponent {
   }
 
   onDelete(user: User) {
-    console.log('users.list.component.onDelete')
     this.delete.emit(user);
   }
 }

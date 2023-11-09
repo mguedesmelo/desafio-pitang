@@ -23,8 +23,6 @@ export class UserFormComponent {
     private route: ActivatedRoute
   ) {
     const user: User = this.route.snapshot.data['user'];
-    console.log('user-form.component.constructor');
-    console.log(user);
     this.form = this.formBuilder.group({
       id: user.id,
       firstName: [user.firstName, [Validators.required, Validators.minLength(5), Validators.maxLength(60)]],
@@ -41,7 +39,6 @@ export class UserFormComponent {
   }
 
   onSave() {
-    console.log('user-form.component.save');
     this.service.save(this.form.value)
       .subscribe(
         result =>
@@ -84,7 +81,6 @@ export class UserFormComponent {
   }
 
   private onError(error: HttpErrorResponse) {
-    console.log(error);
     this.snackBar.open(error.message, 'X', { duration: 5000 });
   }
 }

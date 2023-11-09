@@ -11,7 +11,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CarsListComponent } from './cars/components/cars-list/cars-list.component';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MY_DATE_FORMATS } from './shared/my-date-formats';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { CarsListComponent } from './cars/components/cars-list/cars-list.compone
     MatIconModule,
     MatButtonModule,
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -57,8 +57,6 @@ export class UsersComponent {
   }
 
   onDelete(user: User) {
-    console.log('users.component.onDelete');
-
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: `Deseja realmente remover o usuário ${user.firstName} ${user.lastName}?`,
     });

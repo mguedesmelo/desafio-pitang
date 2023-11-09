@@ -59,8 +59,6 @@ export class CarsComponent {
   }
 
   onDelete(car: Car) {
-    console.log('cars.component.onDelete');
-
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: `Deseja realmente remover o carro ${car.licensePlate}?`,
     });
