@@ -26,7 +26,7 @@ export class AppComponent {
   }
 
   openSnackBar(message: string) {
-    this.snackBar.open(message, 'Ok', {
+    this.snackBar.open(message, 'X', {
       duration: 5000
     });
   }

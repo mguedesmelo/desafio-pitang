@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, first, map, throwError } from 'rxjs';
 
+import { BaseService } from 'src/app/shared/service/base.service';
 import { User } from '../model/user';
 import { UserToken } from '../model/user-token';
-import { BaseService } from 'src/app/shared/service/base.service';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,7 @@ export class UsersService extends BaseService {
     );
   }
 
+  /*
   signIn(user: Partial<User>) {
     return this.httpClient.post('api/signin', user)
     .pipe(
@@ -58,21 +59,7 @@ export class UsersService extends BaseService {
       this.saveToken(token);
     });
   }
-
-  private saveToken(token: string) {
-    localStorage.setItem('token', token);
-  }
-
-  isSignedIn() {
-    if (this.getToken()) {
-      return true;
-    }
-    return false;
-  }
-
-  getToken() {
-    return localStorage.getItem('token');
-  }
+  */
 
   logout() {
     localStorage.removeItem('token');

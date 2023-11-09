@@ -1,13 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, of } from 'rxjs';
+import { Car } from 'src/app/cars/model/car';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
-import { Car } from 'src/app/cars/model/car';
 import { CarsService } from '../../service/cars.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-cars',
@@ -28,12 +28,19 @@ export class CarsComponent {
   }
 
   refresh() {
-    this.cars$ = this.carsService.findAll().pipe(
-      catchError((error: HttpErrorResponse) => {
-        this.onError(error);
-        return of([]);
-      })
-    );
+    if (this.carsService.isSignedIn()) {
+      this.cars$ = this.carsService.findAll().pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.onError(error);
+          return of([]);
+        })
+      );
+    } else {
+      this.router.navigate(['/users/login']);
+      this.snackBar.open('Para acessar esta área você deve estar logado', 'X', {
+        duration: 5000
+      });
+    }
   }
 
   onError(error: HttpErrorResponse) {

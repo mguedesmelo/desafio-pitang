@@ -4,7 +4,7 @@
     <form [formGroup]="form" class="min-width">
       <mat-form-field class="full-width">
         <mat-label>Ano de Fabricação</mat-label>
-        <input matInput placeholder="Year" formControlName="year" #year>
+        <input matInput placeholder="Ano de Fabricação" formControlName="year" #year>
         <mat-hint align="end">{{ year.value.length }}/4</mat-hint>
         <mat-error *ngIf="form.get('year')?.invalid">{{ getErrorMessage('year') }}</mat-error>
       </mat-form-field>

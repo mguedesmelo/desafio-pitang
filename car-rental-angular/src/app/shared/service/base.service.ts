@@ -9,6 +9,21 @@ export class BaseService {
     // Empty
   }
 
+  protected saveToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  isSignedIn() {
+    if (this.getToken()) {
+      return true;
+    }
+    return false;
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
   getServerErrorMessage(error: HttpErrorResponse): string {
     let toReturn: string;
     if (error.error instanceof ErrorEvent) {
