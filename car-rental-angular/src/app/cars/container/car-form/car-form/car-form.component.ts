@@ -20,6 +20,7 @@ export class CarFormComponent {
     model: '',
     color: '',
   });
+  title: string = 'Novo Carro';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,6 +39,9 @@ export class CarFormComponent {
         model: [car.model, [Validators.required, Validators.maxLength(60)]],
         color: [car.color, [Validators.required]],
       });
+      if (car.id) {
+        this.title = 'Editar Carro';
+      }
     } else {
       this.router.navigate(['/users/login']);
       this.snackBar.open('Para acessar esta área você deve estar logado', 'X', {

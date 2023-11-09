@@ -1,14 +1,14 @@
 <mat-toolbar color="primary">
   <span>Desafio Pitang - Aluguel de Carros</span>
   <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" title="Acessar o Sistema" routerLink="/users/login" *ngIf="isSignedIn() == false">
+    <mat-icon>key</mat-icon>
+  </button>
   <button mat-icon-button class="example-icon" title="Usuários" routerLink="/">
     <mat-icon>group</mat-icon>
   </button>
   <button mat-icon-button class="example-icon" title="Meus Carros" routerLink="/cars" *ngIf="isSignedIn()">
     <mat-icon>commute</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" title="Acessar o Sistema" routerLink="/users/login" *ngIf="isSignedIn() == false">
-    <mat-icon>key</mat-icon>
   </button>
   <button mat-icon-button class="example-icon" title="Sair do Sistema" (click)="logout()" routerLink="/" *ngIf="isSignedIn()">
     <mat-icon>exit_to_app</mat-icon>
@@ -18,9 +18,9 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened="true" class="sidenav">
     <mat-nav-list>
+      <a mat-list-item routerLink="/users/login" title="Acessar o Sistema" *ngIf="isSignedIn() == false">Acessar</a>
       <a mat-list-item routerLink="/users" title="Usuários">Usuários</a>
       <a mat-list-item  routerLink="/cars" title="Meus Carros" *ngIf="isSignedIn()">Meus Carros</a>
-      <a mat-list-item routerLink="/users/login" title="Acessar o Sistema" *ngIf="isSignedIn() == false">Acessar</a>
       <a mat-list-item (click)="logout()" title="Sair do Sistema" routerLink="/" *ngIf="isSignedIn()">Sair</a>
     </mat-nav-list>
   </mat-sidenav>

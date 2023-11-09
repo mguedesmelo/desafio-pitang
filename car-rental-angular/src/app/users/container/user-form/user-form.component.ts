@@ -14,6 +14,7 @@ import { UsersService } from '../../service/users.service';
 })
 export class UserFormComponent {
   form: FormGroup;
+  title: string = 'Novo Usuário';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,6 +36,7 @@ export class UserFormComponent {
     });
     if (user.id) {
       this.form.controls['password'].disable();
+      this.title = 'Editar Usuário';
     }
   }
 
