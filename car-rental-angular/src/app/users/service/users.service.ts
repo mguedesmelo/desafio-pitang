@@ -4,24 +4,27 @@ import { Observable, catchError, first, map, throwError } from 'rxjs';
 
 import { User } from '../model/user';
 import { UserToken } from '../model/user-token';
+import { BaseService } from 'src/app/shared/service/base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class UsersService extends BaseService {
   //private readonly API = '/assets/users.json';
   private readonly API = 'api/users';
-  //private tokenSubject: BehaviorSubject<UserToken>;
-  //private token: Observable<UserToken>;
 
   constructor(private httpClient: HttpClient) {
-    //this.tokenSubject = new BehaviorSubject<UserToken>(JSON.parse(localStorage.getItem('token')));
+    super();
   }
 
   findAll(): Observable<User[]> {
     return this.httpClient.get<User[]>(this.API)
     .pipe(
       first(),
+      catchError(error => {
+        let errorMsg: string = this.getServerErrorMessage(error);
+        return throwError(() => new Error(errorMsg));
+      }),
       //delay(3000),
       //tap(user => console.log(user))
     );
@@ -32,14 +35,14 @@ export class UsersService {
     .pipe(
       map((token: UserToken) => {
         const userToken: UserToken = token;
-
         localStorage.setItem('token', userToken.token);
 
         return userToken;
       }),
-      catchError((error) => {
-        return throwError(error);
-      })
+      catchError(error => {
+        let errorMsg: string = this.getServerErrorMessage(error);
+        return throwError(() => new Error(errorMsg));
+      }),
     );
   }
 
@@ -47,11 +50,11 @@ export class UsersService {
     return this.httpClient.post('api/signin', user)
     .pipe(
       catchError((error) => {
-        return throwError(error);
+        return throwError(() => new Error(error));
       })
     )
     .subscribe((response: any) => {
-      const token = response.token;//.replace('"', '');
+      const token = response.token;
       this.saveToken(token);
     });
   }
@@ -77,7 +80,13 @@ export class UsersService {
   }
 
   findById(id: string) {
-    return this.httpClient.get<User>(`${this.API}/${id}`).pipe(first());
+    return this.httpClient.get<User>(`${this.API}/${id}`).pipe(
+      first(),
+      catchError(error => {
+        let errorMsg: string = this.getServerErrorMessage(error);
+        return throwError(() => new Error(errorMsg));
+      }),
+    );
   }
 
   save(user: Partial<User>) {
@@ -88,14 +97,32 @@ export class UsersService {
   }
 
   private create(user: Partial<User>) {
-    return this.httpClient.post<User>(this.API, user).pipe(first());
+    return this.httpClient.post<User>(this.API, user).pipe(
+      first(),
+      catchError(error => {
+        let errorMsg: string = this.getServerErrorMessage(error);
+        return throwError(() => new Error(errorMsg));
+      }),
+    );
   }
 
   private update(user: Partial<User>) {
-    return this.httpClient.put<User>(`${this.API}/${user.id}`, user).pipe(first());
+    return this.httpClient.put<User>(`${this.API}/${user.id}`, user).pipe(
+      first(),
+      catchError(error => {
+        let errorMsg: string = this.getServerErrorMessage(error);
+        return throwError(() => new Error(errorMsg));
+      }),
+    );
   }
 
   delete(user: Partial<User>) {
-    return this.httpClient.delete(`${this.API}/${user.id}`).pipe(first());
+    return this.httpClient.delete(`${this.API}/${user.id}`).pipe(
+      first(),
+      catchError(error => {
+        let errorMsg: string = this.getServerErrorMessage(error);
+        return throwError(() => new Error(errorMsg));
+      }),
+    );
   }
 }

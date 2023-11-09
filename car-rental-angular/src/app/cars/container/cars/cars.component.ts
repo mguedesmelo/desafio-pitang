@@ -30,15 +30,16 @@ export class CarsComponent {
   refresh() {
     this.cars$ = this.carsService.findAll().pipe(
       catchError((error: HttpErrorResponse) => {
-        this.onError('Erro ao carregar os carros: ' + error.message);
+        this.onError(error);
         return of([]);
       })
     );
   }
 
-  onError(errorMsg: string) {
+  onError(error: HttpErrorResponse) {
+    this.router.navigate(['/users/login']);
     this.dialog.open(ErrorDialogComponent, {
-      data: errorMsg,
+      data: error.message,
     });
   }
 
