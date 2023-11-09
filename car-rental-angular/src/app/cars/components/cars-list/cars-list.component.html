@@ -25,12 +25,12 @@
         <mat-icon>add</mat-icon>
       </button>
     </mat-header-cell>
-    <mat-cell *matCellDef="let user" class="action-column">
-      <button mat-icon-button color="primary" aria-label="Editar Carro" (click)="onEdit(user)" title="Editar Carro">
+    <mat-cell *matCellDef="let car" class="action-column">
+      <button mat-icon-button color="primary" aria-label="Editar Carro" (click)="onEdit(car)" title="Editar Carro">
         <mat-icon>edit</mat-icon>
       </button>
 
-      <button mat-icon-button color="warn" aria-label="Remover Carro" (click)="onDelete(user)" title="Remover Carro">
+      <button mat-icon-button color="warn" aria-label="Remover Carro" (click)="onDelete(car)" title="Remover Carro">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>

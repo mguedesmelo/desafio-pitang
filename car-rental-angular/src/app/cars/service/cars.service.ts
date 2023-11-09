@@ -15,9 +15,7 @@ export class CarsService extends BaseService {
   }
 
   findAll(): Observable<Car[]> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    });
+    const headers = this.getHeaders();
     return this.httpClient.get<Car[]>(this.API, { headers }).pipe(
       first(),
       catchError(error => {
@@ -28,7 +26,8 @@ export class CarsService extends BaseService {
   }
 
   findById(id: string) {
-    return this.httpClient.get<Car>(`${this.API}/${id}`).pipe(
+    const headers = this.getHeaders();
+    return this.httpClient.get<Car>(`${this.API}/${id}`, { headers }).pipe(
       first(),
       catchError(error => {
         let errorMsg: string = this.getServerErrorMessage(error);
@@ -55,7 +54,8 @@ export class CarsService extends BaseService {
   }
 
   private create(car: Partial<Car>) {
-    return this.httpClient.post<Car>(this.API, car).pipe(
+    const headers = this.getHeaders();
+    return this.httpClient.post<Car>(this.API, car, { headers }).pipe(
       first(),
       catchError(error => {
         let errorMsg: string = this.getServerErrorMessage(error);
@@ -65,12 +65,19 @@ export class CarsService extends BaseService {
   }
 
   private update(car: Partial<Car>) {
-    return this.httpClient.put<Car>(`${this.API}/${car.id}`, car).pipe(
+    const headers = this.getHeaders();
+    return this.httpClient.put<Car>(`${this.API}/${car.id}`, car, { headers }).pipe(
       first(),
       catchError(error => {
         let errorMsg: string = this.getServerErrorMessage(error);
         return throwError(() => new Error(errorMsg));
       })
     );
+  }
+
+  private getHeaders() {
+    return new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
   }
 }
