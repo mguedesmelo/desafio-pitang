@@ -48,7 +48,7 @@ public class AuthenticationRestController {
             @ApiResponse(responseCode = "200", description = "Login realizado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Login inexistente ou senha inválida"),
     })
-	public ResponseEntity<Token> signin(@RequestBody LoginDto loginDto) {
+	public ResponseEntity<UserInfo> signin(@RequestBody LoginDto loginDto) {
 		try {
 			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 					loginDto.login(), loginDto.password());
@@ -61,7 +61,7 @@ public class AuthenticationRestController {
 			user.setLastLogin(LocalDateTime.now());
 			this.userService.updateLastLogin(user);
 			
-			Token token = new Token(this.tokenService.generateToken(user));
+			UserInfo token = new UserInfo(this.tokenService.generateToken(user), loginDto.login());
 			return ResponseEntity.ok().body(token);
 		} catch (BadCredentialsException e) {
 			throw new BusinessException("Invalid login or password");
@@ -92,7 +92,7 @@ public class AuthenticationRestController {
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class Token {
+class UserInfo {
 	private String token;
-	
+	private String login;
 }
