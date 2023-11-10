@@ -9,12 +9,13 @@ import { UsersService } from './users/service/users.service';
 })
 export class AppComponent {
   title = 'car-rental-angular';
+  userLogin: string | null = '';
 
   constructor(
     private snackBar: MatSnackBar,
     private service: UsersService
   ) {
-    // Empty
+    this.userLogin = this.service.getLogin();
   }
 
   logout() {

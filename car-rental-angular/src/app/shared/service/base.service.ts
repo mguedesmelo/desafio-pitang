@@ -9,8 +9,15 @@ export class BaseService {
     // Empty
   }
 
-  protected saveToken(token: string) {
+  protected saveUserInfo(token: string, login: string) {
     localStorage.setItem('token', token);
+    localStorage.setItem('login', login);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('login');
+    localStorage.clear();
   }
 
   isSignedIn() {
@@ -18,6 +25,13 @@ export class BaseService {
       return true;
     }
     return false;
+  }
+
+  getLogin(): string | null {
+    if (this.isSignedIn()) {
+      return localStorage.getItem('login');
+    }
+    return '';
   }
 
   getToken() {

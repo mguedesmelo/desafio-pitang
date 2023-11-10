@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
   <span>Desafio Pitang - Aluguel de Carros</span>
   <span class="example-spacer"></span>
+  <span *ngIf="isSignedIn()">{{ userLogin }}</span>
   <button mat-icon-button class="example-icon" title="Acessar o Sistema" routerLink="/users/login" *ngIf="isSignedIn() == false">
     <mat-icon>key</mat-icon>
   </button>

@@ -36,7 +36,7 @@ export class UsersService extends BaseService {
     .pipe(
       map((token: UserToken) => {
         const userToken: UserToken = token;
-        localStorage.setItem('token', userToken.token);
+        this.saveUserInfo(userToken.token, userToken.login);
 
         return userToken;
       }),
@@ -45,11 +45,6 @@ export class UsersService extends BaseService {
         return throwError(() => new Error(errorMsg));
       }),
     );
-  }
-
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.clear();
   }
 
   findById(id: string) {
