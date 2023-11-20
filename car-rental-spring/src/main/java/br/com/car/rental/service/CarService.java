@@ -13,6 +13,7 @@ import br.com.car.rental.exception.BusinessException;
 import br.com.car.rental.exception.RecordNotFoundException;
 import br.com.car.rental.model.Car;
 import br.com.car.rental.model.CarColor;
+import br.com.car.rental.model.CarUsageHistory;
 import br.com.car.rental.model.User;
 import br.com.car.rental.repository.CarRepository;
 import br.com.car.rental.shared.StringUtil;
@@ -66,12 +67,16 @@ public class CarService extends BaseService {
 			actual.setLicensePlate(carRequestDto.licensePlate());
 			actual.setModel(carRequestDto.model());
 			actual.setColor(CarColor.valueOf(carRequestDto.color()));
+			actual.addCarUsageHistory(new CarUsageHistory());
 			return this.carMapper.map(this.carRepository.save(actual));
 		}).orElseThrow(() -> new RecordNotFoundException(id));
 	}
 
 	public CarDto findByUserAndId(User user, @Positive @NotNull Long id) {
-		return this.carMapper.map(this.carRepository.findByUserAndId(user.getLogin(), id).orElse(null));
+		// TODO Add CarUsageHistory?
+		Car car = this.carRepository.findByUserAndId(user.getLogin(), id)
+				.orElseThrow(() -> new RecordNotFoundException(id));
+		return this.carMapper.map(car);
 	}
 
 	public Optional<Car> findOptionalById(@Positive @NotNull Long id) {
@@ -80,10 +85,8 @@ public class CarService extends BaseService {
 
     @Transactional
 	public void delete(User user, @Positive @NotNull Long id) {
-		Car car = this.carRepository.findByUserAndId(user.getLogin(), id).orElse(null);
-		if (car == null) {
-			new RecordNotFoundException(id);
-		}
+		Car car = this.carRepository.findByUserAndId(user.getLogin(), id)
+				.orElseThrow(() -> new RecordNotFoundException(id));
 		this.carRepository.delete(car.getId());
 	}
 

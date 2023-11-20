@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class DateUtil {
 	private DateUtil() {
@@ -266,8 +267,8 @@ public final class DateUtil {
 	 * @return int number representing the number of the day of the week
 	 */
 	public static int getDayOfWeek(Date d) {
-		return LocalDate.parse(DateUtil.dateToString(d), DateTimeFormatter.ofPattern("d/M/uuuu")).getDayOfWeek()
-				.getValue();
+		return LocalDate.parse(DateUtil.dateToString(d), 
+				DateTimeFormatter.ofPattern("d/M/uuuu")).getDayOfWeek().getValue();
 	}
 
 	public static String getDuration(LocalDateTime fromDateTime, LocalDateTime toDateTime) {
@@ -323,4 +324,13 @@ public final class DateUtil {
 	public static String getDuration(LocalDateTime fromDateTime) {
 		return DateUtil.getDuration(fromDateTime, LocalDateTime.now());
 	}
+	
+	public static LocalDate generateRandomDate() {
+        int minDay = (int) LocalDate.now().toEpochDay();
+        int maxDay = (int) LocalDate.now().plusMonths(6).toEpochDay();
+
+        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+
+        return LocalDate.ofEpochDay(randomDay);
+    }
 }

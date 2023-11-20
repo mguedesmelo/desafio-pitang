@@ -1,17 +1,23 @@
 package br.com.car.rental.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -59,6 +65,12 @@ public class Car extends BaseEntity {
 	@Column(name = "image")
 	private byte[] image;
 
+	// FIXME Configure to lazy
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "car_id")
+	private List<CarUsageHistory> carUsageHistory = new ArrayList<CarUsageHistory>(0);
+
 	public Car(Integer productionYear, String licensePlate, String model, CarColor color, User user) {
 		super();
 		this.productionYear = productionYear;
@@ -69,7 +81,21 @@ public class Car extends BaseEntity {
 	}
 
 	public Car(String imageName, Long imageSize, String imageType, byte[] image) {
-		super(imageName, imageSize, imageType, image);
+		super();
+		this.imageName = imageName;
+		this.imageSize = imageSize;
+		this.imageType = imageType;
+		this.image = image;
+	}
+
+	public void addCarUsageHistory(CarUsageHistory carUsageHistory) {
+		this.carUsageHistory.add(carUsageHistory);
+		carUsageHistory.setCar(this);
+	}
+
+	public void removeCarUsageHistory(CarUsageHistory carUsageHistory) {
+		this.carUsageHistory.remove(carUsageHistory);
+		carUsageHistory.setCar(null);
 	}
 
 	@Override

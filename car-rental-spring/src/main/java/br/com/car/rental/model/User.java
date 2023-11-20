@@ -19,6 +19,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -71,8 +72,30 @@ public class User extends BaseEntity implements UserDetails {
 	@Column(name = "is_active", nullable = false)
 	private Boolean active = Boolean.TRUE;
 
+
+	@Column(name = "image_name", length = 255)
+	@JsonIgnore
+	private String imageName;
+
+	@Column(name = "image_size")
+	@JsonIgnore
+	private Long imageSize;
+
+	@Column(name = "image_type", length = 50)
+	@JsonIgnore
+	private String imageType;
+
+	@Lob
+	@Column(name = "image")
+	@JsonIgnore
+	private byte[] image;
+
 	public User(String imageName, Long imageSize, String imageType, byte[] image) {
-		super(imageName, imageSize, imageType, image);
+		super();
+		this.imageName = imageName;
+		this.imageSize = imageSize;
+		this.imageType = imageType;
+		this.image = image;
 	}
 
 	public User(String firstName, String lastName, String email, LocalDate birthdate, 

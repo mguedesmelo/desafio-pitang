@@ -37,6 +37,10 @@ public class CarRentalSpringApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		createMockUsers();
+	}
+
+	private void createMockUsers() {
 		List<CarRequestDto> carsHeisenberg = Arrays.asList(
 				new CarRequestDto(2005, "XYZ 5678", "Pontiac Aztek", "White"),
 				new CarRequestDto(2012, "JKL 1234", "Chrysler 300C SRT-8", "Black"),
@@ -65,25 +69,4 @@ public class CarRentalSpringApplication implements CommandLineRunner {
 		List<UserDto> users = this.userService.findAll();
 		users.stream().forEach(System.out::println);
 	}
-	
-//	private SecurityScheme createAPIKeyScheme() {
-//	    return new SecurityScheme().type(SecurityScheme.Type.HTTP)
-//	        .bearerFormat("JWT")
-//	        .scheme("bearer");
-//	}
-	
-//	@Bean
-//	public OpenAPI openAPI() {
-//	    return new OpenAPI().addSecurityItem(new SecurityRequirement().
-//	            addList("Bearer Authentication"))
-//	        .components(new Components().addSecuritySchemes
-//	            ("Bearer Authentication", createAPIKeyScheme()))
-//	        .info(new Info().title("My REST API")
-//	            .description("Some custom description of API.")
-//	            .version("1.0").contact(new Contact().name("Sallo Szrajbman")
-//	                .email( "www.baeldung.com").url("salloszraj@gmail.com"))
-//	            .license(new License().name("License of API")
-//	                .url("API license URL")));
-//	}
 }
-	

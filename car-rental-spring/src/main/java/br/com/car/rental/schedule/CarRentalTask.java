@@ -21,8 +21,9 @@ public class CarRentalTask {
 	private UserHistoryRepository userHistoryRepository;
 
 	/**
-	 * Generates a history with users marked for deletion, if migrated successfully, 
-	 * these users are physically deleted from the table. Fired every 2 minutes.
+	 * Generates a history with users marked for deletion. If migrated successfully, 
+	 * these users are physically deleted from the table. 
+	 * Fired every 2 minutes.
 	 */
 	@Scheduled(fixedRate = 120000)
 	public void createUserHistory() {
@@ -43,7 +44,8 @@ public class CarRentalTask {
 	}
 	
 	/**
-	 * Creates the necessary data structure for the extra requirement. Fired every 2 minutes.
+	 * Creates the necessary data structure for the extra requirement. 
+	 * Fired every 2 minutes.
 	 */
 	@Scheduled(fixedRate = 120000)
 	public void createDataStructure() {
