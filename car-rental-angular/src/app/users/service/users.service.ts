@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, first, map, throwError } from 'rxjs';
 
+import { DatePipe } from '@angular/common';
 import { BaseService } from 'src/app/shared/service/base.service';
 import { User } from '../model/user';
 import { UserToken } from '../model/user-token';
-import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -38,10 +38,13 @@ export class UsersService extends BaseService {
         const userToken: UserToken = token;
         this.saveUserInfo(userToken.token, userToken.login);
 
+        this.isSignedInEmitter.emit(true);
+
         return userToken;
       }),
       catchError(error => {
         let errorMsg: string = this.getServerErrorMessage(error);
+        this.isSignedInEmitter.emit(false);
         return throwError(() => new Error(errorMsg));
       }),
     );
@@ -65,6 +68,16 @@ export class UsersService extends BaseService {
     return this.create(user);
   }
 
+  delete(user: Partial<User>) {
+    return this.httpClient.delete(`${this.API}/${user.id}`).pipe(
+      first(),
+      catchError(error => {
+        let errorMsg: string = this.getServerErrorMessage(error);
+        return throwError(() => new Error(errorMsg));
+      }),
+    );
+  }
+
   private create(user: Partial<User>) {
     return this.httpClient.post<User>(this.API, user).pipe(
       first(),
@@ -77,16 +90,6 @@ export class UsersService extends BaseService {
 
   private update(user: Partial<User>) {
     return this.httpClient.put<User>(`${this.API}/${user.id}`, user).pipe(
-      first(),
-      catchError(error => {
-        let errorMsg: string = this.getServerErrorMessage(error);
-        return throwError(() => new Error(errorMsg));
-      }),
-    );
-  }
-
-  delete(user: Partial<User>) {
-    return this.httpClient.delete(`${this.API}/${user.id}`).pipe(
       first(),
       catchError(error => {
         let errorMsg: string = this.getServerErrorMessage(error);

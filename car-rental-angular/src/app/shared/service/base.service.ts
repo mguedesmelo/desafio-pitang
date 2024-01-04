@@ -1,15 +1,17 @@
-import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaseService {
+  isSignedInEmitter = new EventEmitter<boolean>();
+
   constructor() {
     // Empty
   }
 
-  protected saveUserInfo(token: string, login: string) {
+  saveUserInfo(token: string, login: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('login', login);
   }
@@ -18,6 +20,7 @@ export class BaseService {
     localStorage.removeItem('token');
     localStorage.removeItem('login');
     localStorage.clear();
+    this.isSignedInEmitter.emit(false);
   }
 
   isSignedIn() {
@@ -31,7 +34,7 @@ export class BaseService {
     if (this.isSignedIn()) {
       return localStorage.getItem('login');
     }
-    return '';
+    return null;
   }
 
   getToken() {

@@ -10,12 +10,16 @@ import { UsersService } from './users/service/users.service';
 export class AppComponent {
   title = 'car-rental-angular';
   userLogin: string | null = '';
+  signedIn: boolean = false;
 
   constructor(
     private snackBar: MatSnackBar,
     private service: UsersService
   ) {
     this.userLogin = this.service.getLogin();
+    this.service.isSignedInEmitter.subscribe(
+      signed => this.signedIn = signed
+    );
   }
 
   logout() {
@@ -33,6 +37,7 @@ export class AppComponent {
   }
 
   isSignedIn() {
-    return this.service.isSignedIn();
+    return this.signedIn;
+    //return this.service.isSignedIn();
   }
 }
