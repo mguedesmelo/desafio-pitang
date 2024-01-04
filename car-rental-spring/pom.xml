@@ -73,6 +73,11 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>com.github.eirslett</groupId>
+		    <artifactId>frontend-maven-plugin</artifactId>
+		    <version>1.8.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -89,7 +94,62 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.8.0</version>
+				
+				<configuration>
+				    <workingDirectory>${project.parent.basedir}/../car-rental-angular</workingDirectory>
+				    <nodeVersion>v18.18.1</nodeVersion>
+                    <npmVersion>10.2.5</npmVersion>
+				</configuration>
+				<executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>v18.18.1</nodeVersion>
+                            <npmVersion>10.2.5</npmVersion>
+                        </configuration>
+                    </execution>
+
+<!--
+ -->
+                    <execution>
+                        <id>npm ci</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>ci</arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>javascript tests</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run test</arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>npm run build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>

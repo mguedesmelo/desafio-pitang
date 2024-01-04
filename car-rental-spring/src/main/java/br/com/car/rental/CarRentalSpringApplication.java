@@ -47,7 +47,7 @@ public class CarRentalSpringApplication implements CommandLineRunner {
 				new CarRequestDto(2012, "QRS 9893", "Dodge Challenger SRT-8", "Red"),
 				new CarRequestDto(1992, "GNM 4820", "Buick LeSabre", "Blue"));
 
-		List<CarRequestDto> carsJessePinkman = Arrays.asList(
+		List<CarRequestDto> carsJesse = Arrays.asList(
 				new CarRequestDto(1986, "HLO 2056", "Fleetwood Bounder", "White"),
 				new CarRequestDto(1982, "RND 6893", "Chevrolet Monte Carlo", "WineRed"),
 				new CarRequestDto(1986, "PQT 3570", "Toyota Tercel", "White"),
@@ -58,13 +58,13 @@ public class CarRentalSpringApplication implements CommandLineRunner {
 				"+1 515-516-0624", "$2a$10$SDelfowfCRWei0rkUI5IIO1dLNKYrcHP4cjbjoJLViYj4h/0a7VdO", 
 				carsHeisenberg);
 
-		UserRequestDto userJessePinkman = new UserRequestDto("Jesse", "Pinkman", 
+		UserRequestDto userJesse = new UserRequestDto("Jesse", "Pinkman", 
 				"pinkman@somedomain.com", LocalDate.of(1984, 10, 22), "pinkman", 
 				"+1 707-719-0993", "$2a$10$SDelfowfCRWei0rkUI5IIO1dLNKYrcHP4cjbjoJLViYj4h/0a7VdO", 
-				carsJessePinkman);
+				carsJesse);
 
 		this.userService.save(userHeisenberg);
-		this.userService.save(userJessePinkman);
+		this.userService.save(userJesse);
 
 		List<UserDto> users = this.userService.findAll();
 		users.stream().forEach(System.out::println);

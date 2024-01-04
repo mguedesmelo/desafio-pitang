@@ -57,10 +57,10 @@ public class AuthenticationRestController {
 				throw new UsernameNotFoundException("Invalid login or password");
 			}
 			User user = (User) authenticate.getPrincipal();
-			
+
 			user.setLastLogin(LocalDateTime.now());
 			this.userService.updateLastLogin(user);
-			
+
 			UserInfo token = new UserInfo(this.tokenService.generateToken(user), loginDto.login());
 			return ResponseEntity.ok().body(token);
 		} catch (BadCredentialsException e) {
