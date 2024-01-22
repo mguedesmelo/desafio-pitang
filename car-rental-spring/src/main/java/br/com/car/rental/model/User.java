@@ -25,11 +25,9 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_user")
@@ -72,7 +70,6 @@ public class User extends BaseEntity implements UserDetails {
 	@Column(name = "is_active", nullable = false)
 	private Boolean active = Boolean.TRUE;
 
-
 	@Column(name = "image_name", length = 255)
 	@JsonIgnore
 	private String imageName;
@@ -89,6 +86,10 @@ public class User extends BaseEntity implements UserDetails {
 	@Column(name = "image")
 	@JsonIgnore
 	private byte[] image;
+
+	public User() {
+		super();
+	}
 
 	public User(String imageName, Long imageSize, String imageType, byte[] image) {
 		super();
@@ -170,5 +171,10 @@ public class User extends BaseEntity implements UserDetails {
 	@JsonIgnore
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String getPassword() {
+		return this.password;
 	}
 }

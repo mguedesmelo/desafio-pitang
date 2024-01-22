@@ -19,13 +19,13 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = false)
-@NoArgsConstructor
 @Entity
 @Table(name = "tb_car")
 public class Car extends BaseEntity {
@@ -33,6 +33,10 @@ public class Car extends BaseEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = -7877075265644281766L;
+
+	public Car() {
+		super();
+	}
 
 	@Column(name = "production_year", length = 4, nullable = false)
 	private Integer productionYear;

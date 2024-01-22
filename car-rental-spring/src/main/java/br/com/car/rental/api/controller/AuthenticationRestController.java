@@ -90,8 +90,8 @@ public class AuthenticationRestController {
 }
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 class UserInfo {
 	private String token;
 	private String login;
